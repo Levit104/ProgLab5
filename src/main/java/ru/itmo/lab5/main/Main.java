@@ -10,22 +10,22 @@ public class Main {
     public static void main(String[] args) {
         CollectionControl collectionControl = new CollectionControl();
 
-        InfoCommand infoCommand = new InfoCommand(collectionControl);
-        ShowCommand showCommand = new ShowCommand(collectionControl);
-        InsertCommand insertCommand = new InsertCommand(collectionControl);
-        UpdateCommand updateCommand = new UpdateCommand(collectionControl);
-        RemoveCommand removeCommand = new RemoveCommand(collectionControl);
-        ClearCommand clearCommand = new ClearCommand(collectionControl);
-        SaveCommand saveCommand = new SaveCommand(collectionControl);
-        //ExecuteScript
-        //ReplaceIfGreater
-        //ReplaceIfLower
-        RemoveLowerKeyCommand removeLowerKeyCommand = new RemoveLowerKeyCommand(collectionControl);
-        FilterCommand filterCommand = new FilterCommand(collectionControl);
-        PrintAscendingCommand printAscendingCommand = new PrintAscendingCommand(collectionControl);
-        PrintFieldDescendingCommand printFieldDescendingCommand = new PrintFieldDescendingCommand(collectionControl);
+        Command info = new InfoCommand(collectionControl);
+        Command show = new ShowCommand(collectionControl);
+        Command insert = new InsertCommand(collectionControl);
+        Command update = new UpdateCommand(collectionControl);
+        Command remove = new RemoveCommand(collectionControl);
+        Command clear = new ClearCommand(collectionControl);
+        Command save = new SaveCommand(collectionControl);
+        // Command executeScriptCommand = new ExecuteScriptCommand(collectionControl);
+        Command replaceIfGreater = new ReplaceIfGreaterCommand(collectionControl);
+        Command replaceIfLower = new ReplaceIfLowerCommand(collectionControl);
+        Command removeLowerKey = new RemoveLowerKeyCommand(collectionControl);
+        Command filter = new FilterCommand(collectionControl);
+        Command printAscending = new PrintAscendingCommand(collectionControl);
+        Command printFieldDescending = new PrintFieldDescendingCommand(collectionControl);
 
-        String file = "files\\InputFil5e.csv";
+        String file = "files\\InputFile.csv";
         
         Scanner scanner = new Scanner(System.in);
         CSVParser csvParser = new CSVParser(file);
@@ -47,8 +47,8 @@ public class Main {
                 case "help":
                     if (collectionControl.checkCommand(choice)) {
                         System.out.println("help : вывести справку по доступным командам\n");
-                        Command[] commands = {infoCommand, showCommand, insertCommand, updateCommand, removeCommand, clearCommand, saveCommand, 
-                                              removeLowerKeyCommand, filterCommand, printAscendingCommand, printFieldDescendingCommand};
+                        Command[] commands = {info, show, insert, update, remove, clear, save, replaceIfGreater, replaceIfLower,
+                                              removeLowerKey, filter, printAscending, printFieldDescending};
                         for (Command myCommand : commands) {
                             System.out.println(myCommand.getName() + myCommand.getDescription() + "\n");
                         }
@@ -57,71 +57,85 @@ public class Main {
                 
                 case "info":
                     if (collectionControl.checkCommand(choice)) {
-                        infoCommand.execute(argument);
+                        info.execute(argument);
                     }
                     break;
 
                 case "show":
                     if (collectionControl.checkCommand(choice)) {
-                        showCommand.execute(argument);
+                        show.execute(argument);
                     }
                     break;
 
                 case "insert":
                     if (collectionControl.checkCommandWithArgument(choice)) {
                         argument = choice[1];
-                        insertCommand.execute(argument);
+                        insert.execute(argument);
                     }
                     break;
 
                 case "update":
                     if (collectionControl.checkCommandWithArgument(choice)) {
                         argument = choice[1];
-                        updateCommand.execute(argument);
+                        update.execute(argument);
                     }
                     break;
 
                 case "remove_key":
                     if (collectionControl.checkCommandWithArgument(choice)) {
                         argument = choice[1];
-                        removeCommand.execute(argument);
+                        remove.execute(argument);
                     }
                     break;
 
                 case "clear":
                     if (collectionControl.checkCommand(choice)) {
-                        clearCommand.execute(argument);
+                        clear.execute(argument);
                     }
                     break;
 
                 case "save":
                     argument = file;
-                    saveCommand.execute(argument);
+                    save.execute(argument);
+                    break;
+                
+                case "replace_if_greater":
+                    if (collectionControl.checkCommandWithArgument(choice)) {
+                        argument = choice[1];
+                        replaceIfGreater.execute(argument);
+                    }
+                    break;
+                
+                case "replace_if_lower":
+                    if (collectionControl.checkCommandWithArgument(choice)) {
+                        argument = choice[1];
+                        replaceIfLower.execute(argument);
+                    }
                     break;
                 
                 case "remove_lower_key":
                     if (collectionControl.checkCommandWithArgument(choice)) {
                         argument = choice[1];
-                        removeLowerKeyCommand.execute(argument);
+                        removeLowerKey.execute(argument);
                     }                       
                     break;
 
                 case "filter_starts_with_name":
                     if (collectionControl.checkCommandWithArgument(choice)) {
                         argument = choice[1];
-                        filterCommand.execute(argument);
+                        filter.execute(argument);
                     }                       
                     break;
                 
                 case "print_ascending":
                     if (collectionControl.checkCommand(choice)) {
-                        printAscendingCommand.execute(argument);
+                        printAscending.execute(argument);
                     }
                     break;
                 
                 case "print_field_descending_type":
                     if (collectionControl.checkCommand(choice)) {
-                        printFieldDescendingCommand.execute(argument);   
+                        printFieldDescending.execute(argument);   
                     }
                     break;
 
