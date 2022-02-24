@@ -24,9 +24,7 @@ import ru.itmo.lab5.data.EventType;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
 import ru.itmo.lab5.exception.WrongValueException;
-import lombok.Getter;
 
-@Getter
 public class CSVParser {
     private int row = 2;
     private Map<Integer, Ticket> ticketMap = new LinkedHashMap<>();
@@ -54,8 +52,8 @@ public class CSVParser {
         } catch (UnsupportedEncodingException e1) {
             System.out.println("Неподдерживаемая кодировка\n");
             noErrors = false;
-        } catch (FileNotFoundException e2) {
-            System.out.println("Файл не найден\n");
+        } catch (FileNotFoundException | NullPointerException e2) {
+            if (file != null) System.out.println("Файл не найден\n");
             noErrors = false;
         } catch (IOException e3) {
             System.out.println("Ошибка при чтении файла\n");
@@ -73,6 +71,10 @@ public class CSVParser {
                 System.out.println("Ошибка при чтении файла\n");
             }
         }
+    }
+
+    public Map<Integer, Ticket> getTicketMap() {
+        return this.ticketMap;
     }
 
     public void parse() {
