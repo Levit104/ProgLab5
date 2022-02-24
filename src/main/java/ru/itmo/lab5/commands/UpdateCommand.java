@@ -28,8 +28,8 @@ public class UpdateCommand implements Command {
     @Override
     public void execute(String argument) {
         try {
-            Integer ID = Integer.parseInt(argument);
             boolean wasFound = false;
+            Integer ID = Integer.parseInt(argument);
             InsertCommand insert = new InsertCommand(collectionControl);
     
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
@@ -45,10 +45,10 @@ public class UpdateCommand implements Command {
                 }
             }
             if (!wasFound) {
-                System.out.println("В коллекции нет элемента с таким ID");
+                System.out.println("В коллекции нет элемента с заданным ID");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Значение ID элемента должно быть целым числом");
+            System.out.println("Значение ID  должно быть целым числом");
         }
 
     }

@@ -26,12 +26,11 @@ public class PrintAscendingCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " : вывести элементы коллекции в порядке возрастания";
+        return " : вывести элементы коллекции в порядке возрастания (цены)";
     }
 
     @Override
     public void execute(String argument) {
-        // Сортировка по цене билета
         List<Ticket> sortedCollection = new ArrayList<>(collectionControl.getCollection().values());
         Collections.sort(sortedCollection);
 

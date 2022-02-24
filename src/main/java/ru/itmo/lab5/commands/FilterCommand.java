@@ -37,9 +37,10 @@ public class FilterCommand implements Command {
                 }
             }
             if (ticketList.isEmpty()) {
-                System.out.println("В коллекции нет таких элементов");
+                System.out.println("В коллекции нет элементов, имя которых начинается на " + argument.trim());
             } else {
-                System.out.println(ticketList.substring(0, ticketList.length() - 1)); // убираю перенос на следующую строку
+                // убираю перенос на следующую строку в конце
+                System.out.println(ticketList.substring(0, ticketList.length() - 1));
             }
         }
     }

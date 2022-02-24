@@ -36,7 +36,7 @@ public class ConsoleMode {
                     wasFound = true;
                     if (command.getName().equals("save")) {
                         if (choice.length > 2) {
-                            System.out.println("У данной есть только один необязательный аргумент");
+                            System.out.println("У данной команды есть только один необязательный аргумент");
                         } else {
                             if (choice.length == 1) {
                                 argument = file;
@@ -73,7 +73,7 @@ public class ConsoleMode {
 
     private boolean checkCommandWithArgument(String[] choice) {
         if (choice.length != 2) {
-            System.out.println("У данной команды должен быть один аргумент");
+            System.out.println("У данной команды один обязательный аргумент");
             return false;
         }
         return true;

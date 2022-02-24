@@ -36,6 +36,8 @@ public class PrintFieldDescendingCommand implements Command {
             System.out.println("В коллекции нет элементов");
         } else {
             List<String> typeList = new ArrayList<>();
+            String typeString = "";
+
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 typeList.add(ticket.getType().toString());
             }
@@ -43,11 +45,11 @@ public class PrintFieldDescendingCommand implements Command {
             Collections.sort(typeList);
             Collections.reverse(typeList);
         
-            String typeString = "";
             for (String type : typeList) {
                 typeString += type + ", ";
             }
-
+            
+            // убираю запятую и пробел в конце
             System.out.println(typeString.substring(0, typeString.length() - 2));
         }
     }

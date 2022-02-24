@@ -64,7 +64,7 @@ public class InsertCommand implements Command {
         } catch (NumberFormatException e1) {
             System.out.println("Значение ключа должно быть целым числом");
         } catch (WrongValueException e2) {
-            System.out.println("Элемент с таким ключом уже есть");
+            System.out.println("Элемент с заданным ключом уже существует");
         }
     }
 
@@ -86,7 +86,7 @@ public class InsertCommand implements Command {
             System.out.print("Введите название билета: ");
             String ticketName = scanner.nextLine().trim();
             if (ticketName.isEmpty()) {
-                System.out.println("Имя не может быть пустой строкой");
+                System.out.println("Значение поля не может быть пустым");
             } else {
                 return ticketName;
             }
@@ -96,8 +96,8 @@ public class InsertCommand implements Command {
     private Double askCoordinateX() {
         while (true) {
             try {
-                System.out.print("Введите координату X: ");
-                Double ticketCoordinateX = Double.parseDouble(scanner.nextLine());
+                System.out.print("Введите координату X (максимальное значение - 606): ");
+                Double ticketCoordinateX = Double.parseDouble(scanner.nextLine().trim());
                 if (ticketCoordinateX > 606) {
                     System.out.println("Максимальное значение координаты - 606");
                 } else {
@@ -107,7 +107,7 @@ public class InsertCommand implements Command {
                 if (e.getMessage().equals("empty String")) {
                     System.out.println("Значение поля не может быть пустым");
                 } else {
-                    System.out.println("Необходимо ввести одно число");
+                    System.out.println("Необходимо ввести одно число не больше 606");
                 }
             }
         }
@@ -116,8 +116,8 @@ public class InsertCommand implements Command {
     private Double askCoordinateY() {
         while (true) {
             try {
-                System.out.print("Введите координату Y: ");
-                Double ticketCoordinateY = Double.parseDouble(scanner.nextLine());
+                System.out.print("Введите координату Y (максимальное значение - 483): ");
+                Double ticketCoordinateY = Double.parseDouble(scanner.nextLine().trim());
                 if (ticketCoordinateY > 483) {
                     System.out.println("Максимальное значение координаты - 483");
                 } else {
@@ -127,7 +127,7 @@ public class InsertCommand implements Command {
                 if (e.getMessage().equals("empty String")) {
                     System.out.println("Значение поля не может быть пустым");
                 } else {
-                    System.out.println("Необходимо ввести одно число");
+                    System.out.println("Необходимо ввести одно число не больше 483");
                 }
             }
         }
@@ -136,8 +136,8 @@ public class InsertCommand implements Command {
     private double askPrice() {
         while (true) {
             try {
-                System.out.print("Введите цену билета: ");
-                double ticketPrice = Double.parseDouble(scanner.nextLine());
+                System.out.print("Введите цену билета (значение должно быть больше нуля): ");
+                double ticketPrice = Double.parseDouble(scanner.nextLine().trim());
                 if (ticketPrice <= 0) {
                     System.out.println("Значение поля должно быть больше нуля");
                 } else {
@@ -154,7 +154,7 @@ public class InsertCommand implements Command {
             try {
                 System.out.println("Возможные варианты: " + TicketType.valuesToString());
                 System.out.print("Введите тип билета: ");
-                TicketType ticketType = TicketType.valueOf(scanner.nextLine());
+                TicketType ticketType = TicketType.valueOf(scanner.nextLine().trim().toUpperCase());
                 return ticketType;
             } catch (IllegalArgumentException e) {
                 if (e.getMessage().equals("No enum constant TicketType.")) {
@@ -169,7 +169,7 @@ public class InsertCommand implements Command {
     private boolean askEvent() {
         while (true) {
             System.out.print("Создать событие? (yes/no) ");
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().trim();
             if (choice.equals("yes")) {
                 return true;
             } else if (choice.equals("no")) {
@@ -185,7 +185,7 @@ public class InsertCommand implements Command {
             System.out.print("Введите название события: ");
             String eventName = scanner.nextLine().trim();
             if (eventName.isEmpty()) {
-                System.out.println("Имя не может быть пустой строкой");
+                System.out.println("Значение поля не может быть пустым");
             } else {
                 return eventName;
             }
@@ -210,7 +210,7 @@ public class InsertCommand implements Command {
             try {
                 System.out.println("Возможные варианты: " + EventType.valuesToString());
                 System.out.print("Введите тип события: ");
-                EventType eventType = EventType.valueOf(scanner.nextLine());
+                EventType eventType = EventType.valueOf(scanner.nextLine().trim().toUpperCase());
                 return eventType;
             } catch (IllegalArgumentException e) {
                 if (e.getMessage().equals("No enum constant EventType.")) {

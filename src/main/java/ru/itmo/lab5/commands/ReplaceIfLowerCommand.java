@@ -28,8 +28,8 @@ public class ReplaceIfLowerCommand implements Command {
     @Override
     public void execute(String argument) {
         try {
-            Integer key = Integer.parseInt(argument);
             boolean wasFound = false;
+            Integer key = Integer.parseInt(argument.trim());
             InsertCommand insert = new InsertCommand(collectionControl);
 
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
@@ -47,7 +47,7 @@ public class ReplaceIfLowerCommand implements Command {
                 }
             }
 
-            if (!wasFound) System.out.println("В коллекции нет элемента с таким ключом");
+            if (!wasFound) System.out.println("В коллекции нет элемента с заданным ключом");
 
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");

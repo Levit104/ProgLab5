@@ -28,7 +28,7 @@ public class RemoveCommand implements Command {
     @Override
     public void execute(String argument) {
         try {
-            Integer key = Integer.parseInt(argument);
+            Integer key = Integer.parseInt(argument.trim());
             Ticket removedElement = collectionControl.getCollection().remove(key);
             String keyList = "";
 
@@ -41,7 +41,8 @@ public class RemoveCommand implements Command {
             }
 
             if (removedElement == null) {
-                System.out.printf("Элемента с таким ключом не существует. Все существующие ключи: %s%n", 
+                // убираю запятую и пробел в конце
+                System.out.printf("Элемента с заданным ключом не существует. Все существующие ключи: %s%n", 
                                    keyList.substring(0, keyList.length() - 2));                
             } else {
                 System.out.printf("Элемент с ключом %d успешно удалён%n", key);

@@ -28,15 +28,15 @@ public class ReplaceIfGreaterCommand implements Command {
     @Override
     public void execute(String argument) {
         try {
-            Integer key = Integer.parseInt(argument);
             boolean wasFound = false;
+            Integer key = Integer.parseInt(argument.trim());
             InsertCommand insert = new InsertCommand(collectionControl);
 
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
                 if (key.equals(oldTicket.getKey())) {
+                    wasFound = true;
                     insert.createTicket(key);
                     Ticket newTicket = insert.getTicket();
-                    wasFound = true;
                     if (newTicket.compareTo(oldTicket) > 0) {
                         collectionControl.getCollection().replace(key, oldTicket, newTicket);
                         System.out.println("Элемент был успешно заменён");
@@ -47,7 +47,7 @@ public class ReplaceIfGreaterCommand implements Command {
                 }
             }
 
-            if (!wasFound) System.out.println("В коллекции нет элемента с таким ключом");
+            if (!wasFound) System.out.println("В коллекции нет элемента с заданным ключом");
 
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");

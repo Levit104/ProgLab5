@@ -80,7 +80,6 @@ public class Ticket implements Comparable<Ticket> {
             }
         }
         return true;
-        
     }
 
     public static boolean checkEventID(Long ID, Map<Integer, Ticket> collection) {

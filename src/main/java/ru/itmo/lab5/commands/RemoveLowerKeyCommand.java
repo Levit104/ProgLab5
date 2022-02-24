@@ -28,11 +28,11 @@ public class RemoveLowerKeyCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        boolean wasFound = false;
         try {
-            Integer key = Integer.parseInt(argument);
-
+            boolean wasFound = false;
+            Integer key = Integer.parseInt(argument.trim());
             Iterator<Integer> element = collectionControl.getCollection().keySet().iterator();
+            
             while (element.hasNext()) {
                 Integer elemKey = element.next();
                 if (elemKey < key) {
@@ -44,7 +44,7 @@ public class RemoveLowerKeyCommand implements Command {
             if (wasFound) {
                 System.out.println("Элементы успешно удалены");
             } else {
-                System.out.println("Таких элементов не существует");
+                System.out.println("Элементов, ключ которых меньше заданного не существует");
             }
 
         } catch (NumberFormatException e) {
