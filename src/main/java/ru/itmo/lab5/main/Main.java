@@ -12,9 +12,12 @@ public class Main {
 
         try {
             if (args.length > 1) throw new ArrayIndexOutOfBoundsException();
+            else if (!CSVParser.checkFileExtension(args[0])) throw new IllegalArgumentException();
             file = args[0];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Неверно указан путь до файла");
+        } catch (ArrayIndexOutOfBoundsException e1) {
+            System.out.println("Неверно указан путь до файла\n");
+        } catch (IllegalArgumentException e2) {
+            System.out.println("Файл должен иметь расширение .csv\n");
         }
 
         Command[] commands = {
@@ -35,10 +38,10 @@ public class Main {
         };
         
         CSVParser csvParser = new CSVParser(file);
+        ConsoleMode consoleMode = new ConsoleMode(commands, file);
+
         csvParser.parse();
         collectionControl.addValues(csvParser.getTicketMap());
-
-        ConsoleMode consoleMode = new ConsoleMode(commands, file);
         consoleMode.start();
     }
 }

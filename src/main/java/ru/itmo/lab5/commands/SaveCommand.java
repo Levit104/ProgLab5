@@ -31,17 +31,29 @@ public class SaveCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        String csvString = CollectionControl.csvString() + "\n";
-        for (Ticket ticket : collectionControl.getCollection().values()) {
-            csvString += ticket + "\n";
-        }
-        try {
-            fileWriter = new FileWriter(argument);
-            fileWriter.write(csvString);
-            fileWriter.close();
-            System.out.println("Коллекция успешно сохранена");
-        } catch (IOException e) {
-            System.out.println("Не удалось записать данные в файл");
+        if (collectionControl.getCollection().isEmpty()) {
+            System.out.println("В коллекции нет элементов");
+        } else {
+            String csvString = CollectionControl.csvString() + "\n";
+            for (Ticket ticket : collectionControl.getCollection().values()) {
+                csvString += ticket + "\n";
+            }
+            try {
+                fileWriter = new FileWriter(argument);
+                fileWriter.write(csvString);
+                System.out.println("Коллекция успешно сохранена");
+            } catch (IOException e1) {
+                System.out.println("Не удалось записать данные в файл");
+            } catch (NullPointerException e2) {
+                System.out.println("При запуске программы путь до файла не был указан или был указан неверно." +
+                                    "Укажите его как аргумент команды save");
+            } finally {
+                try {
+                    fileWriter.close();
+                } catch (IOException e) {
+                    System.out.println("Не удалось записать данные в файл");
+                }
+            }
         }
     }
     

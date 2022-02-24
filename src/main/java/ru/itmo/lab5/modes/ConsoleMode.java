@@ -3,6 +3,7 @@ package ru.itmo.lab5.modes;
 import java.util.Scanner;
 
 import ru.itmo.lab5.commands.Command;
+import ru.itmo.lab5.parser.CSVParser;
 
 public class ConsoleMode {
     private Command[] commands;
@@ -32,19 +33,26 @@ public class ConsoleMode {
                     wasFound = true;
                     System.out.println(command.getName() + command.getDescription());
                 } else if (inputCommand.equals(command.getName())) {
-                    if (command.hasArgument()) {
-                        wasFound = true;
+                    wasFound = true;
+                    if (command.getName().equals("save")) {
+                        if (choice.length > 2) {
+                            System.out.println("У данной есть только один необязательный аргумент");
+                        } else {
+                            if (choice.length == 1) {
+                                argument = file;
+                            } else if (choice.length == 2) {
+                                if (CSVParser.checkFileExtension(choice[1])) argument = choice[1];
+                                else System.out.println("Файл должен иметь расширение .csv");
+                            }
+                            command.execute(argument);
+                        }
+                    } else if (command.hasArgument()) {
                         if (checkCommandWithArgument(choice)) {
                             argument = choice[1];
                             command.execute(argument);   
                         }
                     } else {
-                        wasFound = true;
                         if (checkCommand(choice)) {
-                            if (command.getName().equals("save")) {
-                                argument = file;
-                                command.execute(argument);
-                            }
                             command.execute(argument);
                         }
                     }

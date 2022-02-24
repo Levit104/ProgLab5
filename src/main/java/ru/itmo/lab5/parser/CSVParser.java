@@ -154,6 +154,15 @@ public class CSVParser {
         }
     }
 
+    public static boolean checkFileExtension(String file) {
+        String extension = "";
+        int i = file.lastIndexOf('.');
+        if (i > 0) extension = file.substring(i + 1);
+        
+        if (extension.equals("csv")) return true;
+        else return false;
+    }
+
     private Integer parseKey(String data, String mode) {
         Integer key = null;
         try {
