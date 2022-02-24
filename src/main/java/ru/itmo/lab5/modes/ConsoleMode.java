@@ -31,6 +31,8 @@ public class ConsoleMode {
                     break loop;
                 } else if (inputCommand.equals("help")) {
                     wasFound = true;
+                    System.out.println("help : вывести справку по доступным командам");
+                    System.out.println("exit : завершить программу (без сохранения в файл)");
                     System.out.println(command.getName() + command.getDescription());
                 } else if (inputCommand.equals(command.getName())) {
                     wasFound = true;
