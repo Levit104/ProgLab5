@@ -43,7 +43,8 @@ public class CSVParser {
             }
 
             this.stringScanner = new Scanner(stringBuilder.toString());
-            if (!this.stringScanner.nextLine().equals(new CollectionControl().csvString())) {
+            new CollectionControl();
+            if (!this.stringScanner.nextLine().equals(CollectionControl.csvString())) {
                 throw new IllegalArgumentException();
             }
 
