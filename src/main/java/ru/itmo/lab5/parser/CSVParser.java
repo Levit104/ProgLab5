@@ -23,7 +23,7 @@ import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.EventType;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
-import ru.itmo.lab5.exception.WrongValueException;
+import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
 public class CSVParser {
     private int row = 2;
@@ -167,11 +167,11 @@ public class CSVParser {
         Integer key = null;
         try {
             key = Integer.parseInt(data);
-            if (!Ticket.checkTicketKey(key, ticketMap)) throw new WrongValueException();
+            if (!Ticket.checkTicketKey(key, ticketMap)) throw new NotUniqueValueException();
         } catch (NumberFormatException e1) {
             System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
             noErrors = false;
-        } catch (WrongValueException e2) {
+        } catch (NotUniqueValueException e2) {
             System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
             noErrors = false;
         }
@@ -182,15 +182,12 @@ public class CSVParser {
         Integer ID = null;
         try {
             ID = Integer.parseInt(data);
-            if (ID <= 0) throw new IllegalArgumentException();
-            if (!Ticket.checkTicketID(ID, ticketMap)) throw new WrongValueException();
+            if (ID <= 0) throw new NumberFormatException();
+            if (!Ticket.checkTicketID(ID, ticketMap)) throw new NotUniqueValueException();
         } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
             noErrors = false;
-        } catch (IllegalArgumentException e2) {
-            System.out.printf("Значение поля %s в строке %d должно быть больше нуля%n", mode, row);
-            noErrors = false;
-        } catch (WrongValueException e3) {
+        } catch (NotUniqueValueException e2) {
             System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
             noErrors = false;
         }
@@ -201,15 +198,12 @@ public class CSVParser {
         Long eventID = null;
         try {
             eventID = Long.parseLong(data);
-            if (eventID <= 0) throw new IllegalArgumentException();
-            if (!Ticket.checkEventID(eventID, ticketMap)) throw new WrongValueException();
+            if (eventID <= 0) throw new NumberFormatException();
+            if (!Ticket.checkEventID(eventID, ticketMap)) throw new NotUniqueValueException();
         } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
             noErrors = false;
-        } catch (IllegalArgumentException e2) {
-            System.out.printf("Значение поля %s в строке %d должно быть больше нуля%n", mode, row);
-            noErrors = false;
-        } catch (WrongValueException e3) {
+        } catch (NotUniqueValueException e2) {
             System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
             noErrors = false;
         }
@@ -220,13 +214,10 @@ public class CSVParser {
         String name = null;
         try {
             if (data.isEmpty()) throw new IllegalArgumentException();
-            else if (data.trim().length() == 0 || data.trim().length() != data.length()) throw new WrongValueException();
+            else if (data.trim().length() == 0 || data.trim().length() != data.length()) throw new IllegalArgumentException();
             name = data;
-        } catch (IllegalArgumentException e1) {
-            System.out.printf("Значение поля %s в строке %d не может быть пустым%n", mode, row);
-            noErrors = false;
-        } catch (WrongValueException e2) {
-            System.out.printf("Значение поля %s в строке %d содержит лишние пробелы%n", mode, row);
+        } catch (IllegalArgumentException e) {
+            System.out.printf("Значение поля %s в строке %d не может быть пустым и не должно содержать пробелов%n", mode, row);
             noErrors = false;
         }
         return name;
@@ -239,16 +230,13 @@ public class CSVParser {
             coordinate = Double.parseDouble(data);
             if (mode.equals("coordinateX") && coordinate > 606) {
                 maxValue = 606;
-                throw new WrongValueException();
+                throw new NumberFormatException();
             } else if (mode.equals("coordinateY") && coordinate > 483) {
                 maxValue = 483;
-                throw new WrongValueException();
+                throw new NumberFormatException();
             }
-        } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
-            noErrors = false;
-        } catch (WrongValueException e2) {
-            System.out.printf("Максимальное значение поля %s в строке %d = %d%n", mode, row, maxValue);
+        } catch (NumberFormatException e) {
+            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов%n", mode, row, maxValue);
             noErrors = false;
         }
         return coordinate;
@@ -258,12 +246,9 @@ public class CSVParser {
         double price = 0;
         try {
             price = Double.parseDouble(data);
-            if (price <= 0) throw new WrongValueException();
-        } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
-            noErrors = false;
-        } catch (WrongValueException e2) {
-            System.out.printf("Значение поля %s в строке %d должно быть больше нуля%n", mode, row);
+            if (price <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
             noErrors = false;
         }
         return price;

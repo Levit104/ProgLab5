@@ -11,7 +11,7 @@ import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.EventType;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
-import ru.itmo.lab5.exception.WrongValueException;
+import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
 public class InsertCommand implements Command {
     private Scanner scanner = new Scanner(System.in);
@@ -45,7 +45,7 @@ public class InsertCommand implements Command {
     public void execute(String argument) {
         try {
             Integer key = Integer.parseInt(argument);
-            if (!Ticket.checkTicketKey(key, collectionControl.getCollection())) throw new WrongValueException();
+            if (!Ticket.checkTicketKey(key, collectionControl.getCollection())) throw new NotUniqueValueException();
             createTicket(key);
 
             while (!Ticket.checkTicketID(ticket.getId(), collectionControl.getCollection())) {
@@ -63,7 +63,7 @@ public class InsertCommand implements Command {
 
         } catch (NumberFormatException e1) {
             System.out.println("Значение ключа должно быть целым числом");
-        } catch (WrongValueException e2) {
+        } catch (NotUniqueValueException e2) {
             System.out.println("Элемент с заданным ключом уже существует");
         }
     }
