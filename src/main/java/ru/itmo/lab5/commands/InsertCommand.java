@@ -27,6 +27,11 @@ public class InsertCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "insert";
     }

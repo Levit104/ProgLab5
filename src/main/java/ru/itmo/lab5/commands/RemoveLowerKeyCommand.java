@@ -12,6 +12,11 @@ public class RemoveLowerKeyCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "remove_lower_key";
     }

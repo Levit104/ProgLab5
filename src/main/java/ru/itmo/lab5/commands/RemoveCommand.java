@@ -11,6 +11,11 @@ public class RemoveCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "remove_key";
     }
@@ -32,7 +37,7 @@ public class RemoveCommand implements Command {
             }
             
             if (collectionControl.getCollection().isEmpty()) {
-                System.out.println("Нельзя удалить элемент из пустой коллекции");
+                System.out.println("В коллекции нет элементов");
             }
 
             if (removedElement == null) {

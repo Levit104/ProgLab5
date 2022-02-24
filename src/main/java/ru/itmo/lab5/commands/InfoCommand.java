@@ -10,6 +10,11 @@ public class InfoCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return false;
+    }
+
+    @Override
     public String getName() {
         return "info";
     }

@@ -11,6 +11,11 @@ public class ReplaceIfLowerCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "replace_if_lower";
     }

@@ -11,6 +11,11 @@ public class FilterCommand implements Command {
     }
 
     @Override
+    public boolean hasArgument() {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "filter_starts_with_name";
     }
