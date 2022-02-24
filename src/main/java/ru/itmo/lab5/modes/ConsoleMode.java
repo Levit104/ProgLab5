@@ -2,16 +2,13 @@ package ru.itmo.lab5.modes;
 
 import java.util.Scanner;
 
-import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.commands.Command;
 
 public class ConsoleMode {
-    private CollectionControl collectionControl;
     private Command[] commands;
     private String file;
 
-    public ConsoleMode(CollectionControl collectionControl, Command[] commands, String file) {
-        this.collectionControl = collectionControl;
+    public ConsoleMode(Command[] commands, String file) {
         this.commands = commands;
         this.file = file;
     }
@@ -37,13 +34,13 @@ public class ConsoleMode {
                 } else if (inputCommand.equals(command.getName())) {
                     if (command.hasArgument()) {
                         wasFound = true;
-                        if (collectionControl.checkCommandWithArgument(choice)) {
+                        if (checkCommandWithArgument(choice)) {
                             argument = choice[1];
                             command.execute(argument);   
                         }
                     } else {
                         wasFound = true;
-                        if (collectionControl.checkCommand(choice)) {
+                        if (checkCommand(choice)) {
                             if (command.getName().equals("save")) {
                                 argument = file;
                                 command.execute(argument);
@@ -57,4 +54,21 @@ public class ConsoleMode {
         }
         scanner.close();
     }
+
+    private boolean checkCommand(String[] choice) {
+        if (choice.length != 1) {
+            System.out.println("У данной команды нет аргументов");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkCommandWithArgument(String[] choice) {
+        if (choice.length != 2) {
+            System.out.println("У данной команды должен быть один аргумент");
+            return false;
+        }
+        return true;
+    }
+    
 }

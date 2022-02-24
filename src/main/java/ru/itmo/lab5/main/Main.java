@@ -38,7 +38,7 @@ public class Main {
         csvParser.parse();
         collectionControl.addValues(csvParser.getTicketMap());
 
-        ConsoleMode consoleMode = new ConsoleMode(collectionControl, commands, file);
+        ConsoleMode consoleMode = new ConsoleMode(commands, file);
         consoleMode.start();
     }
 }
