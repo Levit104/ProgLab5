@@ -1,7 +1,5 @@
 package ru.itmo.lab5.commands;
 
-import java.util.Map.Entry;
-
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
@@ -10,6 +8,11 @@ public class UpdateCommand implements Command {
 
     public UpdateCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;
+    }
+
+    @Override
+    public boolean hasArgument() {
+        return true;
     }
 
     @Override
@@ -29,12 +32,13 @@ public class UpdateCommand implements Command {
             boolean wasFound = false;
             InsertCommand insert = new InsertCommand(collectionControl);
     
-            for (Entry<Integer, Ticket> element : collectionControl.getCollection().entrySet()) {
-                if (ID.equals(element.getValue().getId())) {
-                    insert.createTicket(element.getKey());
-                    insert.getTicket().setId(element.getValue().getId()); // возвращаем старый ID
-                    insert.getTicket().setCreationDate(element.getValue().getCreationDate()); // возвращаем старую дату
-                    collectionControl.getCollection().replace(element.getKey(), element.getValue(), insert.getTicket());
+            for (Ticket oldTicket : collectionControl.getCollection().values()) {
+                if (ID.equals(oldTicket.getId())) {
+                    insert.createTicket(oldTicket.getKey());
+                    Ticket newTicket = insert.getTicket();
+                    newTicket.setId(oldTicket.getId()); // возвращаем старый ID
+                    newTicket.setCreationDate(oldTicket.getCreationDate()); // возвращаем старую дату
+                    collectionControl.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
                     wasFound = true;
                     System.out.println("Элемент был успешно заменён");
                     break;
