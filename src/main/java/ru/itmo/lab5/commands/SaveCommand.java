@@ -31,7 +31,7 @@ public class SaveCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        String csvString = collectionControl.csvString() + "\n";
+        String csvString = CollectionControl.csvString() + "\n";
         for (Ticket ticket : collectionControl.getCollection().values()) {
             csvString += ticket + "\n";
         }

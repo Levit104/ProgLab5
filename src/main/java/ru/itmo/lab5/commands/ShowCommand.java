@@ -30,7 +30,7 @@ public class ShowCommand implements Command {
         if (collectionControl.getCollection().isEmpty()) {
             System.out.println("В коллекции нет элементов");
         } else {
-            System.out.println(collectionControl.csvString());
+            System.out.println(CollectionControl.csvString());
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 System.out.println(ticket);
             }

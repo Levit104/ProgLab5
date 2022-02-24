@@ -21,7 +21,7 @@ public class CollectionControl {
         collection.putAll(map);
     }
     
-    public String csvString() {
+    public static String csvString() {
         return "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
     }
 
