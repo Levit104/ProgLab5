@@ -6,12 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ru.itmo.lab5.data.Ticket;
-import lombok.Getter;
 
-@Getter
 public class CollectionControl {
     private Map<Integer, Ticket> collection = new HashMap<>();
     private String initDate;
+
+    public Map<Integer, Ticket> getCollection() {
+        return collection;
+    }
+
+    public String getInitDate() {
+        return initDate;
+    }
 
     public CollectionControl() {
         initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));

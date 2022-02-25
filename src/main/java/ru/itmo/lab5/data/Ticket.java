@@ -4,15 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Класс, описывающий билет на спортивное событие. Объекты класса являются элементами коллекции
  */
 
- @Getter
- @Setter
 public class Ticket implements Comparable<Ticket> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -100,4 +95,35 @@ public class Ticket implements Comparable<Ticket> {
         return true;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Integer getKey() {
+        return key;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public TicketType getType() {
+        return type;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
 }

@@ -2,15 +2,10 @@ package ru.itmo.lab5.data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * Класс, описывающий спортивное событие
  */
 
- @Getter
- @Setter
 public class Event {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -31,6 +26,14 @@ public class Event {
         this.name= name;
         this.date = date;
         this.eventType = eventType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Event(Long id, String name, LocalDateTime date, EventType eventType) {
