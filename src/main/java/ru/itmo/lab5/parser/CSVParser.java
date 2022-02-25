@@ -191,7 +191,7 @@ public class CSVParser {
         Integer key = null;
         try {
             key = Integer.parseInt(data);
-            if (!Ticket.checkTicketKey(key, ticketMap)) {
+            if (!Ticket.checkKey(key, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
@@ -211,7 +211,7 @@ public class CSVParser {
             if (ID <= 0) {
                 throw new NumberFormatException();
             }
-            if (!Ticket.checkTicketID(ID, ticketMap)) {
+            if (!Ticket.checkID(ID, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
@@ -231,7 +231,7 @@ public class CSVParser {
             if (eventID <= 0) {
                 throw new NumberFormatException();
             }
-            if (!Ticket.checkEventID(eventID, ticketMap)) {
+            if (!Event.checkID(eventID, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {

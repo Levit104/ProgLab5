@@ -2,6 +2,7 @@ package ru.itmo.lab5.data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 /**
  * Класс, описывающий спортивное событие
@@ -44,6 +45,15 @@ public class Event {
         this.name = name;
         this.date = date;
         this.eventType = eventType;
+    }
+
+    public static boolean checkID(Long ID, Map<Integer, Ticket> collection) {
+        for (Ticket ticket : collection.values()) {
+            if (ticket.getEvent().getId().equals(ID)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

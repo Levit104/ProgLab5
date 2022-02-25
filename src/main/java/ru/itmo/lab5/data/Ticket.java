@@ -73,27 +73,18 @@ public class Ticket implements Comparable<Ticket> {
         return Double.compare(this.price, ticket.price);
     }
 
-    public static boolean checkTicketID(Integer ID, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            if (ticket.getId().equals(ID)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean checkEventID(Long ID, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            if (ticket.getEvent().getId().equals(ID)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean checkTicketKey(Integer key, Map<Integer, Ticket> collection) {
+    public static boolean checkKey(Integer key, Map<Integer, Ticket> collection) {
         for (Ticket ticket : collection.values()) {
             if (ticket.getKey().equals(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkID(Integer ID, Map<Integer, Ticket> collection) {
+        for (Ticket ticket : collection.values()) {
+            if (ticket.getId().equals(ID)) {
                 return false;
             }
         }

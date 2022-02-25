@@ -46,18 +46,18 @@ public class InsertCommand implements Command {
         try {
             Integer key = Integer.parseInt(argument);
             
-            if (!Ticket.checkTicketKey(key, collectionControl.getCollection())) {
+            if (!Ticket.checkKey(key, collectionControl.getCollection())) {
                 throw new NotUniqueValueException();
             }
             
             createTicket(key);
 
-            while (!Ticket.checkTicketID(ticket.getId(), collectionControl.getCollection())) {
+            while (!Ticket.checkID(ticket.getId(), collectionControl.getCollection())) {
                 ticket.setId(ticket.getId() + 1);
             }
 
             if (ticket.getEvent() != null) {
-                while (!Ticket.checkEventID(ticket.getEvent().getId(), collectionControl.getCollection())) {
+                while (!Event.checkID(ticket.getEvent().getId(), collectionControl.getCollection())) {
                     ticket.getEvent().setId(ticket.getEvent().getId() + 1);
                 }
             }
