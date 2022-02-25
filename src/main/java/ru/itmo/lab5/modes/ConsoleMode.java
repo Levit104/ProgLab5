@@ -24,6 +24,7 @@ public class ConsoleMode {
             String inputCommand = choice[0];
             String argument = "";
             boolean wasFound = false;
+            boolean firstHelpCommand = true;
 
             for (Command command : commands) {
                 if (inputCommand.equals("exit")) {
@@ -31,8 +32,11 @@ public class ConsoleMode {
                     break loop;
                 } else if (inputCommand.equals("help")) {
                     wasFound = true;
-                    System.out.println("help : вывести справку по доступным командам");
-                    System.out.println("exit : завершить программу (без сохранения в файл)");
+                    if (firstHelpCommand) {
+                        System.out.println("help : вывести справку по доступным командам");
+                        System.out.println("exit : завершить программу (без сохранения в файл)");
+                        firstHelpCommand = false;
+                    }
                     System.out.println(command.getName() + command.getDescription());
                 } else if (inputCommand.equals(command.getName())) {
                     wasFound = true;
@@ -42,24 +46,16 @@ public class ConsoleMode {
                         } else {
                             if (choice.length == 1) {
                                 argument = file;
-                            } else if (choice.length == 2) {
-                                if (CSVParser.checkFileExtension(choice[1])) {
-                                    argument = choice[1];
-                                } else {
-                                    System.out.println("Файл должен иметь расширение .csv");
-                                }
+                            } else if (choice.length == 2 && CSVParser.checkFileExtension(choice[1])) {
+                                argument = choice[1];
                             }
                             command.execute(argument);
                         }
-                    } else if (command.hasArgument()) {
-                        if (checkCommandWithArgument(choice)) {
-                            argument = choice[1];
-                            command.execute(argument);
-                        }
-                    } else {
-                        if (checkCommand(choice)) {
-                            command.execute(argument);
-                        }
+                    } else if (command.hasArgument() && checkCommandWithArgument(choice)) {
+                        argument = choice[1];
+                        command.execute(argument);
+                    } else if (checkCommand(choice)) {
+                        command.execute(argument);
                     }
                 }
             }
@@ -85,5 +81,4 @@ public class ConsoleMode {
         }
         return true;
     }
-
 }
