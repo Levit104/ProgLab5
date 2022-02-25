@@ -5,7 +5,7 @@ import ru.itmo.lab5.data.Ticket;
 
 public class RemoveCommand implements Command {
     private CollectionControl collectionControl;
-    
+
     public RemoveCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;
     }
@@ -35,7 +35,7 @@ public class RemoveCommand implements Command {
             for (Integer elemKey : collectionControl.getCollection().keySet()) {
                 keyList += elemKey + ", ";
             }
-            
+
             if (collectionControl.getCollection().isEmpty()) {
                 System.out.println("В коллекции нет элементов");
             }

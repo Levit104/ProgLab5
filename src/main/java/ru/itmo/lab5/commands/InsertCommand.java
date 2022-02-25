@@ -51,13 +51,13 @@ public class InsertCommand implements Command {
             while (!Ticket.checkTicketID(ticket.getId(), collectionControl.getCollection())) {
                 ticket.setId(ticket.getId() + 1);
             }
-            
+
             if (ticket.getEvent() != null) {
                 while (!Ticket.checkEventID(ticket.getEvent().getId(), collectionControl.getCollection())) {
                     ticket.getEvent().setId(ticket.getEvent().getId() + 1);
                 }
             }
-            
+
             collectionControl.getCollection().put(key, ticket);
             System.out.println("Элемент успешно добавлен");
 
@@ -191,7 +191,7 @@ public class InsertCommand implements Command {
             }
         }
     }
-  
+
     private LocalDateTime askEventTime() {
         while (true) {
             try {

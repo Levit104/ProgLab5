@@ -53,5 +53,5 @@ public class ReplaceIfGreaterCommand implements Command {
             System.out.println("Значение ключа должно быть целым числом");
         }
     }
-    
+
 }

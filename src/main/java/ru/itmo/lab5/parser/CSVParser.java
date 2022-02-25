@@ -35,7 +35,7 @@ public class CSVParser {
         Reader inputReader = null;
         try {
             inputReader = new InputStreamReader(new FileInputStream(file), "UTF8");
-            
+
             StringBuilder stringBuilder = new StringBuilder();
             int symbol = 0;
             while ((symbol = inputReader.read()) != -1) {
@@ -80,10 +80,10 @@ public class CSVParser {
 
     public void parse() {
         if (noErrors) {
-            Scanner dataScanner = null; 
+            Scanner dataScanner = null;
             String line = null;
             int index = 0;
-            
+
             while (stringScanner.hasNextLine()) {
                 Ticket ticket = null;
                 Integer key = null;
@@ -98,20 +98,20 @@ public class CSVParser {
                 String eventName = null;
                 LocalDateTime eventDate = null;
                 EventType eventType = null;
-                
+
                 line = stringScanner.nextLine();
                 dataScanner = new Scanner(line);
                 dataScanner.useDelimiter(",");
                 noErrors = true;
 
                 if (line.charAt(0) == ',') {
-                    System.out.printf("Значение поля key в строке %d не может быть пустым, " + 
+                    System.out.printf("Значение поля key в строке %d не может быть пустым, " +
                                       "т.к. элемент не может существовать без ключа%n", row);
                     noErrors = false;
                     System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row - 1);
                     continue;
                 }
-                
+
                 while (dataScanner.hasNext()) {
                     String data = dataScanner.next();
 
@@ -128,7 +128,7 @@ public class CSVParser {
                     else if (index == 10) eventDate = parseEventDate(data, "eventDate");
                     else if (index == 11) eventType = parseEventType(data, "eventType");
                     else System.out.println("Некорректные данные " + data);
-                    
+
                     index++;
                 }
 
@@ -136,10 +136,10 @@ public class CSVParser {
                     System.out.printf("Значение поля eventType в строке %d не может быть пустым%n", row);
                     noErrors = false;
                 }
-                
-                ticket = new Ticket(key, id, name, new Coordinates(coordinateX, coordinateY), creationDate, price, type, 
-                                        new Event(eventID, eventName, eventDate, eventType));
-                
+
+                ticket = new Ticket(key, id, name, new Coordinates(coordinateX, coordinateY), creationDate, price, type,
+                                    new Event(eventID, eventName, eventDate, eventType));
+
                 if (noErrors) {
                     ticketMap.put(ticket.getKey(), ticket);
                     System.out.printf("Элемент в строке %d был успешно добавлен%n%n", row);
@@ -158,7 +158,7 @@ public class CSVParser {
         String extension = "";
         int i = file.lastIndexOf('.');
         if (i > 0) extension = file.substring(i + 1);
-        
+
         if (extension.equals("csv")) return true;
         else return false;
     }

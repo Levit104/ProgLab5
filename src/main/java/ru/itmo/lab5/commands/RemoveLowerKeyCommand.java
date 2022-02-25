@@ -32,7 +32,7 @@ public class RemoveLowerKeyCommand implements Command {
             boolean wasFound = false;
             Integer key = Integer.parseInt(argument.trim());
             Iterator<Integer> element = collectionControl.getCollection().keySet().iterator();
-            
+
             while (element.hasNext()) {
                 Integer elemKey = element.next();
                 if (elemKey < key) {
@@ -40,7 +40,7 @@ public class RemoveLowerKeyCommand implements Command {
                     wasFound = true;
                 }
             }
-            
+
             if (wasFound) {
                 System.out.println("Элементы успешно удалены");
             } else {
@@ -50,8 +50,7 @@ public class RemoveLowerKeyCommand implements Command {
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");
         }
-        
 
     }
-    
+
 }

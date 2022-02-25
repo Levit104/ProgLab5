@@ -35,11 +35,11 @@ public class SaveCommand implements Command {
             System.out.println("В коллекции нет элементов");
         } else {
             String csvString = CollectionControl.csvString() + "\n";
-            
+
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 csvString += ticket + "\n";
             }
-            
+
             try {
                 fileWriter = new FileWriter(argument);
                 fileWriter.write(csvString);
@@ -58,5 +58,5 @@ public class SaveCommand implements Command {
             }
         }
     }
-    
+
 }

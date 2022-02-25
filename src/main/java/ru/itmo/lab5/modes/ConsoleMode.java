@@ -20,7 +20,7 @@ public class ConsoleMode {
         loop: while (true) {
             System.out.print("Введите команду (help - справка по всем командам): ");
             String[] choice = scanner.nextLine().split(" ");
-            
+
             String inputCommand = choice[0];
             String argument = "";
             boolean wasFound = false;
@@ -51,7 +51,7 @@ public class ConsoleMode {
                     } else if (command.hasArgument()) {
                         if (checkCommandWithArgument(choice)) {
                             argument = choice[1];
-                            command.execute(argument);   
+                            command.execute(argument);
                         }
                     } else {
                         if (checkCommand(choice)) {
@@ -80,5 +80,5 @@ public class ConsoleMode {
         }
         return true;
     }
-    
+
 }

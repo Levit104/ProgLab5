@@ -38,5 +38,5 @@ public class PrintAscendingCommand implements Command {
             System.out.println(ticket);
         }
     }
-    
+
 }

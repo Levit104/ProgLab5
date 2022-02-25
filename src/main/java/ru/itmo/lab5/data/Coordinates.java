@@ -1,16 +1,20 @@
 package ru.itmo.lab5.data;
+
 /**
  * Класс, описывающий координаты x и y
  */
+
 public class Coordinates {
-    private Double x; //Максимальное значение поля: 606, Поле не может быть null
-    private Double y; //Максимальное значение поля: 483, Поле не может быть null
+    private Double x; // Максимальное значение поля: 606, Поле не может быть null
+    private Double y; // Максимальное значение поля: 483, Поле не может быть null
 
     /**
      * Конструктор для задания координат
+     * 
      * @param x координата x
      * @param y координата y
      */
+
     public Coordinates(Double x, Double y) {
         this.x = x;
         this.y = y;

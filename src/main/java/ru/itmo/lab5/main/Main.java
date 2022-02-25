@@ -21,22 +21,22 @@ public class Main {
         }
 
         Command[] commands = {
-            new InfoCommand(collectionControl), 
-            new ShowCommand(collectionControl), 
-            new InsertCommand(collectionControl), 
-            new UpdateCommand(collectionControl), 
-            new RemoveCommand(collectionControl), 
-            new ClearCommand(collectionControl), 
-            new SaveCommand(collectionControl), 
-            // Command executeScriptCommand = new ExecuteScriptCommand(collectionControl),
-            new ReplaceIfGreaterCommand(collectionControl), 
-            new ReplaceIfLowerCommand(collectionControl),
-            new RemoveLowerKeyCommand(collectionControl), 
-            new FilterCommand(collectionControl), 
-            new PrintAscendingCommand(collectionControl), 
-            new PrintFieldDescendingCommand(collectionControl)
+                new InfoCommand(collectionControl),
+                new ShowCommand(collectionControl),
+                new InsertCommand(collectionControl),
+                new UpdateCommand(collectionControl),
+                new RemoveCommand(collectionControl),
+                new ClearCommand(collectionControl),
+                new SaveCommand(collectionControl),
+                // Command executeScriptCommand = new ExecuteScriptCommand(collectionControl),
+                new ReplaceIfGreaterCommand(collectionControl),
+                new ReplaceIfLowerCommand(collectionControl),
+                new RemoveLowerKeyCommand(collectionControl),
+                new FilterCommand(collectionControl),
+                new PrintAscendingCommand(collectionControl),
+                new PrintFieldDescendingCommand(collectionControl)
         };
-        
+
         CSVParser csvParser = new CSVParser(file);
         ConsoleMode consoleMode = new ConsoleMode(commands, file);
 

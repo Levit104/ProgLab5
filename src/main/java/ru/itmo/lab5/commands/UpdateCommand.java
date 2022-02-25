@@ -31,7 +31,7 @@ public class UpdateCommand implements Command {
             boolean wasFound = false;
             Integer ID = Integer.parseInt(argument);
             InsertCommand insert = new InsertCommand(collectionControl);
-    
+
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
                 if (ID.equals(oldTicket.getId())) {
                     insert.createTicket(oldTicket.getKey());
