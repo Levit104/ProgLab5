@@ -30,5 +30,5 @@ public class InfoCommand implements Command {
                            "\nДата инициализации: " + collectionControl.getInitDate() + 
                            "\nКол-во элементов: " + collectionControl.getCollection().size());
     }
-    
+
 }
