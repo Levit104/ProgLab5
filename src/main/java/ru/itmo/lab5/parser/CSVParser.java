@@ -183,6 +183,7 @@ public class CSVParser {
         if (extension.equals("csv")) {
             return true;
         } else {
+            System.out.println("Файл должен иметь расширение .csv");
             return false;
         }
     }

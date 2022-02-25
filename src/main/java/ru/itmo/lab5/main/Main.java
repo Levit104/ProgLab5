@@ -20,7 +20,7 @@ public class Main {
         } catch (ArrayIndexOutOfBoundsException e1) {
             System.out.println("Неверно указан путь до файла\n");
         } catch (IllegalArgumentException e2) {
-            System.out.println("Файл должен иметь расширение .csv\n");
+            System.out.println("Неверное расширение файла\n");
         }
 
         Command[] commands = {
