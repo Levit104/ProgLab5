@@ -33,10 +33,8 @@ public class PrintAscendingCommand implements Command {
     public void execute(String argument) {
         List<Ticket> sortedCollection = new ArrayList<>(collectionControl.getCollection().values());
         Collections.sort(sortedCollection);
-
         for (Ticket ticket : sortedCollection) {
             System.out.println(ticket);
         }
     }
-
 }

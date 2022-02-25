@@ -11,8 +11,11 @@ public class Main {
         String file = null;
 
         try {
-            if (args.length > 1) throw new ArrayIndexOutOfBoundsException();
-            else if (!CSVParser.checkFileExtension(args[0])) throw new IllegalArgumentException();
+            if (args.length > 1) {
+                throw new ArrayIndexOutOfBoundsException();
+            } else if (!CSVParser.checkFileExtension(args[0])) {
+                throw new IllegalArgumentException();
+            }
             file = args[0];
         } catch (ArrayIndexOutOfBoundsException e1) {
             System.out.println("Неверно указан путь до файла\n");

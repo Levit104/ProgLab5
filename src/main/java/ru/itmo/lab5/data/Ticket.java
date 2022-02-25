@@ -10,6 +10,8 @@ import java.util.Map;
  */
 
 public class Ticket implements Comparable<Ticket> {
+    private static Integer uniqueID = 1;
+    private Integer key;
     private Integer id; // Поле не может быть null, Значение поля должно быть больше 0,
                         // Значение этого поля должно быть уникальным,
                         // Значение этого поля должно генерироваться автоматически
@@ -19,9 +21,6 @@ public class Ticket implements Comparable<Ticket> {
     private double price; // Значение поля должно быть больше 0
     private TicketType type; // Поле не может быть null
     private Event event; // Поле может быть null
-
-    private Integer key;
-    static private Integer uniqueID = 1;
 
     /**
      * Конструктор, задающий параметры объекта класса

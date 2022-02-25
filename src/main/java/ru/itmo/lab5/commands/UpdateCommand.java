@@ -36,20 +36,21 @@ public class UpdateCommand implements Command {
                 if (ID.equals(oldTicket.getId())) {
                     insert.createTicket(oldTicket.getKey());
                     Ticket newTicket = insert.getTicket();
-                    newTicket.setId(oldTicket.getId()); // возвращаем старый ID
-                    newTicket.setCreationDate(oldTicket.getCreationDate()); // возвращаем старую дату
+                    newTicket.setId(oldTicket.getId());
+                    newTicket.setCreationDate(oldTicket.getCreationDate());
                     collectionControl.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
                     wasFound = true;
                     System.out.println("Элемент был успешно заменён");
                     break;
                 }
             }
+
             if (!wasFound) {
                 System.out.println("В коллекции нет элемента с заданным ID");
             }
+            
         } catch (NumberFormatException e) {
-            System.out.println("Значение ID  должно быть целым числом");
+            System.out.println("Значение ID должно быть целым числом");
         }
-
     }
 }

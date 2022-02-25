@@ -50,7 +50,5 @@ public class RemoveLowerKeyCommand implements Command {
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");
         }
-
     }
-
 }

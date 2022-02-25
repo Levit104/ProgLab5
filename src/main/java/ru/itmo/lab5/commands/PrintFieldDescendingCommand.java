@@ -37,21 +37,19 @@ public class PrintFieldDescendingCommand implements Command {
         } else {
             List<String> typeList = new ArrayList<>();
             String typeString = "";
-
+            
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 typeList.add(ticket.getType().toString());
             }
-
+            
             Collections.sort(typeList);
             Collections.reverse(typeList);
-
+            
             for (String type : typeList) {
                 typeString += type + ", ";
             }
-
-            // убираю запятую и пробел в конце
+            
             System.out.println(typeString.substring(0, typeString.length() - 2));
         }
     }
-
 }

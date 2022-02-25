@@ -35,7 +35,7 @@ public class SaveCommand implements Command {
             System.out.println("В коллекции нет элементов");
         } else {
             String csvString = CollectionControl.csvString() + "\n";
-
+            
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 csvString += ticket + "\n";
             }
@@ -58,5 +58,4 @@ public class SaveCommand implements Command {
             }
         }
     }
-
 }

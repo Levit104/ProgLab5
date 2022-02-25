@@ -43,8 +43,11 @@ public class ConsoleMode {
                             if (choice.length == 1) {
                                 argument = file;
                             } else if (choice.length == 2) {
-                                if (CSVParser.checkFileExtension(choice[1])) argument = choice[1];
-                                else System.out.println("Файл должен иметь расширение .csv");
+                                if (CSVParser.checkFileExtension(choice[1])) {
+                                    argument = choice[1];
+                                } else {
+                                    System.out.println("Файл должен иметь расширение .csv");
+                                }
                             }
                             command.execute(argument);
                         }
@@ -60,7 +63,9 @@ public class ConsoleMode {
                     }
                 }
             }
-            if (!wasFound) System.out.println("Вы ввели несуществующую команду");
+            if (!wasFound) {
+                System.out.println("Вы ввели несуществующую команду");
+            }
         }
         scanner.close();
     }

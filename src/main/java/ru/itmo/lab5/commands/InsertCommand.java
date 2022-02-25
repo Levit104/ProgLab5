@@ -45,7 +45,11 @@ public class InsertCommand implements Command {
     public void execute(String argument) {
         try {
             Integer key = Integer.parseInt(argument);
-            if (!Ticket.checkTicketKey(key, collectionControl.getCollection())) throw new NotUniqueValueException();
+            
+            if (!Ticket.checkTicketKey(key, collectionControl.getCollection())) {
+                throw new NotUniqueValueException();
+            }
+            
             createTicket(key);
 
             while (!Ticket.checkTicketID(ticket.getId(), collectionControl.getCollection())) {
@@ -75,9 +79,11 @@ public class InsertCommand implements Command {
         double price = askPrice();
         TicketType ticketType = askTicketType();
         Event event = null;
+        
         if (askEvent()) {
             event = new Event(askEventName(), askEventTime(), askEventType());
         }
+        
         ticket = new Ticket(key, name, new Coordinates(coordinateX, coordinateY), price, ticketType, event);
     }
 
@@ -202,7 +208,6 @@ public class InsertCommand implements Command {
                 System.out.println("Вы ввели недопустимый формат даты");
             }
         }
-
     }
 
     private EventType askEventType() {
@@ -221,5 +226,4 @@ public class InsertCommand implements Command {
             }
         }
     }
-
 }

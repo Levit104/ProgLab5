@@ -47,11 +47,12 @@ public class ReplaceIfLowerCommand implements Command {
                 }
             }
 
-            if (!wasFound) System.out.println("В коллекции нет элемента с заданным ключом");
+            if (!wasFound) {
+                System.out.println("В коллекции нет элемента с заданным ключом");
+            }
 
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");
         }
     }
-
 }

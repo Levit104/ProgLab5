@@ -41,12 +41,12 @@ public class RemoveCommand implements Command {
             }
 
             if (removedElement == null) {
-                // убираю запятую и пробел в конце
                 System.out.printf("Элемента с заданным ключом не существует. Все существующие ключи: %s%n", 
                                    keyList.substring(0, keyList.length() - 2));                
             } else {
                 System.out.printf("Элемент с ключом %d успешно удалён%n", key);
             }
+
         } catch (NumberFormatException e) {
             System.out.println("Значение ключа должно быть целым числом");
         }

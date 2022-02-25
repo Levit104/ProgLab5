@@ -8,14 +8,13 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event {
+    private static Long uniqueID = 1L;
     private Long id; // Поле не может быть null, Значение поля должно быть больше 0,
                      // Значение этого поля должно быть уникальным,
                      // Значение этого поля должно генерироваться автоматически
     private String name; // Поле не может быть null, Строка не может быть пустой
     private LocalDateTime date; // Поле не может быть null
     private EventType eventType; // Поле не может быть null
-
-    static private Long uniqueID = 1L;
 
     /**
      * Конструктор, задающий параметры объекта класса

@@ -31,15 +31,16 @@ public class FilterCommand implements Command {
             System.out.println("В коллекция нет элементов");
         } else {
             String ticketList = "";
+            
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 if (ticket.getName().startsWith(argument.trim())) {
                     ticketList += ticket + "\n";
                 }
             }
+            
             if (ticketList.isEmpty()) {
                 System.out.println("В коллекции нет элементов, имя которых начинается на " + argument.trim());
             } else {
-                // убираю перенос на следующую строку в конце
                 System.out.println(ticketList.substring(0, ticketList.length() - 1));
             }
         }
