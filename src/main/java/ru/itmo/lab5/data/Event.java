@@ -61,7 +61,8 @@ public class Event {
 
     public static boolean checkID(Long ID, Map<Integer, Ticket> collection) {
         for (Ticket ticket : collection.values()) {
-            if (ticket.getEvent().getId().equals(ID)) {
+            Event event = ticket.getEvent();
+            if (event != null && event.getId().equals(ID)) {
                 return false;
             }
         }
