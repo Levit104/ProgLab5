@@ -7,8 +7,19 @@ import java.util.List;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда-фильтр, выводит значение поля "тип билета" элементов в порядке убывания
+ */
+
 public class PrintFieldDescendingCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl коллекция (менеджер коллекции)
+     * @see CollectionControl
+     */
 
     public PrintFieldDescendingCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

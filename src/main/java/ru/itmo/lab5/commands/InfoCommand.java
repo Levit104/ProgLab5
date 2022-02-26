@@ -2,8 +2,19 @@ package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionControl;
 
+/**
+ * Команда, выводящая информацию о коллекции
+ */
+
 public class InfoCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl менеджер коллекции
+     * @see CollectionControl
+     */
 
     public InfoCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

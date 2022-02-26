@@ -25,11 +25,21 @@ import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
+/**
+ * Класс для считывания информации из csv файла
+ */
+
 public class CSVParser {
     private int row = 2;
     private Map<Integer, Ticket> ticketMap = new LinkedHashMap<>();
     private boolean noErrors = true;
     private Scanner stringScanner = null;
+
+    /**
+     * Конструктор, задающий параметры класса
+     * 
+     * @param file путь до файла
+     */
 
     public CSVParser(String file) {
         Reader inputReader = null;
@@ -78,9 +88,19 @@ public class CSVParser {
         }
     }
 
+    /**
+     * Возвращает коллекцию, содержащую объекты класса Ticket
+     * 
+     * @return коллекция
+     */
+
     public Map<Integer, Ticket> getTicketMap() {
         return this.ticketMap;
     }
+
+    /**
+     * Считывание информации из csv файла
+     */
 
     public void parse() {
         if (noErrors) {
@@ -171,6 +191,13 @@ public class CSVParser {
             System.out.println("Проверка данных завершена\n");
         }
     }
+
+    /**
+     * Проверка расширения файла
+     * 
+     * @param file путь до файла
+     * @return {@code true} если файл с расширением .csv, иначе - {@code false} 
+     */
 
     public static boolean checkFileExtension(String file) {
         String extension = "";

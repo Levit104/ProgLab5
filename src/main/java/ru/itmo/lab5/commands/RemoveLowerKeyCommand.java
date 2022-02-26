@@ -4,8 +4,19 @@ import java.util.Iterator;
 
 import ru.itmo.lab5.collection.CollectionControl;
 
+/**
+ * Команда, удаляющая элемент из коллекции, если его ключ меньше того, что введет пользователь
+ */
+
 public class RemoveLowerKeyCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl коллекция (менеджер коллекции)
+     * @see CollectionControl
+     */
 
     public RemoveLowerKeyCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

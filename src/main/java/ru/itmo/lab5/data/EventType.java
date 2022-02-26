@@ -11,9 +11,9 @@ public enum EventType {
     EXPOSITION;
 
     /**
-     * Возвращает строковое представление значений enum'а через запятую
+     * Возвращает значения enum'а в строковом представлении через запятую
      * 
-     * @return строковое представление значение enum'а
+     * @return значения enum'a через запятую
      */
 
     public static String valuesToString() {

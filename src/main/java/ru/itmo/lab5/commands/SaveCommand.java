@@ -6,6 +6,10 @@ import java.io.IOException;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда, записывающая коллекцию в файл .csv
+ */
+
 public class SaveCommand implements Command {
     private CollectionControl collectionControl;
     private FileWriter fileWriter;

@@ -3,8 +3,19 @@ package ru.itmo.lab5.commands;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда, выводящая элементы на экран
+ */
+
 public class ShowCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl коллекция (менеджер коллекции)
+     * @see CollectionControl
+     */
 
     public ShowCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

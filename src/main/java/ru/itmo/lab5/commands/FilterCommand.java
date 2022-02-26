@@ -3,8 +3,19 @@ package ru.itmo.lab5.commands;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда-фильтр, выводит элементы, имя которых начинается с введённой пользователем подстроки
+ */
+
 public class FilterCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl менеджер коллекции
+     * @see CollectionControl
+     */
 
     public FilterCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

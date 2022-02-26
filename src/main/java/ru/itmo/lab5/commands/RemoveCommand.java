@@ -3,8 +3,19 @@ package ru.itmo.lab5.commands;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда, удаляющая элемент из коллекции
+ */
+
 public class RemoveCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl коллекция (менеджер коллекции)
+     * @see CollectionControl
+     */
 
     public RemoveCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

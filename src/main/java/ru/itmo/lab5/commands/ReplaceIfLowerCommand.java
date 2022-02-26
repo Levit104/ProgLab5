@@ -3,8 +3,19 @@ package ru.itmo.lab5.commands;
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
 
+/**
+ * Команда, заменяющая элемент, если цена нового элемента меньше цены старого
+ */
+
 public class ReplaceIfLowerCommand implements Command {
     private CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl коллекция (менеджер коллекции)
+     * @see CollectionControl
+     */
 
     public ReplaceIfLowerCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;

@@ -13,14 +13,30 @@ import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
+/**
+ * Команда, добавляющая элемент в коллекцию
+ */
+
 public class InsertCommand implements Command {
     private Scanner scanner = new Scanner(System.in);
     private CollectionControl collectionControl;
     private Ticket ticket;
 
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl менеджер коллекции
+     * @see CollectionControl
+     */
+
     public InsertCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;
     }
+
+    /**
+     * Возвращает созданный билет
+     * @return билет
+     */
 
     public Ticket getTicket() {
         return ticket;
@@ -71,6 +87,11 @@ public class InsertCommand implements Command {
             System.out.println("Элемент с заданным ключом уже существует");
         }
     }
+
+    /**
+     * Создает новый билет, не добавляя его в коллекцию
+     * @param key ключ
+     */
 
     public void createTicket(Integer key) {
         String name = askName();

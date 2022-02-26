@@ -5,14 +5,30 @@ import java.util.Scanner;
 import ru.itmo.lab5.commands.Command;
 import ru.itmo.lab5.parser.CSVParser;
 
+/**
+ * Класс для управления ввода команд пользователем
+ */
+
 public class ConsoleMode {
     private Command[] commands;
     private String file;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param commands массив команда
+     * @param file     путь до файла
+     * @see Command
+     */
 
     public ConsoleMode(Command[] commands, String file) {
         this.commands = commands;
         this.file = file;
     }
+
+    /**
+     * Запускает консольный режим
+     */
 
     public void start() {
         Scanner scanner = new Scanner(System.in);

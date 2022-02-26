@@ -2,8 +2,19 @@ package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionControl;
 
+/**
+ * Команда, очищающая коллекцию
+ */
+
 public class ClearCommand implements Command {
     CollectionControl collectionControl;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionControl менеджер коллекции
+     * @see CollectionControl
+     */
 
     public ClearCommand(CollectionControl collectionControl) {
         this.collectionControl = collectionControl;
