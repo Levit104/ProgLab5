@@ -68,10 +68,10 @@ public class ConsoleMode {
                             command.execute(argument);
                         }
                     } else if (command.hasArgument() && checkCommandWithArgument(choice)) {
-                        argument = choice[1];
-                        command.execute(argument);
-                    } else if (checkCommand(choice)) {
-                        command.execute(argument);
+                            argument = choice[1];
+                            command.execute(argument);
+                    } else if (!command.hasArgument() && checkCommand(choice)) {
+                            command.execute(argument);
                     }
                 }
             }
