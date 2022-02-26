@@ -16,7 +16,7 @@ public class ConsoleMode {
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param commands массив команда
+     * @param commands массив команд
      * @param file     путь до файла
      * @see Command
      */

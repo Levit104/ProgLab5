@@ -6,7 +6,7 @@ package ru.itmo.lab5.commands;
 
 public interface Command {
     /**
-     * Устанавливает есть ли команда аргумент
+     * Устанавливает есть ли у команды аргумент
      * 
      * @return {@code true} если аргумент есть, иначе {@code false}
      */
