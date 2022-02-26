@@ -275,9 +275,7 @@ public class CSVParser {
     private String parseName(String data, String mode) {
         String name = null;
         try {
-            if (data.isEmpty()) {
-                throw new IllegalArgumentException();
-            } else if (data.trim().length() == 0 || data.trim().length() != data.length()) {
+            if (data.isEmpty() || data.trim().length() == 0 || data.trim().length() != data.length()) {
                 throw new IllegalArgumentException();
             }
             name = data;
