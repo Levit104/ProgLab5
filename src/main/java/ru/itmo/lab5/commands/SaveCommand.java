@@ -55,7 +55,9 @@ public class SaveCommand implements Command {
                                     "Укажите его как аргумент команды save");
             } finally {
                 try {
-                    fileWriter.close();
+                    if (fileWriter != null) {
+                        fileWriter.close();
+                    }
                 } catch (IOException e) {
                     System.out.println("Не удалось записать данные в файл");
                 }
