@@ -82,7 +82,7 @@ public class ConsoleMode {
         scanner.close();
     }
 
-    private boolean checkCommand(String[] choice) {
+    public static boolean checkCommand(String[] choice) {
         if (choice.length != 1) {
             System.out.println("У данной команды нет аргументов");
             return false;
@@ -90,7 +90,7 @@ public class ConsoleMode {
         return true;
     }
 
-    private boolean checkCommandWithArgument(String[] choice) {
+    public static boolean checkCommandWithArgument(String[] choice) {
         if (choice.length != 2) {
             System.out.println("У данной команды один обязательный аргумент");
             return false;
