@@ -67,10 +67,10 @@ public class ConsoleMode {
                             }
                             command.execute(argument);
                         }
-                    } else if (command.hasArgument() && checkCommandWithArgument(choice)) {
+                    } else if (command.hasArgument() && checkCommandWithArgument(choice, command)) {
                         argument = choice[1];
                         command.execute(argument);
-                    } else if (!command.hasArgument() && checkCommand(choice)) {
+                    } else if (!command.hasArgument() && checkCommand(choice, command)) {
                         command.execute(argument);
                     }
                 }
@@ -82,17 +82,17 @@ public class ConsoleMode {
         scanner.close();
     }
 
-    public static boolean checkCommand(String[] choice) {
+    public static boolean checkCommand(String[] choice, Command command) {
         if (choice.length != 1) {
-            System.out.println("У данной команды нет аргументов");
+            System.out.printf("У команды %s нет аргументов%n", command.getName());
             return false;
         }
         return true;
     }
 
-    public static boolean checkCommandWithArgument(String[] choice) {
+    public static boolean checkCommandWithArgument(String[] choice, Command command) {
         if (choice.length != 2) {
-            System.out.println("У данной команды один обязательный аргумент");
+            System.out.printf("У команды %s один обязательный аргумент%n", command.getName());
             return false;
         }
         return true;
