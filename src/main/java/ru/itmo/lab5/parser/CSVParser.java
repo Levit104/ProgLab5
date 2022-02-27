@@ -64,9 +64,7 @@ public class CSVParser {
             System.out.println("Неподдерживаемая кодировка\n");
             noErrors = false;
         } catch (FileNotFoundException | NullPointerException e2) {
-            if (file != null) {
-                System.out.println("Файл не найден\n");
-            }
+            System.out.println("Файл не найден\n");
             noErrors = false;
         } catch (IOException e3) {
             System.out.println("Ошибка при чтении файла\n");
