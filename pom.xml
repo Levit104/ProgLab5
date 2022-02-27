@@ -9,8 +9,8 @@
   <version>1.0</version>
 
   <name>lab5</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <description>Лабораторная работа №5</description>
+  <url>https://github.com/Levit104/ITMO</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,6 +20,27 @@
 
   <dependencies>
   </dependencies>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.3.2</version>
+        <configuration>
+          <sourcepath>${basedir}/src/main/java</sourcepath>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <id>default</id>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
   <build>
     <finalName>${project.artifactId}</finalName>
