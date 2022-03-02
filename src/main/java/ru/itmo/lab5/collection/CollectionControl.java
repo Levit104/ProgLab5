@@ -50,7 +50,7 @@ public class CollectionControl {
      * @param map коллекция
      */
 
-    public void addValues(Map<Integer, Ticket> map) {
+    public void addFromMap(Map<Integer, Ticket> map) {
         collection.putAll(map);
     }
 
