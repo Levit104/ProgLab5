@@ -2,6 +2,7 @@ package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
+import ru.itmo.lab5.modes.ConsoleManager;
 
 /**
  * Команда, заменяющая элемент по ID
@@ -9,6 +10,7 @@ import ru.itmo.lab5.data.Ticket;
 
 public class UpdateCommand implements Command {
     private CollectionControl collectionControl;
+    private ConsoleManager consoleManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
@@ -17,8 +19,9 @@ public class UpdateCommand implements Command {
      * @see CollectionControl
      */
 
-    public UpdateCommand(CollectionControl collectionControl) {
+    public UpdateCommand(CollectionControl collectionControl, ConsoleManager consoleManager) {
         this.collectionControl = collectionControl;
+        this.consoleManager = consoleManager;
     }
 
     @Override
@@ -41,16 +44,14 @@ public class UpdateCommand implements Command {
         try {
             boolean wasFound = false;
             Integer ID = Integer.parseInt(argument);
-            InsertCommand insert = new InsertCommand(collectionControl);
 
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
                 if (ID.equals(oldTicket.getId())) {
-                    insert.createTicket(oldTicket.getKey());
-                    Ticket newTicket = insert.getTicket();
+                    wasFound = true;
+                    Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
                     newTicket.setId(oldTicket.getId());
                     newTicket.setCreationDate(oldTicket.getCreationDate());
                     collectionControl.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
-                    wasFound = true;
                     System.out.println("Элемент был успешно заменён");
                     break;
                 }

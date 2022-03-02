@@ -2,6 +2,7 @@ package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionControl;
 import ru.itmo.lab5.data.Ticket;
+import ru.itmo.lab5.modes.ConsoleManager;
 
 /**
  * Команда, заменяющая элемент, если цена нового элемента меньше цены старого
@@ -9,6 +10,7 @@ import ru.itmo.lab5.data.Ticket;
 
 public class ReplaceIfLowerCommand implements Command {
     private CollectionControl collectionControl;
+    private ConsoleManager consoleManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
@@ -17,8 +19,9 @@ public class ReplaceIfLowerCommand implements Command {
      * @see CollectionControl
      */
 
-    public ReplaceIfLowerCommand(CollectionControl collectionControl) {
+    public ReplaceIfLowerCommand(CollectionControl collectionControl, ConsoleManager consoleManager) {
         this.collectionControl = collectionControl;
+        this.consoleManager = consoleManager;
     }
 
     @Override
@@ -41,13 +44,11 @@ public class ReplaceIfLowerCommand implements Command {
         try {
             boolean wasFound = false;
             Integer key = Integer.parseInt(argument.trim());
-            InsertCommand insert = new InsertCommand(collectionControl);
 
             for (Ticket oldTicket : collectionControl.getCollection().values()) {
                 if (key.equals(oldTicket.getKey())) {
-                    insert.createTicket(key);
-                    Ticket newTicket = insert.getTicket();
                     wasFound = true;
+                    Ticket newTicket = consoleManager.createTicket(key);
                     if (newTicket.compareTo(oldTicket) < 0) {
                         collectionControl.getCollection().replace(key, oldTicket, newTicket);
                         System.out.println("Элемент был успешно заменён");
