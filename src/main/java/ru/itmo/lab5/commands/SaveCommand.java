@@ -33,7 +33,7 @@ public class SaveCommand implements Command {
         if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
-            collectionManager.getCsvParser().save(argument, collectionManager);
+            collectionManager.getFileManager().saveCollection(argument, collectionManager);
         }
     }
 }
