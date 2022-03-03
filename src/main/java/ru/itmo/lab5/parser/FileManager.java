@@ -2,6 +2,7 @@ package ru.itmo.lab5.parser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -17,7 +18,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Coordinates;
 import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.EventType;
@@ -29,11 +30,12 @@ import ru.itmo.lab5.exceptions.NotUniqueValueException;
  * Класс для считывания информации из csv файла
  */
 
-public class CSVParser {
-    private int row = 2;
-    private Map<Integer, Ticket> ticketMap = new LinkedHashMap<>();
-    private boolean noErrors = true;
-    private Scanner stringScanner = null;
+public class FileManager {
+    private int row;
+    private Map<Integer, Ticket> ticketMap;
+    private boolean noErrors;
+    private Scanner stringScanner;
+    private FileWriter fileWriter;
 
     /**
      * Конструктор, задающий параметры класса
@@ -41,8 +43,11 @@ public class CSVParser {
      * @param file путь до файла
      */
 
-    public CSVParser(String file) {
+    public FileManager(String file) {
         Reader inputReader = null;
+        row = 2;
+        ticketMap = new LinkedHashMap<>();
+        noErrors = true;
         try {
             inputReader = new InputStreamReader(new FileInputStream(file), "UTF8");
             StringBuilder stringBuilder = new StringBuilder();
@@ -54,11 +59,9 @@ public class CSVParser {
 
             stringScanner = new Scanner(stringBuilder.toString());
             
-            if (!stringScanner.nextLine().equals(CollectionControl.csvString())) {
+            if (!stringScanner.nextLine().equals(CollectionManager.csvString())) {
                 throw new IllegalArgumentException();
             }
-
-            System.out.println("Файл успешно загружен. Проверка данных...\n");
 
         } catch (UnsupportedEncodingException e1) {
             System.out.println("Неподдерживаемая кодировка\n");
@@ -100,8 +103,10 @@ public class CSVParser {
      * Считывание информации из csv файла
      */
 
-    public void parse() {
+    public Map<Integer, Ticket> parseFile() {
         if (noErrors) {
+            System.out.println("Файл успешно загружен. Проверка данных...\n");
+
             Scanner dataScanner = null;
             String line = null;
             int index = 0;
@@ -187,6 +192,30 @@ public class CSVParser {
                 index = 0;
             }
             System.out.println("Проверка данных завершена\n");
+        }
+        return ticketMap;
+    }
+
+    public void saveCollection(String file, CollectionManager collectionManager) {
+        String csvString = collectionManager.toString();
+
+        try {
+            fileWriter = new FileWriter(file);
+            fileWriter.write(csvString);
+            System.out.println("Коллекция успешно сохранена");
+        } catch (IOException e1) {
+            System.out.println("Не удалось записать данные в файл");
+        } catch (NullPointerException e2) {
+            System.out.println("При запуске программы путь до файла не был указан или был указан неверно. " +
+                                "Укажите его как аргумент команды save");
+        } finally {
+            try {
+                if (fileWriter != null) {
+                    fileWriter.close();
+                }
+            } catch (IOException e) {
+                System.out.println("Не удалось записать данные в файл");
+            }
         }
     }
 
