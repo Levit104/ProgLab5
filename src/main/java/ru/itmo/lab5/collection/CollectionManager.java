@@ -11,7 +11,7 @@ import ru.itmo.lab5.data.Ticket;
  * Управление коллекцией (менеджер коллекции)
  */
 
-public class CollectionControl {
+public class CollectionManager {
     private Map<Integer, Ticket> collection = new HashMap<>();
     private String initDate;
 
@@ -19,7 +19,7 @@ public class CollectionControl {
      * Конструктор по-умолчанию, в момент создания устанавливается дата инициализации коллекции
      */
 
-    public CollectionControl() {
+    public CollectionManager() {
         initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
     }
 
