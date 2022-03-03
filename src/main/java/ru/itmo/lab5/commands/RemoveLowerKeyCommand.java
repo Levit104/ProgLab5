@@ -2,24 +2,24 @@ package ru.itmo.lab5.commands;
 
 import java.util.Iterator;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 
 /**
  * Команда, удаляющая элемент из коллекции, если его ключ меньше того, что введет пользователь
  */
 
 public class RemoveLowerKeyCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public RemoveLowerKeyCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public RemoveLowerKeyCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class RemoveLowerKeyCommand implements Command {
         try {
             boolean wasFound = false;
             Integer key = Integer.parseInt(argument.trim());
-            Iterator<Integer> element = collectionControl.getCollection().keySet().iterator();
+            Iterator<Integer> element = collectionManager.getCollection().keySet().iterator();
 
             while (element.hasNext()) {
                 Integer elemKey = element.next();

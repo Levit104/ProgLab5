@@ -1,6 +1,6 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.modes.ConsoleManager;
 
@@ -9,18 +9,18 @@ import ru.itmo.lab5.modes.ConsoleManager;
  */
 
 public class ReplaceIfLowerCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
     private ConsoleManager consoleManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public ReplaceIfLowerCommand(CollectionControl collectionControl, ConsoleManager consoleManager) {
-        this.collectionControl = collectionControl;
+    public ReplaceIfLowerCommand(CollectionManager collectionManager, ConsoleManager consoleManager) {
+        this.collectionManager = collectionManager;
         this.consoleManager = consoleManager;
     }
 
@@ -45,12 +45,12 @@ public class ReplaceIfLowerCommand implements Command {
             boolean wasFound = false;
             Integer key = Integer.parseInt(argument.trim());
 
-            for (Ticket oldTicket : collectionControl.getCollection().values()) {
+            for (Ticket oldTicket : collectionManager.getCollection().values()) {
                 if (key.equals(oldTicket.getKey())) {
                     wasFound = true;
                     Ticket newTicket = consoleManager.createTicket(key);
                     if (newTicket.compareTo(oldTicket) < 0) {
-                        collectionControl.getCollection().replace(key, oldTicket, newTicket);
+                        collectionManager.getCollection().replace(key, oldTicket, newTicket);
                         System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
                     } else {
                         System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены больше старого%n", key);

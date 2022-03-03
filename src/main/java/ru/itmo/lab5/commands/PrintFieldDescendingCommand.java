@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 
 /**
@@ -12,17 +12,17 @@ import ru.itmo.lab5.data.Ticket;
  */
 
 public class PrintFieldDescendingCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public PrintFieldDescendingCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public PrintFieldDescendingCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -43,15 +43,15 @@ public class PrintFieldDescendingCommand implements Command {
     @Override
     public void execute(String argument) {
 
-        if (collectionControl.getCollection().isEmpty()) {
+        if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
-        } else if (collectionControl.getCollection().size() == 1) {
+        } else if (collectionManager.getCollection().size() == 1) {
             System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
             List<String> typeList = new ArrayList<>();
             String typeString = "";
             
-            for (Ticket ticket : collectionControl.getCollection().values()) {
+            for (Ticket ticket : collectionManager.getCollection().values()) {
                 typeList.add(ticket.getType().toString());
             }
             

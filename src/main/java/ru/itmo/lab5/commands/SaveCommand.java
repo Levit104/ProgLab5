@@ -3,7 +3,7 @@ package ru.itmo.lab5.commands;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 
 /**
@@ -11,11 +11,11 @@ import ru.itmo.lab5.data.Ticket;
  */
 
 public class SaveCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
     private FileWriter fileWriter;
 
-    public SaveCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public SaveCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -35,12 +35,12 @@ public class SaveCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        if (collectionControl.getCollection().isEmpty()) {
+        if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
-            String csvString = CollectionControl.csvString() + "\n";
+            String csvString = CollectionManager.csvString() + "\n";
             
-            for (Ticket ticket : collectionControl.getCollection().values()) {
+            for (Ticket ticket : collectionManager.getCollection().values()) {
                 csvString += ticket + "\n";
             }
 

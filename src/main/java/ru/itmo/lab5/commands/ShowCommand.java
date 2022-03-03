@@ -1,6 +1,6 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 
 /**
@@ -8,17 +8,17 @@ import ru.itmo.lab5.data.Ticket;
  */
 
 public class ShowCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public ShowCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public ShowCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -38,12 +38,12 @@ public class ShowCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        if (collectionControl.getCollection().isEmpty()) {
+        if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
             System.out.println("Все элементы коллекции: ");
-            System.out.println(CollectionControl.csvString());
-            for (Ticket ticket : collectionControl.getCollection().values()) {
+            System.out.println(CollectionManager.csvString());
+            for (Ticket ticket : collectionManager.getCollection().values()) {
                 System.out.println(ticket);
             }
         }

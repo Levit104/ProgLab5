@@ -1,6 +1,6 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 
 /**
@@ -8,17 +8,17 @@ import ru.itmo.lab5.data.Ticket;
  */
 
 public class RemoveCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public RemoveCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public RemoveCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -38,15 +38,15 @@ public class RemoveCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        if (collectionControl.getCollection().isEmpty()) {
+        if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
             try {
                 Integer key = Integer.parseInt(argument);
-                Ticket removedElement = collectionControl.getCollection().remove(key);
+                Ticket removedElement = collectionManager.getCollection().remove(key);
                 String keyList = "";
     
-                for (Integer elemKey : collectionControl.getCollection().keySet()) {
+                for (Integer elemKey : collectionManager.getCollection().keySet()) {
                     keyList += elemKey + ", ";
                 }
     

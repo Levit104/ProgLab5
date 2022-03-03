@@ -1,23 +1,23 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 
 /**
  * Команда, очищающая коллекцию
  */
 
 public class ClearCommand implements Command {
-    CollectionControl collectionControl;
+    CollectionManager collectionManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl менеджер коллекции
-     * @see CollectionControl
+     * @param collectionManager менеджер коллекции
+     * @see CollectionManager
      */
 
-    public ClearCommand(CollectionControl collectionControl) {
-        this.collectionControl = collectionControl;
+    public ClearCommand(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -37,10 +37,10 @@ public class ClearCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        if (collectionControl.getCollection().isEmpty()) {
+        if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
-            collectionControl.getCollection().clear();
+            collectionManager.getCollection().clear();
             System.out.println("Коллекция успешно очищена");
         }
     }

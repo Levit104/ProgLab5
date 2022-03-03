@@ -1,6 +1,6 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
@@ -11,18 +11,18 @@ import ru.itmo.lab5.modes.ConsoleManager;
  */
 
 public class InsertCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
     private ConsoleManager consoleManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl менеджер коллекции
-     * @see CollectionControl
+     * @param collectionManager менеджер коллекции
+     * @see CollectionManager
      */
 
-    public InsertCommand(CollectionControl collectionControl, ConsoleManager consoleManager) {
-        this.collectionControl = collectionControl;
+    public InsertCommand(CollectionManager collectionManager, ConsoleManager consoleManager) {
+        this.collectionManager = collectionManager;
         this.consoleManager = consoleManager;
     }
 
@@ -47,23 +47,23 @@ public class InsertCommand implements Command {
         try {
             key = Integer.parseInt(argument);
 
-            if (!Ticket.checkKey(key, collectionControl.getCollection())) {
+            if (!Ticket.checkKey(key, collectionManager.getCollection())) {
                 throw new NotUniqueValueException();
             }
 
             Ticket ticket = consoleManager.createTicket(key);
 
-            while (!Ticket.checkID(ticket.getId(), collectionControl.getCollection())) {
+            while (!Ticket.checkID(ticket.getId(), collectionManager.getCollection())) {
                 ticket.setId(ticket.getId() + 1);
             }
 
             if (ticket.getEvent() != null) {
-                while (!Event.checkID(ticket.getEvent().getId(), collectionControl.getCollection())) {
+                while (!Event.checkID(ticket.getEvent().getId(), collectionManager.getCollection())) {
                     ticket.getEvent().setId(ticket.getEvent().getId() + 1);
                 }
             }
 
-            collectionControl.getCollection().put(key, ticket);
+            collectionManager.getCollection().put(key, ticket);
             System.out.printf("Элемент с ключом %d успешно добавлен%n", key);
 
         } catch (NumberFormatException e1) {

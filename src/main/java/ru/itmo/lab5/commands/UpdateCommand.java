@@ -1,6 +1,6 @@
 package ru.itmo.lab5.commands;
 
-import ru.itmo.lab5.collection.CollectionControl;
+import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.modes.ConsoleManager;
 
@@ -9,18 +9,18 @@ import ru.itmo.lab5.modes.ConsoleManager;
  */
 
 public class UpdateCommand implements Command {
-    private CollectionControl collectionControl;
+    private CollectionManager collectionManager;
     private ConsoleManager consoleManager;
 
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionControl коллекция (менеджер коллекции)
-     * @see CollectionControl
+     * @param collectionManager коллекция (менеджер коллекции)
+     * @see CollectionManager
      */
 
-    public UpdateCommand(CollectionControl collectionControl, ConsoleManager consoleManager) {
-        this.collectionControl = collectionControl;
+    public UpdateCommand(CollectionManager collectionManager, ConsoleManager consoleManager) {
+        this.collectionManager = collectionManager;
         this.consoleManager = consoleManager;
     }
 
@@ -45,13 +45,13 @@ public class UpdateCommand implements Command {
             boolean wasFound = false;
             Integer ID = Integer.parseInt(argument);
 
-            for (Ticket oldTicket : collectionControl.getCollection().values()) {
+            for (Ticket oldTicket : collectionManager.getCollection().values()) {
                 if (ID.equals(oldTicket.getId())) {
                     wasFound = true;
                     Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
                     newTicket.setId(oldTicket.getId());
                     newTicket.setCreationDate(oldTicket.getCreationDate());
-                    collectionControl.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
+                    collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
                     System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
                     break;
                 }
