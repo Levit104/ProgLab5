@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ru.itmo.lab5.data.Ticket;
-import ru.itmo.lab5.parser.FileManager;
+import ru.itmo.lab5.file.FileManager;
 
 /**
  * Управление коллекцией (менеджер коллекции)

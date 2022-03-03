@@ -1,4 +1,4 @@
-package ru.itmo.lab5.parser;
+package ru.itmo.lab5.file;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
