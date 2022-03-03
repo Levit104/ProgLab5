@@ -53,13 +53,13 @@ public class RemoveLowerKeyCommand implements Command {
             }
 
             if (wasFound) {
-                System.out.println("Элементы успешно удалены");
+                System.out.printf("Элементы, ключ которых меньше %d успешно удалены%n", key);
             } else {
-                System.out.println("Элементов, ключ которых меньше заданного не существует");
+                System.out.printf("Элементов, ключ которых меньше %d не существует%n", key);
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Значение ключа должно быть целым числом");
+            System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
         }
     }
 }

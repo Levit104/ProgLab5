@@ -43,13 +43,14 @@ public class InsertCommand implements Command {
 
     @Override
     public void execute(String argument) {
+        Integer key = null;
         try {
-            Integer key = Integer.parseInt(argument);
-            
+            key = Integer.parseInt(argument);
+
             if (!Ticket.checkKey(key, collectionControl.getCollection())) {
                 throw new NotUniqueValueException();
             }
-            
+
             Ticket ticket = consoleManager.createTicket(key);
 
             while (!Ticket.checkID(ticket.getId(), collectionControl.getCollection())) {
@@ -63,12 +64,12 @@ public class InsertCommand implements Command {
             }
 
             collectionControl.getCollection().put(key, ticket);
-            System.out.println("Элемент успешно добавлен");
+            System.out.printf("Элемент с ключом %d успешно добавлен%n", key);
 
         } catch (NumberFormatException e1) {
-            System.out.println("Значение ключа должно быть целым числом");
+            System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
         } catch (NotUniqueValueException e2) {
-            System.out.println("Элемент с заданным ключом уже существует");
+            System.out.printf("Нельзя выполнить команду %s: элемент с ключом %d уже существует%n", getName(), key);
         }
     }
 }

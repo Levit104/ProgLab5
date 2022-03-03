@@ -52,17 +52,17 @@ public class UpdateCommand implements Command {
                     newTicket.setId(oldTicket.getId());
                     newTicket.setCreationDate(oldTicket.getCreationDate());
                     collectionControl.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
-                    System.out.println("Элемент был успешно заменён");
+                    System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
                     break;
                 }
             }
 
             if (!wasFound) {
-                System.out.println("В коллекции нет элемента с заданным ID");
+                System.out.printf("Элемента с ID %d не существует%n", ID);
             }
             
         } catch (NumberFormatException e) {
-            System.out.println("Значение ID должно быть целым числом");
+            System.out.printf("Нельзя выполнить команду %s: значение ID должно быть целым числом%n", getName());
         }
     }
 }

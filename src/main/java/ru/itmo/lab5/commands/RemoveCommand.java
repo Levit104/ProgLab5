@@ -38,28 +38,27 @@ public class RemoveCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        try {
-            Integer key = Integer.parseInt(argument.trim());
-            Ticket removedElement = collectionControl.getCollection().remove(key);
-            String keyList = "";
-
-            for (Integer elemKey : collectionControl.getCollection().keySet()) {
-                keyList += elemKey + ", ";
+        if (collectionControl.getCollection().isEmpty()) {
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else {
+            try {
+                Integer key = Integer.parseInt(argument);
+                Ticket removedElement = collectionControl.getCollection().remove(key);
+                String keyList = "";
+    
+                for (Integer elemKey : collectionControl.getCollection().keySet()) {
+                    keyList += elemKey + ", ";
+                }
+    
+                if (removedElement == null) {
+                    System.out.printf("Элемента с ключом %d не существует. Все существующие ключи: %s%n", 
+                                       key, keyList.substring(0, keyList.length() - 2));                
+                } else {
+                    System.out.printf("Элемент с ключом %d успешно удалён%n", key);
+                }
+            } catch (NumberFormatException e) {
+                System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
             }
-
-            if (collectionControl.getCollection().isEmpty()) {
-                System.out.println("В коллекции нет элементов");
-            }
-
-            if (removedElement == null) {
-                System.out.printf("Элемента с заданным ключом не существует. Все существующие ключи: %s%n", 
-                                   keyList.substring(0, keyList.length() - 2));                
-            } else {
-                System.out.printf("Элемент с ключом %d успешно удалён%n", key);
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Значение ключа должно быть целым числом");
         }
     }
 }

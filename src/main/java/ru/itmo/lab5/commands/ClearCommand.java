@@ -38,7 +38,7 @@ public class ClearCommand implements Command {
     @Override
     public void execute(String argument) {
         if (collectionControl.getCollection().isEmpty()) {
-            System.out.println("В коллекции нет элементов");
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
             collectionControl.getCollection().clear();
             System.out.println("Коллекция успешно очищена");

@@ -42,10 +42,17 @@ public class PrintAscendingCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        List<Ticket> sortedCollection = new ArrayList<>(collectionControl.getCollection().values());
-        Collections.sort(sortedCollection);
-        for (Ticket ticket : sortedCollection) {
-            System.out.println(ticket);
+        if (collectionControl.getCollection().isEmpty()) {
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else if (collectionControl.getCollection().size() == 1) {
+            System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
+        } else {
+            System.out.println("Элементы коллекции в порядке возрастания цены: ");
+            List<Ticket> sortedCollection = new ArrayList<>(collectionControl.getCollection().values());
+            Collections.sort(sortedCollection);
+            for (Ticket ticket : sortedCollection) {
+                System.out.println(ticket);
+            }
         }
     }
 }

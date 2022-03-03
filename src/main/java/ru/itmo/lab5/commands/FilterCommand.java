@@ -39,19 +39,22 @@ public class FilterCommand implements Command {
     @Override
     public void execute(String argument) {
         if (collectionControl.getCollection().isEmpty()) {
-            System.out.println("В коллекция нет элементов");
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else if (collectionControl.getCollection().size() == 1) {
+            System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
             String ticketList = "";
             
             for (Ticket ticket : collectionControl.getCollection().values()) {
-                if (ticket.getName().startsWith(argument.trim())) {
+                if (ticket.getName().startsWith(argument)) {
                     ticketList += ticket + "\n";
                 }
             }
             
             if (ticketList.isEmpty()) {
-                System.out.println("В коллекции нет элементов, имя которых начинается на " + argument.trim());
+                System.out.println("В коллекции нет элементов, название которых начинается на " + argument);
             } else {
+                System.out.println("Элементы, название которых начинается на " + argument);
                 System.out.println(ticketList.substring(0, ticketList.length() - 1));
             }
         }

@@ -39,8 +39,9 @@ public class ShowCommand implements Command {
     @Override
     public void execute(String argument) {
         if (collectionControl.getCollection().isEmpty()) {
-            System.out.println("В коллекции нет элементов");
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
+            System.out.println("Все элементы коллекции: ");
             System.out.println(CollectionControl.csvString());
             for (Ticket ticket : collectionControl.getCollection().values()) {
                 System.out.println(ticket);

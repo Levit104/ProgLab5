@@ -36,7 +36,7 @@ public class SaveCommand implements Command {
     @Override
     public void execute(String argument) {
         if (collectionControl.getCollection().isEmpty()) {
-            System.out.println("В коллекции нет элементов");
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
             String csvString = CollectionControl.csvString() + "\n";
             

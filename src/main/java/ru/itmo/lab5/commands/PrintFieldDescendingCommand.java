@@ -44,7 +44,9 @@ public class PrintFieldDescendingCommand implements Command {
     public void execute(String argument) {
 
         if (collectionControl.getCollection().isEmpty()) {
-            System.out.println("В коллекции нет элементов");
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else if (collectionControl.getCollection().size() == 1) {
+            System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
             List<String> typeList = new ArrayList<>();
             String typeString = "";
@@ -60,6 +62,7 @@ public class PrintFieldDescendingCommand implements Command {
                 typeString += type + ", ";
             }
             
+            System.out.println("Значения поля type всех элементов в порядке убывания: ");
             System.out.println(typeString.substring(0, typeString.length() - 2));
         }
     }

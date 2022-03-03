@@ -51,20 +51,20 @@ public class ReplaceIfLowerCommand implements Command {
                     Ticket newTicket = consoleManager.createTicket(key);
                     if (newTicket.compareTo(oldTicket) < 0) {
                         collectionControl.getCollection().replace(key, oldTicket, newTicket);
-                        System.out.println("Элемент был успешно заменён");
+                        System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
                     } else {
-                        System.out.println("Элемент не был заменён, т.к новое значение цены больше старого");
+                        System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены больше старого%n", key);
                     }
                     break;
                 }
             }
 
             if (!wasFound) {
-                System.out.println("В коллекции нет элемента с заданным ключом");
+                System.out.printf("Элемента с ключом %d не существует%n", key);
             }
 
         } catch (NumberFormatException e) {
-            System.out.println("Значение ключа должно быть целым числом");
+            System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
         }
     }
 }
