@@ -56,10 +56,8 @@ public class InsertCommand implements Command {
                 ticket.setId(ticket.getId() + 1);
             }
 
-            if (ticket.getEvent() != null) {
-                while (!CollectionManager.checkEventID(ticket.getEvent().getId(), collectionManager.getCollection())) {
-                    ticket.getEvent().setId(ticket.getEvent().getId() + 1);
-                }
+            while (!CollectionManager.checkEventID(ticket.getEvent().getId(), collectionManager.getCollection())) {
+                ticket.getEvent().setId(ticket.getEvent().getId() + 1);
             }
 
             if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {

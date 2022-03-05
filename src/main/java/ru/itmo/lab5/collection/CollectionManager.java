@@ -111,7 +111,7 @@ public class CollectionManager {
     public static boolean checkEventID(Long ID, Map<Integer, Ticket> collection) {
         for (Ticket ticket : collection.values()) {
             Event event = ticket.getEvent();
-            if (event != null && event.getId().equals(ID)) {
+            if (event.getId().equals(ID)) {
                 return false;
             }
         }

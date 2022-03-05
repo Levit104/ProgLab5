@@ -19,7 +19,7 @@ public class Ticket implements Comparable<Ticket> {
     private Date creationDate; // Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private double price; // Значение поля должно быть больше 0
     private TicketType type; // Поле не может быть null
-    private Event event; // Поле может быть null
+    private Event event; // Поле НЕ может быть null
 
     /**
     * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются автоматически)
@@ -77,11 +77,6 @@ public class Ticket implements Comparable<Ticket> {
 
     @Override
     public String toString() {
-        if (event == null) {
-            return String.format("%s,%s,%s,%s,%s,%s,%s",
-                    key, id, name, coordinates, new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(creationDate), price, type);
-        }
-
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s",
                 key, id, name, coordinates, new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(creationDate), price, type, event);
     }

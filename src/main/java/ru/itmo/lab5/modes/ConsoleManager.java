@@ -57,12 +57,7 @@ public class ConsoleManager {
         Double coordinateY = askCoordinateY();
         double price = askPrice();
         TicketType ticketType = askTicketType();
-        Event event = null;
-        
-        if (askEvent()) {
-            event = new Event(askEventName(), askEventTime(), askEventType());
-        }
-        
+        Event event = new Event(askEventName(), askEventTime(), askEventType());
         return new Ticket(key, name, new Coordinates(coordinateX, coordinateY), price, ticketType, event);
     }
 
@@ -164,26 +159,6 @@ public class ConsoleManager {
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
-                }
-            }
-        }
-    }
-
-    private boolean askEvent() {
-        while (true) {
-            if (!inScript) {
-                System.out.print("Создать событие? (yes/no) ");
-            }
-            String choice = scanner.nextLine();
-            if (choice.equals("yes")) {
-                return true;
-            } else if (choice.equals("no")) {
-                return false;
-            } else {
-                System.out.println("Возможны только варианты (yes/no) без пробелов");
-                if (inScript) {
-                    noScriptErrors = false;
-                    return false;
                 }
             }
         }
