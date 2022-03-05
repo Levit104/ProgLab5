@@ -51,8 +51,15 @@ public class UpdateCommand implements Command {
                     Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
                     newTicket.setId(oldTicket.getId());
                     newTicket.setCreationDate(oldTicket.getCreationDate());
-                    collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
-                    System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
+                    
+                    if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
+                        collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
+                        System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
+                    } else {
+                        System.out.printf("Элемент с ID %d не был заменён%n", ID);
+                        consoleManager.setNoScriptErrors(true);
+                    }
+
                     break;
                 }
             }

@@ -63,8 +63,13 @@ public class InsertCommand implements Command {
                 }
             }
 
-            collectionManager.getCollection().put(key, ticket);
-            System.out.printf("Элемент с ключом %d успешно добавлен%n", key);
+            if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
+                collectionManager.getCollection().put(key, ticket);
+                System.out.printf("Элемент с ключом %d успешно добавлен%n", key);
+            } else {
+                System.out.printf("Элемент с ключом %d не был добавлен%n", key);
+                consoleManager.setNoScriptErrors(true);
+            }
 
         } catch (NumberFormatException e1) {
             System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());

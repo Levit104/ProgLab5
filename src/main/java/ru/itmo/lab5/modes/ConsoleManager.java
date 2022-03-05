@@ -14,13 +14,11 @@ import ru.itmo.lab5.data.TicketType;
 public class ConsoleManager {
     private Scanner scanner;
     private boolean inScript;
+    private boolean noScriptErrors;
 
     public ConsoleManager(Scanner scanner) {
         this.scanner = scanner;
-    }
-
-    public void setInScript(boolean inScript) {
-        this.inScript = inScript;
+        this.noScriptErrors = true;
     }
 
     public Scanner getScanner() {
@@ -29,6 +27,22 @@ public class ConsoleManager {
 
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public boolean inScript() {
+        return inScript;
+    }
+
+    public void setInScript(boolean inScript) {
+        this.inScript = inScript;
+    }
+
+    public boolean noScriptErrors() {
+        return noScriptErrors;
+    }
+
+    public void setNoScriptErrors(boolean noScriptErrors) {
+        this.noScriptErrors = noScriptErrors;
     }
 
     /**
@@ -58,8 +72,12 @@ public class ConsoleManager {
                 System.out.print("Введите название билета: ");
             }
             String ticketName = scanner.nextLine();
-            if (ticketName.isEmpty()) {
+            if (ticketName.trim().length() == 0) {
                 System.out.println("Значение названия билета не может быть пустым и не должно содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             } else {
                 return ticketName;
             }
@@ -80,6 +98,10 @@ public class ConsoleManager {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Значение координаты X должно быть числом не больше 606 и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             }
         }
     }
@@ -98,6 +120,10 @@ public class ConsoleManager {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             }
         }
     }
@@ -116,6 +142,10 @@ public class ConsoleManager {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return 0;
+                }
             }
         }
     }
@@ -131,6 +161,10 @@ public class ConsoleManager {
                 return ticketType;
             } catch (IllegalArgumentException e) {
                 System.out.println("Значение \"тип билета\" должно соответствовать одному из допустимых типов и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             }
         }
     }
@@ -147,6 +181,10 @@ public class ConsoleManager {
                 return false;
             } else {
                 System.out.println("Возможны только варианты (yes/no) без пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return false;
+                }
             }
         }
     }
@@ -159,6 +197,10 @@ public class ConsoleManager {
             String eventName = scanner.nextLine();
             if (eventName.isEmpty()) {
                 System.out.println("Значение названия события не может быть пустым и не должно содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             } else {
                 return eventName;
             }
@@ -175,6 +217,10 @@ public class ConsoleManager {
                 return date;
             } catch (DateTimeParseException e) {
                 System.out.println("Значение даты должно строго соответствовать формату дату и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             }
         }
     }
@@ -190,6 +236,10 @@ public class ConsoleManager {
                 return eventType;
             } catch (IllegalArgumentException e) {
                 System.out.println("Значение \"тип события\" должно соответствовать одному из допустимых типов и не содержать пробелов");
+                if (inScript) {
+                    noScriptErrors = false;
+                    return null;
+                }
             }
         }
     }

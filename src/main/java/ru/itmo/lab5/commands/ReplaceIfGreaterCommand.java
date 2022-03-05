@@ -49,12 +49,19 @@ public class ReplaceIfGreaterCommand implements Command {
                 if (key.equals(oldTicket.getKey())) {
                     wasFound = true;
                     Ticket newTicket = consoleManager.createTicket(key);
-                    if (newTicket.compareTo(oldTicket) > 0) {
-                        collectionManager.getCollection().replace(key, oldTicket, newTicket);
-                        System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
+
+                    if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
+                        if (newTicket.compareTo(oldTicket) > 0) {
+                            collectionManager.getCollection().replace(key, oldTicket, newTicket);
+                            System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
+                        } else {
+                            System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены меньше старого%n", key);
+                        }
                     } else {
-                        System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены меньше старого%n", key);
+                        System.out.printf("Элемент с ключом %d не был заменён%n", key);
+                        consoleManager.setNoScriptErrors(true);
                     }
+
                     break;
                 }
             }
