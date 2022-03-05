@@ -3,7 +3,7 @@ package ru.itmo.lab5.commands;
 import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
-import ru.itmo.lab5.modes.ConsoleManager;
+import ru.itmo.lab5.console.ConsoleManager;
 
 /**
  * Команда, добавляющая элемент в коллекцию

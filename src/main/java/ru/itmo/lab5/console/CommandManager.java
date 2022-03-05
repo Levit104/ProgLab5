@@ -1,4 +1,4 @@
-package ru.itmo.lab5.modes;
+package ru.itmo.lab5.console;
 
 import java.io.File;
 import java.io.FileNotFoundException;

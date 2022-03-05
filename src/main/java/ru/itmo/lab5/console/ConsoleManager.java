@@ -1,4 +1,4 @@
-package ru.itmo.lab5.modes;
+package ru.itmo.lab5.console;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

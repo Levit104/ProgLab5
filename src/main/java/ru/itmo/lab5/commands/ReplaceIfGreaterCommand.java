@@ -2,7 +2,7 @@ package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionManager;
 import ru.itmo.lab5.data.Ticket;
-import ru.itmo.lab5.modes.ConsoleManager;
+import ru.itmo.lab5.console.ConsoleManager;
 
 /**
  * Команда, заменяющая элемент, если цена нового элемента больше цены старого
