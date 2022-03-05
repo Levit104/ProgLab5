@@ -60,7 +60,7 @@ public class CommandManager {
             } else if (inputCommand.equals("execute_script")) {
                 wasFound = true;
                 if (checkCommandWithArgument(inputChoice, "execute_script")) {
-                    scriptMode(inputChoice[1]);
+                    scriptMode(inputChoice[1], scriptScanner);
                     openedScripts.clear();
                 }
             } else {
@@ -93,7 +93,7 @@ public class CommandManager {
         }
     }
 
-    public void scriptMode(String script) {
+    public void scriptMode(String script, Scanner scriptScanner) {
         try {
             openedScripts.add(script);
             scriptScanner = new Scanner(new File(script));
@@ -119,7 +119,7 @@ public class CommandManager {
                 } else if (scriptCommand.equals("execute_script")) {
                     wasFound = true;
                     if (checkCommandWithArgument(scriptChoice, "execute_script") && checkOpenedScript(scriptChoice[1])) {
-                        scriptMode(scriptChoice[1]);
+                        scriptMode(scriptChoice[1], scriptScanner);
                     }
                 } else {
                     for (Command command : commands) {
