@@ -69,7 +69,7 @@ public class CommandManager {
                         wasFound = true;
                         if (command.getName().equals("save")) {
                             if (inputChoice.length > 2) {
-                                System.out.println("У данной команды есть только один необязательный аргумент");
+                                System.out.println("У команды save один необязательный аргумент");
                             } else {
                                 if (inputChoice.length == 1) {
                                     inputArgument = file;
@@ -127,7 +127,7 @@ public class CommandManager {
                             wasFound = true;
                             if (command.getName().equals("save")) {
                                 if (scriptChoice.length > 2) {
-                                    System.out.println("У команды save есть только один необязательный аргумент");
+                                    System.out.println("У команды save один необязательный аргумент");
                                 } else {
                                     if (scriptChoice.length == 1) {
                                         scriptArgument = file;
