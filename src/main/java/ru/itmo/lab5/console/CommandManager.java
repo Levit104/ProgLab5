@@ -175,7 +175,7 @@ public class CommandManager {
         System.out.println("Все доступные команды: ");
         System.out.println("help : вывести справку по доступным командам");
         System.out.println("exit : завершить программу (без сохранения в файл)");
-        System.out.println("execute_script file_name : считать и исполнить скрипт из указанного файла");
+        System.out.println("execute_script <file_name> : считать и исполнить скрипт из указанного файла");
         for (Command command : commands) {
             System.out.println(command.getName() + command.getDescription());
         }

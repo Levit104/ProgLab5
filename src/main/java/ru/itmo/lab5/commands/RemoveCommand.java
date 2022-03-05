@@ -33,7 +33,7 @@ public class RemoveCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " null : удалить элемент из коллекции по его ключу";
+        return " <key> : удалить элемент из коллекции по его ключу";
     }
 
     @Override

@@ -33,7 +33,7 @@ public class FilterCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " name : вывести элементы, значение поля name которых начинается с заданной подстроки";
+        return " <name> : вывести элементы, значение поля name которых начинается с заданной подстроки";
     }
 
     @Override

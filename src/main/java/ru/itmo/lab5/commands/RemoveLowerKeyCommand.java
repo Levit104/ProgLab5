@@ -34,7 +34,7 @@ public class RemoveLowerKeyCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " null : удалить из коллекции все элементы, ключ которых меньше, чем заданный";
+        return " <key> : удалить из коллекции все элементы, ключ которых меньше, чем заданный";
     }
 
     @Override

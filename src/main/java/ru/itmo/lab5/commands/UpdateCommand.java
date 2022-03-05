@@ -36,7 +36,7 @@ public class UpdateCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " id {element} : обновить значение элемента коллекции, id которого равен заданному";
+        return " <id> : обновить значение элемента коллекции, id которого равен заданному";
     }
 
     @Override

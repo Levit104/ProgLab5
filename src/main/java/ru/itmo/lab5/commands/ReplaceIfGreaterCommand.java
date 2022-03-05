@@ -36,7 +36,7 @@ public class ReplaceIfGreaterCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " null {element} : заменить значение по ключу, если новое значение больше старого";
+        return " <key> : заменить значение по ключу, если новое значение больше старого";
     }
 
     @Override

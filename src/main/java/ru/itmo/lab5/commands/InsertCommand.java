@@ -37,7 +37,7 @@ public class InsertCommand implements Command {
 
     @Override
     public String getDescription() {
-        return " null {element} : добавить новый элемент с заданным ключом";
+        return " <key> : добавить новый элемент с заданным ключом";
     }
 
     @Override
