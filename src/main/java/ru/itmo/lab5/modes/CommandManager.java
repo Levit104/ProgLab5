@@ -14,8 +14,7 @@ public class CommandManager {
     private String file;
     private Scanner mainScanner;
     private Scanner scriptScanner;
-
-    private boolean scriptExit = false;
+    private boolean scriptExit;
     
     public CommandManager(ConsoleManager consoleManager, Command[] commands, String file) {
         this.consoleManager = consoleManager;
@@ -37,21 +36,21 @@ public class CommandManager {
             }
 
             System.out.print("Введите команду (help - справка по всем командам): ");
-            String[] choice = mainScanner.nextLine().split(" ");
+            String[] inputChoice = mainScanner.nextLine().split(" ");
 
-            String inputCommand = choice[0];
-            String argument = "";
+            String inputCommand = inputChoice[0];
+            String inputArgument = "";
             boolean wasFound = false;
 
             if (inputCommand.equals("exit")) {
                 wasFound = true;
-                if (checkCommand(choice, "exit")) {
+                if (checkCommand(inputChoice, "exit")) {
                     System.out.println("Программа успешно завершена");
                     break loop;
                 }
             } else if (inputCommand.equals("help")) {
                 wasFound = true;
-                if (checkCommand(choice, "help")) {
+                if (checkCommand(inputChoice, "help")) {
                     System.out.println("help : вывести справку по доступным командам");
                     System.out.println("exit : завершить программу (без сохранения в файл)");
                     for (Command command : commands) {
@@ -61,7 +60,7 @@ public class CommandManager {
             } else if (inputCommand.equals("script")) {
                 //TODO переделать
                 wasFound = true;
-                if (checkCommand(choice, "execute_script")) {
+                if (checkCommand(inputChoice, "execute_script")) {
                     scriptMode("script");
                 }
             } else {
@@ -69,21 +68,21 @@ public class CommandManager {
                     if (inputCommand.equals(command.getName())) {
                         wasFound = true;
                         if (command.getName().equals("save")) {
-                            if (choice.length > 2) {
+                            if (inputChoice.length > 2) {
                                 System.out.println("У данной команды есть только один необязательный аргумент");
                             } else {
-                                if (choice.length == 1) {
-                                    argument = file;
-                                } else if (choice.length == 2 && FileManager.checkFileExtension(choice[1])) {
-                                    argument = choice[1];
+                                if (inputChoice.length == 1) {
+                                    inputArgument = file;
+                                } else if (inputChoice.length == 2 && FileManager.checkFileExtension(inputChoice[1])) {
+                                    inputArgument = inputChoice[1];
                                 }
-                                command.execute(argument);
+                                command.execute(inputArgument);
                             }
-                        } else if (command.hasArgument() && checkCommandWithArgument(choice, command.getName())) {
-                            argument = choice[1];
-                            command.execute(argument);
-                        } else if (!command.hasArgument() && checkCommand(choice, command.getName())) {
-                            command.execute(argument);
+                        } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
+                            inputArgument = inputChoice[1];
+                            command.execute(inputArgument);
+                        } else if (!command.hasArgument() && checkCommand(inputChoice, command.getName())) {
+                            command.execute(inputArgument);
                         }
                     }
                 }
@@ -101,27 +100,25 @@ public class CommandManager {
         } catch (FileNotFoundException e) {
             System.out.println("Скрипт не найден");
         }
-        //String scriptLine = null;
+
         loop: while (scriptScanner.hasNextLine()) {
             
-            String line = scriptScanner.nextLine();
-            lineNumber++;
-            
-            //String[] s = (line + " ").split(" ");
-            String[] s = line.split(" ");
-            String inputCommand = s[0];
-            String argument = "";
+            String scriptLine = scriptScanner.nextLine();
+            String[] scriptChoice = scriptLine.split(" ");
+            String scriptCommand = scriptChoice[0];
+            String scriptArgument = "";
             boolean wasFound = false;
+            lineNumber++;
 
-            if (inputCommand.equals("exit")) {
+            if (scriptCommand.equals("exit")) {
                 wasFound = true;
-                if (checkCommand(s, "exit")) {
+                if (checkCommand(scriptChoice, "exit")) {
                     scriptExit = true;
                     break loop;
                 }
-            } else if (inputCommand.equals("help")) {
+            } else if (scriptCommand.equals("help")) {
                 wasFound = true;
-                if (checkCommand(s, "help")) {
+                if (checkCommand(scriptChoice, "help")) {
                     System.out.println("help : вывести справку по доступным командам");
                     System.out.println("exit : завершить программу (без сохранения в файл)");
                     for (Command command : commands) {
@@ -130,21 +127,21 @@ public class CommandManager {
                 }
             } else {
                 for (Command command : commands) {
-                    if (inputCommand.equals(command.getName())) {
+                    if (scriptCommand.equals(command.getName())) {
                         wasFound = true;
                         if (command.getName().equals("save")) {
-                            if (s.length > 2) {
+                            if (scriptChoice.length > 2) {
                                 System.out.println("У команды save есть только один необязательный аргумент");
                             } else {
-                                if (s.length == 1) {
-                                    argument = file;
-                                } else if (s.length == 2 && FileManager.checkFileExtension(s[1])) {
-                                    argument = s[1];
+                                if (scriptChoice.length == 1) {
+                                    scriptArgument = file;
+                                } else if (scriptChoice.length == 2 && FileManager.checkFileExtension(scriptChoice[1])) {
+                                    scriptArgument = scriptChoice[1];
                                 }
-                                command.execute(argument);
+                                command.execute(scriptArgument);
                             }
-                        } else if (command.hasArgument() && checkCommandWithArgument(s, command.getName())) {
-                            argument = s[1];
+                        } else if (command.hasArgument() && checkCommandWithArgument(scriptChoice, command.getName())) {
+                            scriptArgument = scriptChoice[1];
                             if (command.getName().equals("insert") || 
                                 command.getName().equals("update") || 
                                 command.getName().equals("replace_if_greater") ||
@@ -152,7 +149,7 @@ public class CommandManager {
                                     try {
                                         consoleManager.setInScript(true);
                                         consoleManager.setScanner(scriptScanner);
-                                        command.execute(argument);
+                                        command.execute(scriptArgument);
                                     } catch (NoSuchElementException e) {
                                         //TODO описание ошибки
                                         System.out.println("Ошибка при чтении скрипта " + lineNumber);
@@ -161,22 +158,23 @@ public class CommandManager {
                                         consoleManager.setScanner(mainScanner);
                                     }
                                 } else {
-                                    command.execute(argument);
+                                    command.execute(scriptArgument);
                                 }
-                        } else if (!command.hasArgument() && checkCommand(s, command.getName())) {
-                            command.execute(argument);
+                        } else if (!command.hasArgument() && checkCommand(scriptChoice, command.getName())) {
+                            command.execute(scriptArgument);
                         }
                     }
                 }
             }
             if (!wasFound) {
-                System.out.println("Несуществующая команда");
+                //TODO описание ошибки
+                System.out.println("Несуществующая команда " + lineNumber);
             }
         }
         System.out.println("Скрипт завершён");
     }
 
-    public static boolean checkCommand(String[] choice, String commandName) {
+    private boolean checkCommand(String[] choice, String commandName) {
         if (choice.length != 1) {
             System.out.printf("У команды %s нет аргументов%n", commandName);
             return false;
@@ -184,7 +182,7 @@ public class CommandManager {
         return true;
     }
 
-    public static boolean checkCommandWithArgument(String[] choice, String commandName) {
+    private boolean checkCommandWithArgument(String[] choice, String commandName) {
         if (choice.length != 2) {
             System.out.printf("У команды %s один обязательный аргумент%n", commandName);
             return false;
