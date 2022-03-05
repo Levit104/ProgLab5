@@ -131,11 +131,18 @@ public class FileManager {
                 dataScanner.useDelimiter(",");
                 noErrors = true;
 
+                if (line.split(",").length != 12) {
+                    System.out.println("Некорректные данные в строке " + row);
+                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row);
+                    row++;
+                    continue;
+                }
+
                 if (line.charAt(0) == ',') {
                     System.out.printf("Значение поля key в строке %d не может быть пустым, " +
                                       "т.к. элемент не может существовать без ключа%n", row);
-                    noErrors = false;
-                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row - 1);
+                    row++;
+                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row);
                     continue;
                 }
 
