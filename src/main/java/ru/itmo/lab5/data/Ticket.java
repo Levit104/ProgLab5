@@ -2,7 +2,6 @@ package ru.itmo.lab5.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Класс, описывающий билет на спортивное событие.
@@ -74,42 +73,6 @@ public class Ticket implements Comparable<Ticket> {
         this.price = price;
         this.type = type;
         this.event = event;
-    }
-
-    /**
-     * Проверка ключа на уникальность
-     * 
-     * @param key        ключ
-     * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ключ уникальный, иначе {@code false} 
-     * @see Ticket
-     */
-
-    public static boolean checkKey(Integer key, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            if (ticket.getKey().equals(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Проверка ID на уникальность
-     * 
-     * @param ID         идентификатор
-     * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ID уникальный, иначе {@code false} 
-     * @see Ticket
-     */
-
-    public static boolean checkID(Integer ID, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            if (ticket.getId().equals(ID)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

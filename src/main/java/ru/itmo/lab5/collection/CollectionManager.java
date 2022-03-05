@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.file.FileManager;
 
@@ -61,6 +62,60 @@ public class CollectionManager {
 
     public static String csvString() {
         return "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
+    }
+
+    /**
+     * Проверка ключа билета на уникальность
+     * 
+     * @param key        ключ
+     * @param collection коллекция, содержащая объекты класса Ticket
+     * @return {@code true} если ключ уникальный, иначе {@code false} 
+     * @see Ticket
+     */
+
+    public static boolean checkTicketKey(Integer key, Map<Integer, Ticket> collection) {
+        for (Ticket ticket : collection.values()) {
+            if (ticket.getKey().equals(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Проверка ID билета на уникальность
+     * 
+     * @param ID         идентификатор
+     * @param collection коллекция, содержащая объекты класса Ticket
+     * @return {@code true} если ID уникальный, иначе {@code false} 
+     * @see Ticket
+     */
+
+    public static boolean checkTicketID(Integer ID, Map<Integer, Ticket> collection) {
+        for (Ticket ticket : collection.values()) {
+            if (ticket.getId().equals(ID)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Проверка ID события на уникальность
+     * 
+     * @param ID         идентификатор
+     * @param collection коллекция, содержащая объекты класса Ticket
+     * @return {@code true} если ключ уникальный, иначе {@code false} 
+     */
+
+    public static boolean checkEventID(Long ID, Map<Integer, Ticket> collection) {
+        for (Ticket ticket : collection.values()) {
+            Event event = ticket.getEvent();
+            if (event != null && event.getId().equals(ID)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

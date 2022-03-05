@@ -246,7 +246,7 @@ public class FileManager {
         Integer key = null;
         try {
             key = Integer.parseInt(data);
-            if (!Ticket.checkKey(key, ticketMap)) {
+            if (!CollectionManager.checkTicketKey(key, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
@@ -266,7 +266,7 @@ public class FileManager {
             if (ID <= 0) {
                 throw new NumberFormatException();
             }
-            if (!Ticket.checkID(ID, ticketMap)) {
+            if (!CollectionManager.checkTicketID(ID, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
@@ -286,7 +286,7 @@ public class FileManager {
             if (eventID <= 0) {
                 throw new NumberFormatException();
             }
-            if (!Event.checkID(eventID, ticketMap)) {
+            if (!CollectionManager.checkEventID(eventID, ticketMap)) {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {

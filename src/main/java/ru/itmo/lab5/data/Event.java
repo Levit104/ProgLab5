@@ -2,7 +2,6 @@ package ru.itmo.lab5.data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
 
 /**
  * Класс, описывающий спортивное событие
@@ -49,24 +48,6 @@ public class Event {
         this.name = name;
         this.date = date;
         this.eventType = eventType;
-    }
-
-    /**
-     * Проверка ID на уникальность
-     * 
-     * @param ID         идентификатор
-     * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ключ уникальный, иначе {@code false} 
-     */
-
-    public static boolean checkID(Long ID, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            Event event = ticket.getEvent();
-            if (event != null && event.getId().equals(ID)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override

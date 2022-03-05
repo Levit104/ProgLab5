@@ -1,7 +1,6 @@
 package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionManager;
-import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
 import ru.itmo.lab5.modes.ConsoleManager;
@@ -47,18 +46,18 @@ public class InsertCommand implements Command {
         try {
             key = Integer.parseInt(argument);
 
-            if (!Ticket.checkKey(key, collectionManager.getCollection())) {
+            if (!CollectionManager.checkTicketKey(key, collectionManager.getCollection())) {
                 throw new NotUniqueValueException();
             }
 
             Ticket ticket = consoleManager.createTicket(key);
 
-            while (!Ticket.checkID(ticket.getId(), collectionManager.getCollection())) {
+            while (!CollectionManager.checkTicketID(ticket.getId(), collectionManager.getCollection())) {
                 ticket.setId(ticket.getId() + 1);
             }
 
             if (ticket.getEvent() != null) {
-                while (!Event.checkID(ticket.getEvent().getId(), collectionManager.getCollection())) {
+                while (!CollectionManager.checkEventID(ticket.getEvent().getId(), collectionManager.getCollection())) {
                     ticket.getEvent().setId(ticket.getEvent().getId() + 1);
                 }
             }
