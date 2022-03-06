@@ -24,12 +24,12 @@ public class Ticket implements Comparable<Ticket> {
     /**
     * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются автоматически)
     * 
-    * @param key         ключ
-    * @param name        название
+    * @param key ключ
+    * @param name название
     * @param coordinates координаты
-    * @param price       цена
-    * @param type        тип билета
-    * @param event       событие
+    * @param price цена
+    * @param type тип билета
+    * @param event событие
     * @see Coordinates
     * @see TicketType
     * @see Event
@@ -50,14 +50,14 @@ public class Ticket implements Comparable<Ticket> {
     /**
      * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются вручную)
      * 
-     * @param key          ключ
-     * @param id           ID
-     * @param name         название
-     * @param coordinates  координаты
+     * @param key ключ
+     * @param id ID
+     * @param name название
+     * @param coordinates координаты
      * @param creationDate дата создания
-     * @param price        цена
-     * @param type         тип билета
-     * @param event        событие
+     * @param price цена
+     * @param type тип билета
+     * @param event событие
      * @see Coordinates
      * @see TicketType
      * @see Event

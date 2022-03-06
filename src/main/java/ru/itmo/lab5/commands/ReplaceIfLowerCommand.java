@@ -15,8 +15,10 @@ public class ReplaceIfLowerCommand implements Command {
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionManager коллекция (менеджер коллекции)
+     * @param collectionManager менеджер коллекции
+     * @param consoleManager менеджер консоли
      * @see CollectionManager
+     * @see ConsoleManager
      */
 
     public ReplaceIfLowerCommand(CollectionManager collectionManager, ConsoleManager consoleManager) {

@@ -17,7 +17,7 @@ public class PrintFieldDescendingCommand implements Command {
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionManager коллекция (менеджер коллекции)
+     * @param collectionManager менеджер коллекции
      * @see CollectionManager
      */
 
@@ -42,7 +42,6 @@ public class PrintFieldDescendingCommand implements Command {
 
     @Override
     public void execute(String argument) {
-
         if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else if (collectionManager.getCollection().size() == 1) {

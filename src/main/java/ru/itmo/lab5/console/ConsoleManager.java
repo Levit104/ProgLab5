@@ -11,42 +11,87 @@ import ru.itmo.lab5.data.EventType;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
 
+/**
+ * Класс для работы с консолью (менеджер консоли)
+ */
+
 public class ConsoleManager {
     private Scanner scanner;
     private boolean inScript;
     private boolean noScriptErrors;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param scanner сканер для считывания информации, вводимой пользователем
+     */
 
     public ConsoleManager(Scanner scanner) {
         this.scanner = scanner;
         this.noScriptErrors = true;
     }
 
+    /**
+     * Возвращает используемые сканер
+     * 
+     * @return сканер
+     */
+
     public Scanner getScanner() {
         return scanner;
     }
+
+    /**
+     * Устанавливает новый сканер
+     * @param scanner новый сканер
+     */
 
     public void setScanner(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    /**
+     * Указывает выполняется команда в скрипте или нет
+     * 
+     * @return {@code true} если в скрипте, иначе {@code false} 
+     */
+
     public boolean inScript() {
         return inScript;
     }
+
+    /**
+     * Устанавливает выполняется команда в скрипте или нет
+     * 
+     * @param inScript
+     */
 
     public void setInScript(boolean inScript) {
         this.inScript = inScript;
     }
 
+    /**
+     * Указывает были ли ошибки в скрипте
+     * 
+     * @return {@code true} если ошибок не было, иначе {@code false} 
+     */
+
     public boolean noScriptErrors() {
         return noScriptErrors;
     }
+
+    /**
+     * Устанавливает были ли ошибки в скрипте или нет
+     * 
+     * @param noScriptErrors
+     */
 
     public void setNoScriptErrors(boolean noScriptErrors) {
         this.noScriptErrors = noScriptErrors;
     }
 
     /**
-     * Создает новый билет, не добавляя его в коллекцию
+     * Создает новый элемент (билет), не добавляя его в коллекцию
      * @param key ключ
      * @return билет
      */

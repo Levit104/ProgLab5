@@ -19,8 +19,8 @@ public class Event {
     /**
      * Конструктор, задающий параметры для создания события (ID устанавливается автоматически)
      * 
-     * @param name      название
-     * @param date      дата
+     * @param name название
+     * @param date дата
      * @param eventType тип события
      * @see EventType
      */
@@ -36,9 +36,9 @@ public class Event {
     /**
      * Конструктор, задающий параметры для создания события (ID устанавливается вручную)
      * 
-     * @param id        ID
-     * @param name      название
-     * @param date      дата
+     * @param id ID
+     * @param name название
+     * @param date дата
      * @param eventType тип события
      * @see EventType
      */

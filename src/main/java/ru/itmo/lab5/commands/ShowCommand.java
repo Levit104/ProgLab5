@@ -13,7 +13,7 @@ public class ShowCommand implements Command {
     /**
      * Конструктор, задающий параметры для создания объекта
      * 
-     * @param collectionManager коллекция (менеджер коллекции)
+     * @param collectionManager менеджер коллекции
      * @see CollectionManager
      */
 

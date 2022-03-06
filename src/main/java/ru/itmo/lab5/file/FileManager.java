@@ -27,7 +27,7 @@ import ru.itmo.lab5.data.TicketType;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
 /**
- * Класс для считывания информации из csv файла
+ * Класс для работы с файлом (менеджер файла)
  */
 
 public class FileManager {
@@ -100,7 +100,7 @@ public class FileManager {
     }
 
     /**
-     * Считывание информации из csv файла
+     * Считывает информацию из csv файла
      */
 
     public Map<Integer, Ticket> parseFile() {
@@ -203,6 +203,13 @@ public class FileManager {
         return ticketMap;
     }
 
+    /**
+     * Сохраняет коллекцию в файл
+     * 
+     * @param file путь до файла
+     * @param collectionManager менеджер коллекции
+     */
+
     public void saveCollection(String file, CollectionManager collectionManager) {
         String csvString = collectionManager.toString();
 
@@ -230,7 +237,7 @@ public class FileManager {
      * Проверка расширения файла
      * 
      * @param file путь до файла
-     * @return {@code true} если файл с расширением .csv, иначе - {@code false} 
+     * @return {@code true} если файл имеет расширение .csv, иначе {@code false} 
      */
 
     public static boolean checkFileExtension(String file) {
