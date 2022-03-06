@@ -43,7 +43,7 @@ public class Main {
                 new UpdateCommand(collectionControl, consoleManager),
                 new RemoveCommand(collectionControl),
                 new ClearCommand(collectionControl),
-                new SaveCommand(collectionControl),
+                new SaveCommand(collectionControl, fileManager),
                 new ReplaceIfGreaterCommand(collectionControl, consoleManager),
                 new ReplaceIfLowerCommand(collectionControl, consoleManager),
                 new RemoveLowerKeyCommand(collectionControl),
