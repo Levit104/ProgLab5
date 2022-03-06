@@ -36,23 +36,23 @@ public class Main {
         }
 
         FileManager fileManager = new FileManager(file);
-        CollectionManager collectionControl = new CollectionManager(fileManager);
+        CollectionManager collectionManager = new CollectionManager(fileManager);
         ConsoleManager consoleManager = new ConsoleManager(new Scanner(System.in));
 
         Command[] commands = {
-                new InfoCommand(collectionControl),
-                new ShowCommand(collectionControl),
-                new InsertCommand(collectionControl, consoleManager),
-                new UpdateCommand(collectionControl, consoleManager),
-                new RemoveCommand(collectionControl),
-                new ClearCommand(collectionControl),
-                new SaveCommand(collectionControl, fileManager),
-                new ReplaceIfGreaterCommand(collectionControl, consoleManager),
-                new ReplaceIfLowerCommand(collectionControl, consoleManager),
-                new RemoveLowerKeyCommand(collectionControl),
-                new FilterCommand(collectionControl),
-                new PrintAscendingCommand(collectionControl),
-                new PrintFieldDescendingCommand(collectionControl)
+                new InfoCommand(collectionManager),
+                new ShowCommand(collectionManager),
+                new InsertCommand(collectionManager, consoleManager),
+                new UpdateCommand(collectionManager, consoleManager),
+                new RemoveCommand(collectionManager),
+                new ClearCommand(collectionManager),
+                new SaveCommand(collectionManager, fileManager),
+                new ReplaceIfGreaterCommand(collectionManager, consoleManager),
+                new ReplaceIfLowerCommand(collectionManager, consoleManager),
+                new RemoveLowerKeyCommand(collectionManager),
+                new FilterCommand(collectionManager),
+                new PrintAscendingCommand(collectionManager),
+                new PrintFieldDescendingCommand(collectionManager)
         };
 
         CommandManager commandManager = new CommandManager(consoleManager, commands, file);
