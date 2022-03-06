@@ -53,12 +53,11 @@ public class ConsoleManager {
 
     public Ticket createTicket(Integer key) {
         String name = askName();
-        Double coordinateX = askCoordinateX();
-        Double coordinateY = askCoordinateY();
+        Coordinates coordinates = new Coordinates(askCoordinateX(), askCoordinateY());
         double price = askPrice();
         TicketType ticketType = askTicketType();
         Event event = new Event(askEventName(), askEventTime(), askEventType());
-        return new Ticket(key, name, new Coordinates(coordinateX, coordinateY), price, ticketType, event);
+        return new Ticket(key, name, coordinates, price, ticketType, event);
     }
 
     private String askName() {
