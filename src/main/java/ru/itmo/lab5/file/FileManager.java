@@ -101,6 +101,9 @@ public class FileManager {
 
     /**
      * Считывает информацию из csv файла
+     * 
+     * @return коллекцию, содержащую объекты класса Ticket
+     * @see Ticket
      */
 
     public Map<Integer, Ticket> parseFile() {

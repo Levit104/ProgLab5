@@ -63,7 +63,7 @@ public class ConsoleManager {
     /**
      * Устанавливает выполняется команда в скрипте или нет
      * 
-     * @param inScript
+     * @param inScript {@code true/false}
      */
 
     public void setInScript(boolean inScript) {
@@ -83,7 +83,7 @@ public class ConsoleManager {
     /**
      * Устанавливает были ли ошибки в скрипте или нет
      * 
-     * @param noScriptErrors
+     * @param noScriptErrors {@code true/false}
      */
 
     public void setNoScriptErrors(boolean noScriptErrors) {
