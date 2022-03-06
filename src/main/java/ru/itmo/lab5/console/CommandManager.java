@@ -10,6 +10,10 @@ import java.util.Set;
 import ru.itmo.lab5.commands.Command;
 import ru.itmo.lab5.file.FileManager;
 
+/**
+ * Класс для работы с командами (менеджер команд)
+ */
+
 public class CommandManager {
     private ConsoleManager consoleManager;
     private Command[] commands;
@@ -18,6 +22,16 @@ public class CommandManager {
     private Scanner scriptScanner;
     private boolean scriptExit;
     private Set<String> openedScripts;
+
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param consoleManager менеджер консоли
+     * @param commands команды (массив из команд)
+     * @param file путь до файла
+     * @see ConsoleManager
+     * @see Command
+     */
     
     public CommandManager(ConsoleManager consoleManager, Command[] commands, String file) {
         this.consoleManager = consoleManager;
@@ -92,6 +106,13 @@ public class CommandManager {
             }
         }
     }
+
+    /**
+     * Запускает скриптовый режим
+     * 
+     * @param script путь до скрипта
+     * @param scriptScanner сканер для считывания скрипта
+     */
 
     public void scriptMode(String script, Scanner scriptScanner) {
         try {
