@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import ru.itmo.lab5.collection.CollectionManager;
+import ru.itmo.lab5.collection.*;
 import ru.itmo.lab5.commands.*;
-import ru.itmo.lab5.exceptions.FileFormatException;
-import ru.itmo.lab5.console.CommandManager;
-import ru.itmo.lab5.console.ConsoleManager;
-import ru.itmo.lab5.file.FileManager;
+import ru.itmo.lab5.console.*;
+import ru.itmo.lab5.exceptions.*;
+import ru.itmo.lab5.file.*;
+
+/**
+ * Главный класс, запускающий программу
+ */
 
 public class Main {
     public static void main(String[] args) {
