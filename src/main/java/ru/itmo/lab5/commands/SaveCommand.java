@@ -1,6 +1,7 @@
 package ru.itmo.lab5.commands;
 
 import ru.itmo.lab5.collection.CollectionManager;
+import ru.itmo.lab5.file.FileManager;
 
 /**
  * Команда, записывающая коллекцию в файл .csv
@@ -8,9 +9,20 @@ import ru.itmo.lab5.collection.CollectionManager;
 
 public class SaveCommand implements Command {
     private CollectionManager collectionManager;
+    private FileManager fileManager;
 
-    public SaveCommand(CollectionManager collectionManager) {
+    /**
+     * Конструктор, задающий параметры для создания объекта
+     * 
+     * @param collectionManager менеджер коллекции
+     * @param fileManager менеджер файла
+     * @see CollectionManager
+     * @see FileManager
+     */
+
+    public SaveCommand(CollectionManager collectionManager, FileManager fileManager) {
         this.collectionManager = collectionManager;
+        this.fileManager = fileManager;
     }
 
     @Override
@@ -33,7 +45,7 @@ public class SaveCommand implements Command {
         if (collectionManager.getCollection().isEmpty()) {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
-            collectionManager.getFileManager().saveCollection(argument, collectionManager);
+            fileManager.saveCollection(argument, collectionManager);
         }
     }
 }

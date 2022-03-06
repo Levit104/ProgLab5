@@ -10,22 +10,21 @@ import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.file.FileManager;
 
 /**
- * Управление коллекцией (менеджер коллекции)
+ * Класс для работы с коллекцией (менеджер коллекции)
  */
 
 public class CollectionManager {
     private Map<Integer, Ticket> collection;
     private String initDate;
-    private FileManager fileManager;
 
     /**
-     * Конструктор по-умолчанию, в момент создания устанавливается дата инициализации коллекции
+     * Конструктор, задающий параметры для создания объекта, в момент создания устанавливается дата инициализации коллекции
+     * 
+     * @param fileManager менеджер файла
      */
-
     public CollectionManager(FileManager fileManager) {
         this.collection = new HashMap<>();
         this.initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
-        this.fileManager = fileManager;
         collection.putAll(fileManager.parseFile());;
     }
 
@@ -50,14 +49,10 @@ public class CollectionManager {
         return initDate;
     }
 
-    public FileManager getFileManager() {
-        return fileManager;
-    }
-
     /**
-     * Возвращает строку, содержащую все поля элемента коллекции в виде csv
+     * Возвращает строку, содержащую все поля элемента коллекции (билета) в виде заголовка csv файла
      * 
-     * @return строка в виде csv
+     * @return заголовок csv файла
      */
 
     public static String csvString() {
@@ -65,9 +60,9 @@ public class CollectionManager {
     }
 
     /**
-     * Проверка ключа билета на уникальность
+     * Проверка ключа элемента (билета) на уникальность
      * 
-     * @param key        ключ
+     * @param key ключ
      * @param collection коллекция, содержащая объекты класса Ticket
      * @return {@code true} если ключ уникальный, иначе {@code false} 
      * @see Ticket
@@ -83,9 +78,9 @@ public class CollectionManager {
     }
 
     /**
-     * Проверка ID билета на уникальность
+     * Проверка ID элемента (билета) на уникальность
      * 
-     * @param ID         идентификатор
+     * @param ID идентификатор
      * @param collection коллекция, содержащая объекты класса Ticket
      * @return {@code true} если ID уникальный, иначе {@code false} 
      * @see Ticket
@@ -103,9 +98,10 @@ public class CollectionManager {
     /**
      * Проверка ID события на уникальность
      * 
-     * @param ID         идентификатор
+     * @param ID идентификатор
      * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ключ уникальный, иначе {@code false} 
+     * @return {@code true} если ID уникальный, иначе {@code false}
+     * @see Event
      */
 
     public static boolean checkEventID(Long ID, Map<Integer, Ticket> collection) {
