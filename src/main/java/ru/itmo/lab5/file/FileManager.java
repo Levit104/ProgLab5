@@ -1,5 +1,6 @@
 package ru.itmo.lab5.file;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -237,7 +238,7 @@ public class FileManager {
     }
 
     /**
-     * Проверка расширения файла
+     * Проверяет расширение файла
      * 
      * @param file путь до файла
      * @return {@code true} если файл имеет расширение .csv, иначе {@code false} 
@@ -257,6 +258,16 @@ public class FileManager {
             System.out.println("Файл должен иметь расширение .csv");
             return false;
         }
+    }
+
+    /**
+     * Проверяет существует ли файл
+     * 
+     * @param file путь до файла
+     * @return {@code true} если файл существует, иначе {@code false} 
+     */
+    public static boolean checkIfFileExists(String file) {
+        return new File(file).isFile();
     }
 
     private Integer parseKey(String data, String mode) {

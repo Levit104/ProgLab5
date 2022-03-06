@@ -1,6 +1,5 @@
 package ru.itmo.lab5.main;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -23,7 +22,7 @@ public class Main {
                 throw new ArrayIndexOutOfBoundsException();
             } else if (!FileManager.checkFileExtension(args[0])) {
                 throw new FileFormatException();
-            } else if (!new File(args[0]).isFile()) {
+            } else if (!FileManager.checkIfFileExists(args[0])) {
                 throw new FileNotFoundException();
             }
             file = args[0];
