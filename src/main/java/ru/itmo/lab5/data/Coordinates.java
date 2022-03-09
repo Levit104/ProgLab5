@@ -22,6 +22,6 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return String.format("%s,%s", Double.toString(x), Double.toString(y));
+        return String.format("%s,%s", x, y);
     }
 }

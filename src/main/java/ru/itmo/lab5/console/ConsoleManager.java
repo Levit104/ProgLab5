@@ -111,7 +111,7 @@ public class ConsoleManager {
                 System.out.print("Введите название билета: ");
             }
             String ticketName = scanner.nextLine();
-            if (ticketName.trim().length() == 0) {
+            if (ticketName.trim().isEmpty()) {
                 System.out.println("Значение названия билета не может быть пустым и не должно содержать пробелов");
                 if (inScript) {
                     noScriptErrors = false;
@@ -193,7 +193,7 @@ public class ConsoleManager {
         while (true) {
             try {
                 if (!inScript) {
-                    System.out.println("Возможные варианты: " + TicketType.valuesToString());
+                    System.out.println("Возможные варианты: " + TicketType.valuesList());
                     System.out.print("Введите тип билета: ");
                 }
                 TicketType ticketType = TicketType.valueOf(scanner.nextLine().toUpperCase());
@@ -214,7 +214,7 @@ public class ConsoleManager {
                 System.out.print("Введите название события: ");
             }
             String eventName = scanner.nextLine();
-            if (eventName.isEmpty()) {
+            if (eventName.trim().isEmpty()) {
                 System.out.println("Значение названия события не может быть пустым и не должно содержать пробелов");
                 if (inScript) {
                     noScriptErrors = false;
@@ -235,7 +235,7 @@ public class ConsoleManager {
                 LocalDateTime date = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
                 return date;
             } catch (DateTimeParseException e) {
-                System.out.println("Значение даты должно строго соответствовать формату дату и не содержать пробелов");
+                System.out.println("Значение даты должно строго соответствовать формату даты и не содержать пробелов");
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
@@ -248,7 +248,7 @@ public class ConsoleManager {
         while (true) {
             try {
                 if (!inScript) {
-                    System.out.println("Возможные варианты: " + EventType.valuesToString());
+                    System.out.println("Возможные варианты: " + EventType.valuesList());
                     System.out.print("Введите тип события: ");
                 }
                 EventType eventType = EventType.valueOf(scanner.nextLine().toUpperCase());

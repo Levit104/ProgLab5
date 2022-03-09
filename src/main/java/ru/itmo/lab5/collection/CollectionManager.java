@@ -18,14 +18,21 @@ public class CollectionManager {
     private String initDate;
 
     /**
+     * Строка, содержащая все поля элемента коллекции (билета) в виде заголовка csv файла
+     */
+    
+    public static String csvString = 
+    "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
+
+    /**
      * Конструктор, задающий параметры для создания объекта, в момент создания устанавливается дата инициализации коллекции
      * 
      * @param fileManager менеджер файла
      */
     public CollectionManager(FileManager fileManager) {
-        this.collection = new HashMap<>();
-        this.initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
-        collection.putAll(fileManager.parseFile());;
+        collection = new HashMap<>();
+        initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
+        collection.putAll(fileManager.parseFile());
     }
 
     /**
@@ -47,16 +54,6 @@ public class CollectionManager {
 
     public String getInitDate() {
         return initDate;
-    }
-
-    /**
-     * Возвращает строку, содержащую все поля элемента коллекции (билета) в виде заголовка csv файла
-     * 
-     * @return заголовок csv файла
-     */
-
-    public static String csvString() {
-        return "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
     }
 
     /**
@@ -116,10 +113,10 @@ public class CollectionManager {
 
     @Override
     public String toString() {
-        String ticketList = csvString();
+        StringBuilder ticketList = new StringBuilder(csvString);
         for (Ticket ticket : collection.values()) {
-            ticketList += "\n" + ticket;
+            ticketList.append("\n").append(ticket);
         }
-        return ticketList;
+        return ticketList.toString();
     }
 }

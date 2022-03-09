@@ -16,11 +16,11 @@ public enum TicketType {
      * @return значения enum'a через запятую
      */
 
-    public static String valuesToString() {
-        String valuesList = "";
+    public static String valuesList() {
+        StringBuilder valuesListBuilder = new StringBuilder();
         for (TicketType type : values()) {
-            valuesList += type.name() + ", ";
+            valuesListBuilder.append(type).append(", ");
         }
-        return valuesList.substring(0, valuesList.length() - 2);
+        return valuesListBuilder.substring(0, valuesListBuilder.length() - 2);
     }
 }

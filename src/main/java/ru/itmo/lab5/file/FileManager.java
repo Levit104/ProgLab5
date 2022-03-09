@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -32,11 +32,12 @@ import ru.itmo.lab5.exceptions.NotUniqueValueException;
  */
 
 public class FileManager {
-    private int row;
-    private Map<Integer, Ticket> ticketMap;
-    private boolean noErrors;
+    private Reader inputReader;
     private Scanner stringScanner;
     private FileWriter fileWriter;
+    private Map<Integer, Ticket> ticketMap;
+    private boolean noErrors;
+    private int lineNumber;
 
     /**
      * Конструктор, задающий параметры класса
@@ -45,12 +46,11 @@ public class FileManager {
      */
 
     public FileManager(String file) {
-        Reader inputReader = null;
-        row = 2;
-        ticketMap = new LinkedHashMap<>();
-        noErrors = true;
         try {
-            inputReader = new InputStreamReader(new FileInputStream(file), "UTF8");
+            ticketMap = new HashMap<>();
+            noErrors = true;
+            lineNumber = 2;
+            inputReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
             StringBuilder stringBuilder = new StringBuilder();
             int symbol = 0;
             
@@ -60,7 +60,7 @@ public class FileManager {
 
             stringScanner = new Scanner(stringBuilder.toString());
             
-            if (!stringScanner.nextLine().equals(CollectionManager.csvString())) {
+            if (!stringScanner.nextLine().equals(CollectionManager.csvString)) {
                 throw new IllegalArgumentException();
             }
 
@@ -79,25 +79,7 @@ public class FileManager {
         } catch (IllegalArgumentException e5) {
             System.out.println("Ошибка в заголовке файла/Некорректные данные\n");
             noErrors = false;
-        } finally {
-            try {
-                if (inputReader != null) {
-                    inputReader.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Ошибка при чтении файла\n");
-            }
         }
-    }
-
-    /**
-     * Возвращает коллекцию, содержащую объекты класса Ticket
-     * 
-     * @return коллекция
-     */
-
-    public Map<Integer, Ticket> getTicketMap() {
-        return this.ticketMap;
     }
 
     /**
@@ -112,6 +94,7 @@ public class FileManager {
             System.out.println("Файл успешно загружен. Проверка данных...\n");
 
             Scanner dataScanner = null;
+            String data = null;
             String line = null;
             int index = 0;
 
@@ -136,22 +119,22 @@ public class FileManager {
                 noErrors = true;
 
                 if (line.split(",").length != 12) {
-                    System.out.println("Некорректные данные в строке " + row);
-                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row);
-                    row++;
+                    System.out.println("Некорректные данные в строке " + lineNumber);
+                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", lineNumber);
+                    lineNumber++;
                     continue;
                 }
 
                 if (line.charAt(0) == ',') {
                     System.out.printf("Значение поля key в строке %d не может быть пустым, " +
-                                      "т.к. элемент не может существовать без ключа%n", row);
-                    row++;
-                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row);
+                                      "т.к. элемент не может существовать без ключа%n", lineNumber);
+                    lineNumber++;
+                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", lineNumber);
                     continue;
                 }
 
                 while (dataScanner.hasNext()) {
-                    String data = dataScanner.next();
+                    data = dataScanner.next();
 
                     if (index == 0) {
                         key = parseKey(data, "key");
@@ -185,7 +168,7 @@ public class FileManager {
                 }
 
                 if (line.charAt(line.length() - 1) == ',') {
-                    System.out.printf("Значение поля eventType в строке %d не может быть пустым%n", row);
+                    System.out.printf("Значение поля eventType в строке %d не может быть пустым%n", lineNumber);
                     noErrors = false;
                 }
 
@@ -194,12 +177,12 @@ public class FileManager {
 
                 if (noErrors) {
                     ticketMap.put(ticket.getKey(), ticket);
-                    System.out.printf("Элемент в строке %d был успешно добавлен%n%n", row);
+                    System.out.printf("Элемент в строке %d был успешно добавлен%n%n", lineNumber);
                 } else {
-                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", row);
+                    System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", lineNumber);
                 }
 
-                row++;
+                lineNumber++;
                 index = 0;
             }
             System.out.println("Проверка данных завершена\n");
@@ -278,10 +261,10 @@ public class FileManager {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом и не содержать пробелов%n", mode, lineNumber);
             noErrors = false;
         } catch (NotUniqueValueException e2) {
-            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, lineNumber);
             noErrors = false;
         }
         return key;
@@ -298,10 +281,10 @@ public class FileManager {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, lineNumber);
             noErrors = false;
         } catch (NotUniqueValueException e2) {
-            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, lineNumber);
             noErrors = false;
         }
         return ID;
@@ -318,10 +301,10 @@ public class FileManager {
                 throw new NotUniqueValueException();
             }
         } catch (NumberFormatException e1) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, lineNumber);
             noErrors = false;
         } catch (NotUniqueValueException e2) {
-            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d, должно быть уникальным%n", mode, lineNumber);
             noErrors = false;
         }
         return eventID;
@@ -330,12 +313,12 @@ public class FileManager {
     private String parseName(String data, String mode) {
         String name = null;
         try {
-            if (data.isEmpty() || data.trim().length() == 0 || data.trim().length() != data.length()) {
+            if (data.trim().isEmpty()) {
                 throw new IllegalArgumentException();
             }
             name = data;
         } catch (IllegalArgumentException e) {
-            System.out.printf("Значение поля %s в строке %d не может быть пустым и не должно содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d не может быть пустым и не должно содержать пробелов%n", mode, lineNumber);
             noErrors = false;
         }
         return name;
@@ -354,7 +337,7 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов%n", mode, row, maxValue);
+            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов%n", mode, lineNumber, maxValue);
             noErrors = false;
         }
         return coordinate;
@@ -368,7 +351,7 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, lineNumber);
             noErrors = false;
         }
         return price;
@@ -379,7 +362,7 @@ public class FileManager {
         try {
             date = new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").parse(data);
         } catch (ParseException e) {
-            System.out.printf("Значение поля %s в строке %d содержит неверный формат даты и/или лишние пробелы%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d содержит неверный формат даты и/или лишние пробелы%n", mode, lineNumber);
             noErrors = false;
         }
         return date;
@@ -390,7 +373,7 @@ public class FileManager {
         try {
             date = LocalDateTime.parse(data, DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
         } catch (DateTimeParseException e) {
-            System.out.printf("Значение поля %s в строке %d содержит неверный формат даты и/или лишние пробелы%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d содержит неверный формат даты и/или лишние пробелы%n", mode, lineNumber);
             noErrors = false;
             System.out.println(e.getMessage());
         }
@@ -402,7 +385,7 @@ public class FileManager {
         try {
             ticketType = TicketType.valueOf(data);
         } catch (IllegalArgumentException e) {
-            System.out.printf("Значение поля %s в строке %d содержит недопустимое значение и/или пробелы%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d содержит недопустимое значение и/или пробелы%n", mode, lineNumber);
             noErrors = false;
         }
         return ticketType;
@@ -413,7 +396,7 @@ public class FileManager {
         try {
             eventType = EventType.valueOf(data);
         } catch (IllegalArgumentException e1) {
-            System.out.printf("Значение поля %s в строке %d содержит недопустимое значение и/или пробелы%n", mode, row);
+            System.out.printf("Значение поля %s в строке %d содержит недопустимое значение и/или пробелы%n", mode, lineNumber);
             noErrors = false;
         }
         return eventType;

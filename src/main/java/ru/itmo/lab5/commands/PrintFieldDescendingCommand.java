@@ -48,7 +48,7 @@ public class PrintFieldDescendingCommand implements Command {
             System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
             List<String> typeList = new ArrayList<>();
-            String typeString = "";
+            StringBuilder typeString = new StringBuilder();
             
             for (Ticket ticket : collectionManager.getCollection().values()) {
                 typeList.add(ticket.getType().toString());
@@ -58,7 +58,7 @@ public class PrintFieldDescendingCommand implements Command {
             Collections.reverse(typeList);
             
             for (String type : typeList) {
-                typeString += type + ", ";
+                typeString.append(type).append(", ");
             }
             
             System.out.println("Значения поля type всех элементов в порядке убывания: ");

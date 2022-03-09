@@ -43,15 +43,15 @@ public class FilterCommand implements Command {
         } else if (collectionManager.getCollection().size() == 1) {
             System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
-            String ticketList = "";
+            StringBuilder ticketList = new StringBuilder();
             
             for (Ticket ticket : collectionManager.getCollection().values()) {
                 if (ticket.getName().startsWith(argument)) {
-                    ticketList += ticket + "\n";
+                    ticketList.append(ticket).append("\n");
                 }
             }
             
-            if (ticketList.isEmpty()) {
+            if (ticketList.length() == 0) {
                 System.out.println("В коллекции нет элементов, название которых начинается на " + argument);
             } else {
                 System.out.println("Элементы, название которых начинается на " + argument);

@@ -19,7 +19,6 @@ public class CommandManager {
     private Command[] commands;
     private String file;
     private Scanner mainScanner;
-    private Scanner scriptScanner;
     private boolean scriptExit;
     private Set<String> openedScripts;
 
@@ -74,7 +73,7 @@ public class CommandManager {
             } else if (inputCommand.equals("execute_script")) {
                 wasFound = true;
                 if (checkCommandWithArgument(inputChoice, "execute_script")) {
-                    scriptMode(inputChoice[1], scriptScanner);
+                    scriptMode(inputChoice[1]);
                     openedScripts.clear();
                 }
             } else {
@@ -82,16 +81,7 @@ public class CommandManager {
                     if (inputCommand.equals(command.getName())) {
                         wasFound = true;
                         if (command.getName().equals("save")) {
-                            if (inputChoice.length > 2) {
-                                System.out.println("У команды save один необязательный аргумент");
-                            } else {
-                                if (inputChoice.length == 1) {
-                                    inputArgument = file;
-                                } else if (inputChoice.length == 2 && FileManager.checkFileExtension(inputChoice[1])) {
-                                    inputArgument = inputChoice[1];
-                                }
-                                command.execute(inputArgument);
-                            }
+                            executeSave(inputChoice, inputArgument, command);
                         } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
                             inputArgument = inputChoice[1];
                             command.execute(inputArgument);
@@ -101,9 +91,11 @@ public class CommandManager {
                     }
                 }
             }
+
             if (!wasFound) {
                 System.out.println("Вы ввели несуществующую команду");
             }
+
         }
     }
 
@@ -111,13 +103,12 @@ public class CommandManager {
      * Запускает скриптовый режим
      * 
      * @param script путь до скрипта
-     * @param scriptScanner сканер для считывания скрипта
      */
 
-    public void scriptMode(String script, Scanner scriptScanner) {
+    public void scriptMode(String script) {
         try {
             openedScripts.add(script);
-            scriptScanner = new Scanner(new File(script));
+            Scanner scriptScanner = new Scanner(new File(script));
             
             loop: while (scriptScanner.hasNextLine()) {
                 String scriptLine = scriptScanner.nextLine();
@@ -140,23 +131,14 @@ public class CommandManager {
                 } else if (scriptCommand.equals("execute_script")) {
                     wasFound = true;
                     if (checkCommandWithArgument(scriptChoice, "execute_script") && checkOpenedScript(scriptChoice[1])) {
-                        scriptMode(scriptChoice[1], scriptScanner);
+                        scriptMode(scriptChoice[1]);
                     }
                 } else {
                     for (Command command : commands) {
                         if (scriptCommand.equals(command.getName())) {
                             wasFound = true;
                             if (command.getName().equals("save")) {
-                                if (scriptChoice.length > 2) {
-                                    System.out.println("У команды save один необязательный аргумент");
-                                } else {
-                                    if (scriptChoice.length == 1) {
-                                        scriptArgument = file;
-                                    } else if (scriptChoice.length == 2 && FileManager.checkFileExtension(scriptChoice[1])) {
-                                        scriptArgument = scriptChoice[1];
-                                    }
-                                    command.execute(scriptArgument);
-                                }
+                                executeSave(scriptChoice, scriptArgument, command);
                             } else if (command.hasArgument() && checkCommandWithArgument(scriptChoice, command.getName())) {
                                 scriptArgument = scriptChoice[1];
                                 if (command.getName().equals("insert") || 
@@ -182,11 +164,15 @@ public class CommandManager {
                         }
                     }
                 }
+
                 if (!wasFound) {
                     System.out.println("Несуществующая команда: " + scriptCommand);
                 }
+
             }
+
             System.out.printf("Скрипт %s завершён%n", script);
+
         } catch (FileNotFoundException e) {
             System.out.printf("Скрипт %s не найден%n", script);
         }
@@ -199,6 +185,18 @@ public class CommandManager {
         System.out.println("execute_script <file_name> : считать и исполнить скрипт из указанного файла");
         for (Command command : commands) {
             System.out.println(command.getName() + command.getDescription());
+        }
+    }
+
+    private void executeSave(String[] input, String argument, Command save) {
+        if (input.length > 2) {
+            System.out.println("У команды save один необязательный аргумент");
+        } else if (input.length == 1) {
+            argument = file;
+            save.execute(argument);
+        } else if (FileManager.checkFileExtension(input[1])) {
+            argument = input[1];
+            save.execute(argument);
         }
     }
 

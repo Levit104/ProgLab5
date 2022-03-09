@@ -10,7 +10,7 @@ public interface Command {
      * 
      * @return {@code true} если аргумент есть, иначе {@code false}
      */
-    public boolean hasArgument();
+    boolean hasArgument();
 
     /**
      * Возвращает имя команды
@@ -18,7 +18,7 @@ public interface Command {
      * @return имя команды
      */
 
-    public String getName();
+    String getName();
 
     /**
      * Возвращает описание команды
@@ -26,12 +26,12 @@ public interface Command {
      * @return описание команды
      */
     
-    public String getDescription();
+    String getDescription();
 
     /**
      * Запускает выполнение команды
      * @param argument аргумент команды (если есть)
      */
     
-    public void execute(String argument);
+    void execute(String argument);
 }

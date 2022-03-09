@@ -42,7 +42,7 @@ public class ShowCommand implements Command {
             System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
         } else {
             System.out.println("Все элементы коллекции: ");
-            System.out.println(CollectionManager.csvString());
+            System.out.println(CollectionManager.csvString);
             for (Ticket ticket : collectionManager.getCollection().values()) {
                 System.out.println(ticket);
             }

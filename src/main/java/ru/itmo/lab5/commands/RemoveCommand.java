@@ -44,10 +44,10 @@ public class RemoveCommand implements Command {
             try {
                 Integer key = Integer.parseInt(argument);
                 Ticket removedElement = collectionManager.getCollection().remove(key);
-                String keyList = "";
-    
+                StringBuilder keyList = new StringBuilder();
+
                 for (Integer elemKey : collectionManager.getCollection().keySet()) {
-                    keyList += elemKey + ", ";
+                    keyList.append(elemKey).append(", ");
                 }
     
                 if (removedElement == null) {
