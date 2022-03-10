@@ -53,13 +53,17 @@ public class CommandManager {
             }
 
             System.out.print("Введите команду (help - справка по всем командам): ");
-            String[] inputChoice = mainScanner.nextLine().split(" ");
+            String[] inputChoice = mainScanner.nextLine().split("\\s+");
 
             String inputCommand = inputChoice[0];
             String inputArgument = "";
             boolean wasFound = false;
 
-            if (inputCommand.equals("exit")) {
+            
+
+            if (inputCommand.isEmpty()) {
+                continue;
+            } else if (inputCommand.equals("exit")) {
                 wasFound = true;
                 if (checkCommand(inputChoice, "exit")) {
                     System.out.println("Программа успешно завершена");
@@ -93,7 +97,7 @@ public class CommandManager {
             }
 
             if (!wasFound) {
-                System.out.println("Вы ввели несуществующую команду");
+                System.out.println("Несуществующая команда " + inputCommand);
             }
 
         }
@@ -112,7 +116,7 @@ public class CommandManager {
             
             loop: while (scriptScanner.hasNextLine()) {
                 String scriptLine = scriptScanner.nextLine();
-                String[] scriptChoice = scriptLine.split(" ");
+                String[] scriptChoice = scriptLine.split("\\s+");
                 String scriptCommand = scriptChoice[0];
                 String scriptArgument = "";
                 boolean wasFound = false;
