@@ -48,7 +48,7 @@ public class CommandManager {
         loop: while (true) {
             
             if (scriptExit) {
-                System.out.println("Программа успешно завершена через скрипт");
+                System.out.println("Программа успешно завершена через скрипт\n");
                 break loop;
             }
 
@@ -59,14 +59,14 @@ public class CommandManager {
             String inputArgument = "";
             boolean wasFound = false;
 
-            
+            System.out.println(); //просто отступ
 
             if (inputCommand.isEmpty()) {
                 continue;
             } else if (inputCommand.equals("exit")) {
                 wasFound = true;
                 if (checkCommand(inputChoice, "exit")) {
-                    System.out.println("Программа успешно завершена");
+                    System.out.println("Программа успешно завершена\n");
                     break loop;
                 }
             } else if (inputCommand.equals("help")) {
@@ -97,9 +97,10 @@ public class CommandManager {
             }
 
             if (!wasFound) {
-                System.out.println("Несуществующая команда " + inputCommand);
+                System.out.println("Несуществующая команда: " + inputCommand);
             }
 
+            System.out.println(); //просто отступ
         }
     }
 
@@ -113,14 +114,14 @@ public class CommandManager {
         try {
             openedScripts.add(script);
             Scanner scriptScanner = new Scanner(new File(script));
-            
+
             loop: while (scriptScanner.hasNextLine()) {
                 String scriptLine = scriptScanner.nextLine();
                 String[] scriptChoice = scriptLine.split("\\s+");
                 String scriptCommand = scriptChoice[0];
                 String scriptArgument = "";
                 boolean wasFound = false;
-    
+
                 if (scriptCommand.equals("exit")) {
                     wasFound = true;
                     if (checkCommand(scriptChoice, "exit")) {
@@ -173,6 +174,7 @@ public class CommandManager {
                     System.out.println("Несуществующая команда: " + scriptCommand);
                 }
 
+                System.out.println(); //просто отступ
             }
 
             System.out.printf("Скрипт %s завершён%n", script);

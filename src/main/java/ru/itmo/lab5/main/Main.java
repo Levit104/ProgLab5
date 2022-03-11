@@ -19,7 +19,7 @@ public class Main {
             if (args.length > 1) throw new ArrayIndexOutOfBoundsException();
             file = args[0];
         } catch (ArrayIndexOutOfBoundsException e1) {
-            System.out.println("Путь до файла не указан или указан неверно\n");
+            System.out.println("\nПуть до файла не указан или указан неверно");
         }
 
         FileManager fileManager = new FileManager(file);
