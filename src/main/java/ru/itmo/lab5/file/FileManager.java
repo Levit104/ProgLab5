@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -72,9 +71,14 @@ public class FileManager {
                 throw new IllegalArgumentException();
             }
 
-        } catch (UnsupportedEncodingException e1) {
-            System.out.println("Неподдерживаемая кодировка\n");
+        } catch (FileFormatException e1) {
+            if (new File(file).isDirectory()) {
+                System.out.println("Указанный путь является директорией\n");
+            } else {
+                System.out.println("Неверное расширение файла\n");
+            }
             noErrors = false;
+            wrongFile = true;
         } catch (FileNotFoundException e2) {
             if (new File(file).isFile()) {
                 System.out.println("Не хватает прав для чтения файла\n");
@@ -83,21 +87,17 @@ public class FileManager {
                 wrongFile = true;
             }
             noErrors = false;
-        } catch (NullPointerException e3) {
-            noErrors = false;
-        } catch (IOException e3) {
-            System.out.println("Ошибка при чтении файла\n");
-            noErrors = false;
-        } catch (NoSuchElementException e4) {
+        } catch (NoSuchElementException e3) {
             System.out.println("Файл пустой\n");
             noErrors = false;
-        } catch (IllegalArgumentException e5) {
+        } catch (IllegalArgumentException e4) {
             System.out.println("Ошибка в заголовке файла/Некорректные данные\n");
             noErrors = false;
-        } catch (FileFormatException e6) {
-            System.out.println("Неверное расширение файла\n");
+        } catch (NullPointerException e5) {
             noErrors = false;
-            wrongFile = true;
+        } catch (IOException e6) {
+            System.out.println("Ошибка при чтении файла\n");
+            noErrors = false;
         }
     }
 
