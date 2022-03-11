@@ -25,6 +25,7 @@ import ru.itmo.lab5.data.Event;
 import ru.itmo.lab5.data.EventType;
 import ru.itmo.lab5.data.Ticket;
 import ru.itmo.lab5.data.TicketType;
+import ru.itmo.lab5.exceptions.FileFormatException;
 import ru.itmo.lab5.exceptions.NotUniqueValueException;
 
 /**
@@ -37,8 +38,9 @@ public class FileManager {
     private FileWriter fileWriter;
     private Map<Integer, Ticket> ticketMap;
     private boolean noErrors;
+    private boolean wrongFile;
     private int lineNumber;
-
+    
     /**
      * Конструктор, задающий параметры класса
      * 
@@ -50,6 +52,12 @@ public class FileManager {
             ticketMap = new HashMap<>();
             noErrors = true;
             lineNumber = 2;
+            System.out.println(); //просто отступ
+
+            if (!checkFileExtension(file)) {
+                throw new FileFormatException();
+            }
+
             inputReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
             StringBuilder stringBuilder = new StringBuilder();
             int symbol = 0;
@@ -67,8 +75,15 @@ public class FileManager {
         } catch (UnsupportedEncodingException e1) {
             System.out.println("Неподдерживаемая кодировка\n");
             noErrors = false;
-        } catch (FileNotFoundException | NullPointerException e2) {
-            System.out.println("Файл не найден\n");
+        } catch (FileNotFoundException e2) {
+            if (new File(file).isFile()) {
+                System.out.println("Не хватает прав для чтения файла\n");
+            } else {
+                System.out.println("Файл не найден\n");
+                wrongFile = true;
+            }
+            noErrors = false;
+        } catch (NullPointerException e3) {
             noErrors = false;
         } catch (IOException e3) {
             System.out.println("Ошибка при чтении файла\n");
@@ -79,6 +94,10 @@ public class FileManager {
         } catch (IllegalArgumentException e5) {
             System.out.println("Ошибка в заголовке файла/Некорректные данные\n");
             noErrors = false;
+        } catch (FileFormatException e6) {
+            System.out.println("Неверное расширение файла\n");
+            noErrors = false;
+            wrongFile = true;
         }
     }
 
@@ -198,25 +217,24 @@ public class FileManager {
      */
 
     public void saveCollection(String file, CollectionManager collectionManager) {
-        String csvString = collectionManager.toString();
-
         try {
+            String csvString = collectionManager.toString();
+
+            if (wrongFile) {
+                throw new NullPointerException(); //NullPointer также бросается если файл не был указан вообще
+            }
+
             fileWriter = new FileWriter(file);
             fileWriter.write(csvString);
             System.out.println("Коллекция успешно сохранена");
-        } catch (IOException e1) {
-            System.out.println("Не удалось записать данные в файл");
+
+        } catch (FileNotFoundException e1) {
+            System.out.println("Не хватает прав для записи в файл");
         } catch (NullPointerException e2) {
             System.out.println("При запуске программы путь до файла не был указан или был указан неверно. " +
                                 "Укажите его как аргумент команды save");
-        } finally {
-            try {
-                if (fileWriter != null) {
-                    fileWriter.close();
-                }
-            } catch (IOException e) {
-                System.out.println("Не удалось записать данные в файл");
-            }
+        } catch (IOException e3) {
+            System.out.println("Не удалось записать данные в файл");
         }
     }
 
@@ -241,16 +259,6 @@ public class FileManager {
             System.out.println("Файл должен иметь расширение .csv");
             return false;
         }
-    }
-
-    /**
-     * Проверяет существует ли файл
-     * 
-     * @param file путь до файла
-     * @return {@code true} если файл существует, иначе {@code false} 
-     */
-    public static boolean checkIfFileExists(String file) {
-        return new File(file).isFile();
     }
 
     private Integer parseKey(String data, String mode) {

@@ -1,12 +1,10 @@
 package ru.itmo.lab5.main;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import ru.itmo.lab5.collection.*;
 import ru.itmo.lab5.commands.*;
 import ru.itmo.lab5.console.*;
-import ru.itmo.lab5.exceptions.*;
 import ru.itmo.lab5.file.*;
 
 /**
@@ -18,20 +16,10 @@ public class Main {
         String file = null;
         
         try {
-            if (args.length > 1) {
-                throw new ArrayIndexOutOfBoundsException();
-            } else if (!FileManager.checkFileExtension(args[0])) {
-                throw new FileFormatException();
-            } else if (!FileManager.checkIfFileExists(args[0])) {
-                throw new FileNotFoundException();
-            }
+            if (args.length > 1) throw new ArrayIndexOutOfBoundsException();
             file = args[0];
         } catch (ArrayIndexOutOfBoundsException e1) {
-            System.out.println("Неверно указан путь до файла\n");
-        } catch (FileFormatException e2) {
-            System.out.println("Неверное расширение файла\n");
-        } catch (FileNotFoundException e3) {
-            System.out.println("Указан несуществующий файл\n");
+            System.out.println("Путь до файла не указан или указан неверно\n");
         }
 
         FileManager fileManager = new FileManager(file);
