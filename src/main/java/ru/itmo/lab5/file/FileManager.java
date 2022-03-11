@@ -137,6 +137,12 @@ public class FileManager {
                 dataScanner.useDelimiter(",");
                 noErrors = true;
 
+                if (line.isEmpty()) {
+                    System.out.printf("Пропуск строки %d%n%n", lineNumber);
+                    lineNumber++;
+                    continue;
+                }
+
                 if (line.split(",").length != 12) {
                     System.out.println("Некорректные данные в строке " + lineNumber);
                     System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", lineNumber);
@@ -235,6 +241,10 @@ public class FileManager {
                                 "Укажите его как аргумент команды save");
         } catch (IOException e3) {
             System.out.println("Не удалось записать данные в файл");
+        } finally {
+            try {
+                fileWriter.close();
+            } catch (IOException e) {}
         }
     }
 
