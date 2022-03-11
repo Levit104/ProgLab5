@@ -127,7 +127,7 @@ public class ConsoleManager {
         while (true) {
             try {
                 if (!inScript) {
-                    System.out.print("Введите координату X (максимальное значение - 606): ");
+                    System.out.print("Введите координату X (в качестве разделителя используется точка, максимальное значение - 606): ");
                 }
                 Double ticketCoordinateX = Double.parseDouble(scanner.nextLine());
                 if (ticketCoordinateX > 606) {
@@ -136,7 +136,8 @@ public class ConsoleManager {
                     return ticketCoordinateX;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение координаты X должно быть числом не больше 606 и не содержать пробелов");
+                System.out.println("Значение координаты X должно быть числом не больше 606 и не содержать пробелов, " + 
+                                   "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
@@ -149,7 +150,7 @@ public class ConsoleManager {
         while (true) {
             try {
                 if (!inScript) {
-                    System.out.print("Введите координату Y (максимальное значение - 483): ");
+                    System.out.print("Введите координату Y (в качестве разделителя используется точка, максимальное значение - 483): ");
                 }
                 Double ticketCoordinateY = Double.parseDouble(scanner.nextLine());
                 if (ticketCoordinateY > 483) {
@@ -158,7 +159,8 @@ public class ConsoleManager {
                     return ticketCoordinateY;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов");
+                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов " + 
+                                   "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
@@ -171,7 +173,7 @@ public class ConsoleManager {
         while (true) {
             try {
                 if (!inScript) {
-                    System.out.print("Введите цену билета (значение должно быть больше нуля): ");
+                    System.out.print("Введите цену билета (в качестве разделителя используется точка, значение должно быть больше нуля): ");
                 }
                 double ticketPrice = Double.parseDouble(scanner.nextLine());
                 if (ticketPrice <= 0) {
@@ -180,7 +182,8 @@ public class ConsoleManager {
                     return ticketPrice;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов");
+                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов " + 
+                                   "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return 0;

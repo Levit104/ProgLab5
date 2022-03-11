@@ -355,7 +355,8 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов%n", mode, lineNumber, maxValue);
+            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов, " + 
+                              "в качестве разделителя должна использоваться точка,%n", mode, lineNumber, maxValue);
             noErrors = false;
         }
         return coordinate;
@@ -369,7 +370,8 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n", mode, lineNumber);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n " + 
+                              "в качестве разделителя должна использоваться точка,%n", mode, lineNumber);
             noErrors = false;
         }
         return price;
