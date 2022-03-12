@@ -185,8 +185,6 @@ public class FileManager {
                         eventDate = parseEventDate(data, "eventDate");
                     } else if (index == 11) {
                         eventType = parseEventType(data, "eventType");
-                    } else {
-                        System.out.println("Некорректные данные " + data);
                     }
 
                     index++;
