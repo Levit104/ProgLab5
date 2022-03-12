@@ -85,7 +85,7 @@ public class CommandManager {
                     if (inputCommand.equals(command.getName())) {
                         wasFound = true;
                         if (command.getName().equals("save")) {
-                            executeSave(inputChoice, inputArgument, command);
+                            executeSave(inputChoice, command);
                         } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
                             inputArgument = inputChoice[1];
                             command.execute(inputArgument);
@@ -143,7 +143,7 @@ public class CommandManager {
                         if (scriptCommand.equals(command.getName())) {
                             wasFound = true;
                             if (command.getName().equals("save")) {
-                                executeSave(scriptChoice, scriptArgument, command);
+                                executeSave(scriptChoice, command);
                             } else if (command.hasArgument() && checkCommandWithArgument(scriptChoice, command.getName())) {
                                 scriptArgument = scriptChoice[1];
                                 if (command.getName().equals("insert") || 
@@ -194,7 +194,8 @@ public class CommandManager {
         }
     }
 
-    private void executeSave(String[] input, String argument, Command save) {
+    private void executeSave(String[] input, Command save) {
+        String argument;
         if (input.length > 2) {
             System.out.println("У команды save один необязательный аргумент");
         } else if (input.length == 1) {
