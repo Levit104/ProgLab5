@@ -159,7 +159,7 @@ public class ConsoleManager {
                     return ticketCoordinateY;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов " + 
+                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов, " + 
                                    "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
@@ -182,7 +182,7 @@ public class ConsoleManager {
                     return ticketPrice;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов " + 
+                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов, " + 
                                    "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
