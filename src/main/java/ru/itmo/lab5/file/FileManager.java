@@ -104,8 +104,7 @@ public class FileManager {
     /**
      * Считывает информацию из csv файла
      * 
-     * @return коллекцию, содержащую объекты класса Ticket
-     * @see Ticket
+     * @return коллекцию, содержащую объекты класса {@link Ticket}
      */
 
     public Map<Integer, Ticket> parseFile() {
@@ -218,6 +217,7 @@ public class FileManager {
      * 
      * @param file путь до файла
      * @param collectionManager менеджер коллекции
+     * @see CollectionManager
      */
 
     public void saveCollection(String file, CollectionManager collectionManager) {

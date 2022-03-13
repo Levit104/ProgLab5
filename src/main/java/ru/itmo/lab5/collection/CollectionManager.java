@@ -28,7 +28,9 @@ public class CollectionManager {
      * Конструктор, задающий параметры для создания объекта, в момент создания устанавливается дата инициализации коллекции
      * 
      * @param fileManager менеджер файла
+     * @see FileManager
      */
+
     public CollectionManager(FileManager fileManager) {
         collection = new HashMap<>();
         initDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy"));
@@ -36,10 +38,9 @@ public class CollectionManager {
     }
 
     /**
-     * Возвращает коллекцию, содержащую объекты класса Ticket
+     * Возвращает коллекцию, содержащую объекты класса {@link Ticket}
      * 
      * @return коллекция
-     * @see Ticket
      */
 
     public Map<Integer, Ticket> getCollection() {
@@ -60,9 +61,8 @@ public class CollectionManager {
      * Проверка ключа элемента (билета) на уникальность
      * 
      * @param key ключ
-     * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ключ уникальный, иначе {@code false} 
-     * @see Ticket
+     * @param collection коллекция, содержащая объекты класса {@link Ticket}
+     * @return {@code true} если ключ уникальный, иначе {@code false}
      */
 
     public static boolean checkTicketKey(Integer key, Map<Integer, Ticket> collection) {
@@ -78,9 +78,8 @@ public class CollectionManager {
      * Проверка ID элемента (билета) на уникальность
      * 
      * @param ID идентификатор
-     * @param collection коллекция, содержащая объекты класса Ticket
-     * @return {@code true} если ID уникальный, иначе {@code false} 
-     * @see Ticket
+     * @param collection коллекция, содержащая объекты класса {@link Ticket}
+     * @return {@code true} если ID уникальный, иначе {@code false}
      */
 
     public static boolean checkTicketID(Integer ID, Map<Integer, Ticket> collection) {
@@ -96,7 +95,7 @@ public class CollectionManager {
      * Проверка ID события на уникальность
      * 
      * @param ID идентификатор
-     * @param collection коллекция, содержащая объекты класса Ticket
+     * @param collection коллекция, содержащая объекты класса {@link Ticket}
      * @return {@code true} если ID уникальный, иначе {@code false}
      * @see Event
      */
