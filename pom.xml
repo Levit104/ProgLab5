@@ -6,11 +6,11 @@
 
   <groupId>ru.itmo.lab5</groupId>
   <artifactId>lab5</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
 
   <name>lab5</name>
   <description>Лабораторная работа №5</description>
-  <url>https://github.com/Levit104/ITMO</url>
+  <url>https://github.com/Levit104/ProgLab5</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +29,8 @@
         <version>3.3.2</version>
         <configuration>
           <sourcepath>${basedir}/src/main/java</sourcepath>
+          <doctitle>ProgLab5</doctitle>
+          <windowtitle>ProgLab5</windowtitle>
         </configuration>
         <reportSets>
           <reportSet>
