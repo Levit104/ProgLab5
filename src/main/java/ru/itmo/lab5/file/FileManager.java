@@ -242,7 +242,7 @@ public class FileManager {
         } finally {
             try {
                 fileWriter.close();
-            } catch (IOException e) {}
+            } catch (NullPointerException | IOException e) {}
         }
     }
 
