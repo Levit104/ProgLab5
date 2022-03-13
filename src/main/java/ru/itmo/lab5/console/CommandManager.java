@@ -46,61 +46,66 @@ public class CommandManager {
 
     public void consoleMode() {
         loop: while (true) {
-            
-            if (scriptExit) {
-                System.out.println("Программа успешно завершена через скрипт\n");
-                break loop;
-            }
-
-            System.out.print("Введите команду (help - справка по всем командам): ");
-            String[] inputChoice = mainScanner.nextLine().split("\\s+");
-
-            String inputCommand = inputChoice[0];
-            String inputArgument = "";
-            boolean wasFound = false;
-
-            System.out.println(); //просто отступ
-
-            if (inputCommand.isEmpty()) {
-                continue;
-            } else if (inputCommand.equals("exit")) {
-                wasFound = true;
-                if (checkCommand(inputChoice, "exit")) {
-                    System.out.println("Программа успешно завершена\n");
+            try {
+                if (scriptExit) {
+                    System.out.println("Программа успешно завершена через скрипт\n");
                     break loop;
                 }
-            } else if (inputCommand.equals("help")) {
-                wasFound = true;
-                if (checkCommand(inputChoice, "help")) {
-                    helpDescriptions();
-                }
-            } else if (inputCommand.equals("execute_script")) {
-                wasFound = true;
-                if (checkCommandWithArgument(inputChoice, "execute_script")) {
-                    scriptMode(inputChoice[1]);
-                    openedScripts.clear();
-                }
-            } else {
-                for (Command command : commands) {
-                    if (inputCommand.equals(command.getName())) {
-                        wasFound = true;
-                        if (command.getName().equals("save")) {
-                            executeSave(inputChoice, command);
-                        } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
-                            inputArgument = inputChoice[1];
-                            command.execute(inputArgument);
-                        } else if (!command.hasArgument() && checkCommand(inputChoice, command.getName())) {
-                            command.execute(inputArgument);
+    
+                System.out.print("Введите команду (help - справка по всем командам): ");
+                String[] inputChoice = mainScanner.nextLine().split("\\s+");
+    
+                String inputCommand = inputChoice[0];
+                String inputArgument = "";
+                boolean wasFound = false;
+    
+                System.out.println(); //просто отступ
+    
+                if (inputCommand.isEmpty()) {
+                    continue;
+                } else if (inputCommand.equals("exit")) {
+                    wasFound = true;
+                    if (checkCommand(inputChoice, "exit")) {
+                        System.out.println("Программа успешно завершена\n");
+                        break loop;
+                    }
+                } else if (inputCommand.equals("help")) {
+                    wasFound = true;
+                    if (checkCommand(inputChoice, "help")) {
+                        helpDescriptions();
+                    }
+                } else if (inputCommand.equals("execute_script")) {
+                    wasFound = true;
+                    if (checkCommandWithArgument(inputChoice, "execute_script")) {
+                        scriptMode(inputChoice[1]);
+                        openedScripts.clear();
+                    }
+                } else {
+                    for (Command command : commands) {
+                        if (inputCommand.equals(command.getName())) {
+                            wasFound = true;
+                            if (command.getName().equals("save")) {
+                                executeSave(inputChoice, command);
+                            } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
+                                inputArgument = inputChoice[1];
+                                command.execute(inputArgument);
+                            } else if (!command.hasArgument() && checkCommand(inputChoice, command.getName())) {
+                                command.execute(inputArgument);
+                            }
                         }
                     }
                 }
-            }
+    
+                if (!wasFound) {
+                    System.out.println("Несуществующая команда: " + inputCommand);
+                }
+    
+                System.out.println(); //просто отступ
 
-            if (!wasFound) {
-                System.out.println("Несуществующая команда: " + inputCommand);
+            } catch (NoSuchElementException e) {
+                System.out.println();
+                mainScanner = new Scanner(System.in);
             }
-
-            System.out.println(); //просто отступ
         }
     }
 
