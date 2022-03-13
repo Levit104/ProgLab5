@@ -22,18 +22,18 @@ public class Ticket implements Comparable<Ticket> {
     private Event event; // Поле НЕ может быть null
 
     /**
-    * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются автоматически)
-    * 
-    * @param key ключ
-    * @param name название
-    * @param coordinates координаты
-    * @param price цена
-    * @param type тип билета
-    * @param event событие
-    * @see Coordinates
-    * @see TicketType
-    * @see Event
-    */
+     * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются автоматически)
+     * 
+     * @param key         ключ
+     * @param name        название
+     * @param coordinates координаты
+     * @param price       цена
+     * @param type        тип билета
+     * @param event       событие
+     * @see Coordinates
+     * @see TicketType
+     * @see Event
+     */
 
     public Ticket(Integer key, String name, Coordinates coordinates, double price, TicketType type, Event event) {
         this.key = key;
@@ -50,21 +50,21 @@ public class Ticket implements Comparable<Ticket> {
     /**
      * Конструктор, задающий параметры для создания билета (ID и дата создания устанавливаются вручную)
      * 
-     * @param key ключ
-     * @param id ID
-     * @param name название
-     * @param coordinates координаты
+     * @param key          ключ
+     * @param id           ID
+     * @param name         название
+     * @param coordinates  координаты
      * @param creationDate дата создания
-     * @param price цена
-     * @param type тип билета
-     * @param event событие
+     * @param price        цена
+     * @param type         тип билета
+     * @param event        событие
      * @see Coordinates
      * @see TicketType
      * @see Event
      */
 
-    public Ticket(Integer key, Integer id, String name, Coordinates coordinates, 
-                  Date creationDate, double price, TicketType type, Event event) {
+    public Ticket(Integer key, Integer id, String name, Coordinates coordinates,
+            Date creationDate, double price, TicketType type, Event event) {
         this.key = key;
         this.id = id;
         this.name = name;
@@ -80,7 +80,6 @@ public class Ticket implements Comparable<Ticket> {
         return String.format("%s,%s,%s,%s,%s,%s,%s,%s",
                 key, id, name, coordinates, new SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(creationDate), price, type, event);
     }
-    
 
     @Override
     public int compareTo(Ticket ticket) {
@@ -106,7 +105,7 @@ public class Ticket implements Comparable<Ticket> {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     /**
      * Возвращает дату создания билета
      * 

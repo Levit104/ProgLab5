@@ -49,18 +49,18 @@ public class PrintFieldDescendingCommand implements Command {
         } else {
             List<String> typeList = new ArrayList<>();
             StringBuilder typeString = new StringBuilder();
-            
+
             for (Ticket ticket : collectionManager.getCollection().values()) {
                 typeList.add(ticket.getType().toString());
             }
-            
+
             Collections.sort(typeList);
             Collections.reverse(typeList);
-            
+
             for (String type : typeList) {
                 typeString.append(type).append(", ");
             }
-            
+
             System.out.println("Значения поля type всех элементов в порядке убывания: ");
             System.out.println(typeString.substring(0, typeString.length() - 2));
         }

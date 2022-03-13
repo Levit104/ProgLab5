@@ -14,7 +14,7 @@ import ru.itmo.lab5.file.*;
 public class Main {
     public static void main(String[] args) {
         String file = null;
-        
+
         try {
             if (args.length > 1) throw new ArrayIndexOutOfBoundsException();
             file = args[0];

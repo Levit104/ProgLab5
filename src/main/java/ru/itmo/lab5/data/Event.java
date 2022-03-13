@@ -17,45 +17,6 @@ public class Event {
     private EventType eventType; // Поле не может быть null
 
     /**
-     * Конструктор, задающий параметры для создания события (ID устанавливается автоматически)
-     * 
-     * @param name название
-     * @param date дата
-     * @param eventType тип события
-     * @see EventType
-     */
-
-    public Event(String name, LocalDateTime date, EventType eventType) {
-        this.id = uniqueID;
-        uniqueID += 1L;
-        this.name = name;
-        this.date = date;
-        this.eventType = eventType;
-    }
-
-    /**
-     * Конструктор, задающий параметры для создания события (ID устанавливается вручную)
-     * 
-     * @param id ID
-     * @param name название
-     * @param date дата
-     * @param eventType тип события
-     * @see EventType
-     */
-
-    public Event(Long id, String name, LocalDateTime date, EventType eventType) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.eventType = eventType;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s,%s,%s,%s", id, name, date.format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy")), eventType);
-    }
-    
-    /**
      * Возвращает ID события
      * 
      * @return ID
@@ -73,5 +34,44 @@ public class Event {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * Конструктор, задающий параметры для создания события (ID устанавливается автоматически)
+     * 
+     * @param name      название
+     * @param date      дата
+     * @param eventType тип события
+     * @see EventType
+     */
+
+    public Event(String name, LocalDateTime date, EventType eventType) {
+        this.id = uniqueID;
+        uniqueID += 1L;
+        this.name = name;
+        this.date = date;
+        this.eventType = eventType;
+    }
+
+    /**
+     * Конструктор, задающий параметры для создания события (ID устанавливается вручную)
+     * 
+     * @param id        ID
+     * @param name      название
+     * @param date      дата
+     * @param eventType тип события
+     * @see EventType
+     */
+
+    public Event(Long id, String name, LocalDateTime date, EventType eventType) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.eventType = eventType;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s,%s,%s,%s", id, name, date.format(DateTimeFormatter.ofPattern("HH:mm:ss dd.MM.yyyy")), eventType);
     }
 }

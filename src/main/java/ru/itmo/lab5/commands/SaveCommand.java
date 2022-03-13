@@ -15,7 +15,7 @@ public class SaveCommand implements Command {
      * Конструктор, задающий параметры для создания объекта
      * 
      * @param collectionManager менеджер коллекции
-     * @param fileManager менеджер файла
+     * @param fileManager       менеджер файла
      * @see CollectionManager
      * @see FileManager
      */

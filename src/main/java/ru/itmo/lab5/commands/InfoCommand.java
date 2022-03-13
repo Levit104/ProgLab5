@@ -38,9 +38,8 @@ public class InfoCommand implements Command {
     @Override
     public void execute(String argument) {
         System.out.println("Информация о коллекции: ");
-        System.out.println("Коллекция типа HashMap, хранящая объекты класса Ticket" +
-                           "\nДата инициализации: " + collectionManager.getInitDate() + 
-                           "\nКол-во элементов: " + collectionManager.getCollection().size()
-                           );
+        System.out.println("Коллекция типа HashMap, хранящая объекты класса Ticket");
+        System.out.println("Дата инициализации: " + collectionManager.getInitDate());
+        System.out.println("Кол-во элементов: " + collectionManager.getCollection().size());
     }
 }

@@ -44,13 +44,13 @@ public class FilterCommand implements Command {
             System.out.printf("Нельзя выполнить команду %s: в коллекции всего 1 элемент%n", getName());
         } else {
             StringBuilder ticketList = new StringBuilder();
-            
+
             for (Ticket ticket : collectionManager.getCollection().values()) {
                 if (ticket.getName().startsWith(argument)) {
                     ticketList.append(ticket).append("\n");
                 }
             }
-            
+
             if (ticketList.length() == 0) {
                 System.out.println("В коллекции нет элементов, название которых начинается на " + argument);
             } else {

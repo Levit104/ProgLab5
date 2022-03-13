@@ -16,7 +16,7 @@ public class UpdateCommand implements Command {
      * Конструктор, задающий параметры для создания объекта
      * 
      * @param collectionManager менеджер коллекции
-     * @param consoleManager менеджер консоли
+     * @param consoleManager    менеджер консоли
      * @see CollectionManager
      * @see ConsoleManager
      */
@@ -53,7 +53,7 @@ public class UpdateCommand implements Command {
                     Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
                     newTicket.setId(oldTicket.getId());
                     newTicket.setCreationDate(oldTicket.getCreationDate());
-                    
+
                     if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
                         collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
                         System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
@@ -69,7 +69,7 @@ public class UpdateCommand implements Command {
             if (!wasFound) {
                 System.out.printf("Элемента с ID %d не существует%n", ID);
             }
-            
+
         } catch (NumberFormatException e) {
             System.out.printf("Нельзя выполнить команду %s: значение ID должно быть целым числом%n", getName());
         }

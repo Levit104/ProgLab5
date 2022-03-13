@@ -17,7 +17,7 @@ public class InsertCommand implements Command {
      * Конструктор, задающий параметры для создания объекта
      * 
      * @param collectionManager менеджер коллекции
-     * @param consoleManager менеджер консоли 
+     * @param consoleManager    менеджер консоли
      * @see CollectionManager
      * @see ConsoleManager
      */

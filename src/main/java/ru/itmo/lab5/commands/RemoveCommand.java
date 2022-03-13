@@ -49,10 +49,10 @@ public class RemoveCommand implements Command {
                 for (Integer elemKey : collectionManager.getCollection().keySet()) {
                     keyList.append(elemKey).append(", ");
                 }
-    
+
                 if (removedElement == null) {
-                    System.out.printf("Элемента с ключом %d не существует. Все существующие ключи: %s%n", 
-                                       key, keyList.substring(0, keyList.length() - 2));                
+                    System.out.printf("Элемента с ключом %d не существует. Все существующие ключи: %s%n", key,
+                            keyList.substring(0, keyList.length() - 2));
                 } else {
                     System.out.printf("Элемент с ключом %d успешно удалён%n", key);
                 }

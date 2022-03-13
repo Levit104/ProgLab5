@@ -43,6 +43,7 @@ public class ConsoleManager {
 
     /**
      * Устанавливает новый сканер
+     * 
      * @param scanner новый сканер
      */
 
@@ -53,7 +54,7 @@ public class ConsoleManager {
     /**
      * Указывает выполняется команда в скрипте или нет
      * 
-     * @return {@code true} если в скрипте, иначе {@code false} 
+     * @return {@code true} если в скрипте, иначе {@code false}
      */
 
     public boolean inScript() {
@@ -73,7 +74,7 @@ public class ConsoleManager {
     /**
      * Указывает были ли ошибки в скрипте
      * 
-     * @return {@code true} если ошибок не было, иначе {@code false} 
+     * @return {@code true} если ошибок не было, иначе {@code false}
      */
 
     public boolean noScriptErrors() {
@@ -92,6 +93,7 @@ public class ConsoleManager {
 
     /**
      * Создает новый элемент (билет), не добавляя его в коллекцию
+     * 
      * @param key ключ
      * @return билет
      */
@@ -136,8 +138,8 @@ public class ConsoleManager {
                     return ticketCoordinateX;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение координаты X должно быть числом не больше 606 и не содержать пробелов, " + 
-                                   "в качестве разделителя используется точка");
+                System.out.println("Значение координаты X должно быть числом не больше 606 и не содержать пробелов, " +
+                        "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
@@ -159,8 +161,8 @@ public class ConsoleManager {
                     return ticketCoordinateY;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов, " + 
-                                   "в качестве разделителя используется точка");
+                System.out.println("Значение координаты X должно быть числом не больше 483 и не содержать пробелов, " +
+                        "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return null;
@@ -182,8 +184,8 @@ public class ConsoleManager {
                     return ticketPrice;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов, " + 
-                                   "в качестве разделителя используется точка");
+                System.out.println("Значение цены должно быть числом больше нуля и не содержать пробелов, " +
+                        "в качестве разделителя используется точка");
                 if (inScript) {
                     noScriptErrors = false;
                     return 0;

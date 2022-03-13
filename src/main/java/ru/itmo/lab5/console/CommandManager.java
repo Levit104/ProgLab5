@@ -26,12 +26,12 @@ public class CommandManager {
      * Конструктор, задающий параметры для создания объекта
      * 
      * @param consoleManager менеджер консоли
-     * @param commands команды (массив из команд)
-     * @param file путь до файла
+     * @param commands       команды (массив из команд)
+     * @param file           путь до файла
      * @see ConsoleManager
      * @see Command
      */
-    
+
     public CommandManager(ConsoleManager consoleManager, Command[] commands, String file) {
         this.consoleManager = consoleManager;
         this.commands = commands;
@@ -51,16 +51,16 @@ public class CommandManager {
                     System.out.println("Программа успешно завершена через скрипт\n");
                     break loop;
                 }
-    
+
                 System.out.print("Введите команду (help - справка по всем командам): ");
                 String[] inputChoice = mainScanner.nextLine().split("\\s+");
-    
+
                 String inputCommand = inputChoice[0];
                 String inputArgument = "";
                 boolean wasFound = false;
-    
-                System.out.println(); //просто отступ
-    
+
+                System.out.println(); // просто отступ
+
                 if (inputCommand.isEmpty()) {
                     continue;
                 } else if (inputCommand.equals("exit")) {
@@ -86,7 +86,8 @@ public class CommandManager {
                             wasFound = true;
                             if (command.getName().equals("save")) {
                                 executeSave(inputChoice, command);
-                            } else if (command.hasArgument() && checkCommandWithArgument(inputChoice, command.getName())) {
+                            } else if (command.hasArgument()
+                                    && checkCommandWithArgument(inputChoice, command.getName())) {
                                 inputArgument = inputChoice[1];
                                 command.execute(inputArgument);
                             } else if (!command.hasArgument() && checkCommand(inputChoice, command.getName())) {
@@ -95,12 +96,12 @@ public class CommandManager {
                         }
                     }
                 }
-    
+
                 if (!wasFound) {
                     System.out.println("Несуществующая команда: " + inputCommand);
                 }
-    
-                System.out.println(); //просто отступ
+
+                System.out.println(); // просто отступ
 
             } catch (NoSuchElementException e) {
                 System.out.println();
@@ -140,7 +141,8 @@ public class CommandManager {
                     }
                 } else if (scriptCommand.equals("execute_script")) {
                     wasFound = true;
-                    if (checkCommandWithArgument(scriptChoice, "execute_script") && checkOpenedScript(scriptChoice[1])) {
+                    if (checkCommandWithArgument(scriptChoice, "execute_script")
+                            && checkOpenedScript(scriptChoice[1])) {
                         scriptMode(scriptChoice[1]);
                     }
                 } else {
@@ -149,25 +151,26 @@ public class CommandManager {
                             wasFound = true;
                             if (command.getName().equals("save")) {
                                 executeSave(scriptChoice, command);
-                            } else if (command.hasArgument() && checkCommandWithArgument(scriptChoice, command.getName())) {
+                            } else if (command.hasArgument()
+                                    && checkCommandWithArgument(scriptChoice, command.getName())) {
                                 scriptArgument = scriptChoice[1];
-                                if (command.getName().equals("insert") || 
-                                    command.getName().equals("update") || 
-                                    command.getName().equals("replace_if_greater") ||
-                                    command.getName().equals("replace_if_lower"))  {
-                                        try {
-                                            consoleManager.setInScript(true);
-                                            consoleManager.setScanner(scriptScanner);
-                                            command.execute(scriptArgument);
-                                        } catch (NoSuchElementException e) {
-                                            System.out.println("Ошибка при чтении скрипта");
-                                        } finally {
-                                            consoleManager.setInScript(false);
-                                            consoleManager.setScanner(mainScanner);
-                                        }
-                                    } else {
+                                if (command.getName().equals("insert") ||
+                                        command.getName().equals("update") ||
+                                        command.getName().equals("replace_if_greater") ||
+                                        command.getName().equals("replace_if_lower")) {
+                                    try {
+                                        consoleManager.setInScript(true);
+                                        consoleManager.setScanner(scriptScanner);
                                         command.execute(scriptArgument);
+                                    } catch (NoSuchElementException e) {
+                                        System.out.println("Ошибка при чтении скрипта");
+                                    } finally {
+                                        consoleManager.setInScript(false);
+                                        consoleManager.setScanner(mainScanner);
                                     }
+                                } else {
+                                    command.execute(scriptArgument);
+                                }
                             } else if (!command.hasArgument() && checkCommand(scriptChoice, command.getName())) {
                                 command.execute(scriptArgument);
                             }
@@ -179,7 +182,7 @@ public class CommandManager {
                     System.out.println("Несуществующая команда: " + scriptCommand);
                 }
 
-                System.out.println(); //просто отступ
+                System.out.println(); // просто отступ
             }
 
             System.out.printf("Скрипт %s завершён%n", script);

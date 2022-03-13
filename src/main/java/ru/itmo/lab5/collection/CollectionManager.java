@@ -20,12 +20,13 @@ public class CollectionManager {
     /**
      * Строка, содержащая все поля элемента коллекции (билета) в виде заголовка csv файла
      */
-    
+
     public static String csvString = 
-    "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
+            "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
 
     /**
-     * Конструктор, задающий параметры для создания объекта, в момент создания устанавливается дата инициализации коллекции
+     * Конструктор, задающий параметры для создания объекта, 
+     * в момент создания устанавливается дата инициализации коллекции
      * 
      * @param fileManager менеджер файла
      * @see FileManager
@@ -60,7 +61,7 @@ public class CollectionManager {
     /**
      * Проверка ключа элемента (билета) на уникальность
      * 
-     * @param key ключ
+     * @param key        ключ
      * @param collection коллекция, содержащая объекты класса {@link Ticket}
      * @return {@code true} если ключ уникальный, иначе {@code false}
      */
@@ -77,7 +78,7 @@ public class CollectionManager {
     /**
      * Проверка ID элемента (билета) на уникальность
      * 
-     * @param ID идентификатор
+     * @param ID         идентификатор
      * @param collection коллекция, содержащая объекты класса {@link Ticket}
      * @return {@code true} если ID уникальный, иначе {@code false}
      */
@@ -94,7 +95,7 @@ public class CollectionManager {
     /**
      * Проверка ID события на уникальность
      * 
-     * @param ID идентификатор
+     * @param ID         идентификатор
      * @param collection коллекция, содержащая объекты класса {@link Ticket}
      * @return {@code true} если ID уникальный, иначе {@code false}
      * @see Event

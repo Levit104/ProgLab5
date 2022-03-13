@@ -25,13 +25,14 @@ public interface Command {
      * 
      * @return описание команды
      */
-    
+
     String getDescription();
 
     /**
      * Запускает выполнение команды
+     * 
      * @param argument аргумент команды (если есть)
      */
-    
+
     void execute(String argument);
 }

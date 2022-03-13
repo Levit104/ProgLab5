@@ -39,7 +39,7 @@ public class FileManager {
     private boolean noErrors;
     private boolean wrongFile;
     private int lineNumber;
-    
+
     /**
      * Конструктор, задающий параметры класса
      * 
@@ -51,7 +51,7 @@ public class FileManager {
             ticketMap = new HashMap<>();
             noErrors = true;
             lineNumber = 2;
-            System.out.println(); //просто отступ
+            System.out.println(); // просто отступ
 
             if (!checkFileExtension(file)) {
                 throw new FileFormatException();
@@ -60,13 +60,13 @@ public class FileManager {
             inputReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
             StringBuilder stringBuilder = new StringBuilder();
             int symbol = 0;
-            
+
             while ((symbol = inputReader.read()) != -1) {
                 stringBuilder.append((char) symbol);
             }
 
             stringScanner = new Scanner(stringBuilder.toString());
-            
+
             if (!stringScanner.nextLine().equals(CollectionManager.csvString)) {
                 throw new IllegalArgumentException();
             }
@@ -151,7 +151,7 @@ public class FileManager {
 
                 if (line.charAt(0) == ',') {
                     System.out.printf("Значение поля key в строке %d не может быть пустым, " +
-                                      "т.к. элемент не может существовать без ключа%n", lineNumber);
+                            "т.к. элемент не может существовать без ключа%n", lineNumber);
                     lineNumber++;
                     System.out.printf("Ошибка: элемент в строке %d не был добавлен%n%n", lineNumber);
                     continue;
@@ -195,7 +195,7 @@ public class FileManager {
                 }
 
                 ticket = new Ticket(key, id, name, new Coordinates(coordinateX, coordinateY), creationDate, price, type,
-                                    new Event(eventID, eventName, eventDate, eventType));
+                        new Event(eventID, eventName, eventDate, eventType));
 
                 if (noErrors) {
                     ticketMap.put(ticket.getKey(), ticket);
@@ -215,7 +215,7 @@ public class FileManager {
     /**
      * Сохраняет коллекцию в файл
      * 
-     * @param file путь до файла
+     * @param file              путь до файла
      * @param collectionManager менеджер коллекции
      * @see CollectionManager
      */
@@ -225,7 +225,7 @@ public class FileManager {
             String csvString = collectionManager.toString();
 
             if (wrongFile) {
-                throw new NullPointerException(); //NullPointer также бросается если файл не был указан вообще
+                throw new NullPointerException(); // NullPointer также бросается если файл не был указан вообще
             }
 
             fileWriter = new FileWriter(file);
@@ -236,13 +236,14 @@ public class FileManager {
             System.out.println("Не хватает прав для записи в файл");
         } catch (NullPointerException e2) {
             System.out.println("При запуске программы путь до файла не был указан или был указан неверно. " +
-                                "Укажите его как аргумент команды save");
+                    "Укажите его как аргумент команды save");
         } catch (IOException e3) {
             System.out.println("Не удалось записать данные в файл");
         } finally {
             try {
                 fileWriter.close();
-            } catch (NullPointerException | IOException e) {}
+            } catch (NullPointerException | IOException e) {
+            }
         }
     }
 
@@ -250,13 +251,13 @@ public class FileManager {
      * Проверяет расширение файла
      * 
      * @param file путь до файла
-     * @return {@code true} если файл имеет расширение .csv, иначе {@code false} 
+     * @return {@code true} если файл имеет расширение .csv, иначе {@code false}
      */
 
     public static boolean checkFileExtension(String file) {
         String extension = "";
         int i = file.lastIndexOf('.');
-        
+
         if (i > 0) {
             extension = file.substring(i + 1);
         }
@@ -353,8 +354,8 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов, " + 
-                              "в качестве разделителя должна использоваться точка,%n", mode, lineNumber, maxValue);
+            System.out.printf("Значение поля %s в строке %d должно быть числом не больше %d и не содержать пробелов, " +
+                    "в качестве разделителя должна использоваться точка,%n", mode, lineNumber, maxValue);
             noErrors = false;
         }
         return coordinate;
@@ -368,8 +369,8 @@ public class FileManager {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n " + 
-                              "в качестве разделителя должна использоваться точка,%n", mode, lineNumber);
+            System.out.printf("Значение поля %s в строке %d должно быть числом больше нуля и не содержать пробелов%n " +
+                    "в качестве разделителя должна использоваться точка,%n", mode, lineNumber);
             noErrors = false;
         }
         return price;

@@ -5,5 +5,5 @@ package ru.itmo.lab5.exceptions;
  */
 
 public class FileFormatException extends RuntimeException {
-    
+
 }

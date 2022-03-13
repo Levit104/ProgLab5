@@ -16,7 +16,7 @@ public class ReplaceIfGreaterCommand implements Command {
      * Конструктор, задающий параметры для создания объекта
      * 
      * @param collectionManager менеджер коллекции
-     * @param consoleManager менеджер консоли
+     * @param consoleManager    менеджер консоли
      * @see CollectionManager
      * @see ConsoleManager
      */
@@ -57,7 +57,8 @@ public class ReplaceIfGreaterCommand implements Command {
                             collectionManager.getCollection().replace(key, oldTicket, newTicket);
                             System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
                         } else {
-                            System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены меньше старого%n", key);
+                            System.out.printf(
+                                    "Элемент с ключом %d не был заменён, т.к новое значение цены меньше старого%n", key);
                         }
                     } else {
                         System.out.printf("Элемент с ключом %d не был заменён%n", key);
