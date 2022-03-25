@@ -18,14 +18,14 @@ public class CollectionManager {
     private String initDate;
 
     /**
-     * Строка, содержащая все поля элемента коллекции (билета) в виде заголовка csv файла
+     * Строка, содержащая все поля элемента коллекции (билета) в виде заголовка csv
+     * файла
      */
 
-    public static String csvString = 
-            "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
+    public static String csvString = "key,id,name,coordinates/x,coordinates/y,creationDate,price,type,event/id,event/name,event/date,event/eventType";
 
     /**
-     * Конструктор, задающий параметры для создания объекта, 
+     * Конструктор, задающий параметры для создания объекта,
      * в момент создания устанавливается дата инициализации коллекции
      * 
      * @param fileManager менеджер файла
@@ -67,10 +67,8 @@ public class CollectionManager {
      */
 
     public static boolean checkTicketKey(Integer key, Map<Integer, Ticket> collection) {
-        for (Ticket ticket : collection.values()) {
-            if (ticket.getKey().equals(key)) {
-                return false;
-            }
+        if (collection.containsKey(key)) {
+            return false;
         }
         return true;
     }

@@ -5,7 +5,8 @@ import java.util.Iterator;
 import ru.itmo.lab5.collection.CollectionManager;
 
 /**
- * Команда, удаляющая элемент из коллекции, если его ключ меньше того, что введет пользователь
+ * Команда, удаляющая элемент из коллекции, если его ключ меньше того, что
+ * введет пользователь
  */
 
 public class RemoveLowerKeyCommand implements Command {
@@ -39,27 +40,31 @@ public class RemoveLowerKeyCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        try {
-            boolean wasFound = false;
-            Integer key = Integer.parseInt(argument.trim());
-            Iterator<Integer> element = collectionManager.getCollection().keySet().iterator();
+        if (collectionManager.getCollection().isEmpty()) {
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else {
+            try {
+                boolean wasFound = false;
+                Integer key = Integer.parseInt(argument);
+                Iterator<Integer> element = collectionManager.getCollection().keySet().iterator();
 
-            while (element.hasNext()) {
-                Integer elemKey = element.next();
-                if (elemKey < key) {
-                    element.remove();
-                    wasFound = true;
+                while (element.hasNext()) {
+                    Integer elemKey = element.next();
+                    if (elemKey < key) {
+                        element.remove();
+                        wasFound = true;
+                    }
                 }
-            }
 
-            if (wasFound) {
-                System.out.printf("Элементы, ключ которых меньше %d успешно удалены%n", key);
-            } else {
-                System.out.printf("Элементов, ключ которых меньше %d не существует%n", key);
-            }
+                if (wasFound) {
+                    System.out.printf("Элементы, ключ которых меньше %d успешно удалены%n", key);
+                } else {
+                    System.out.printf("Элементов, ключ которых меньше %d не существует%n", key);
+                }
 
-        } catch (NumberFormatException e) {
-            System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
+            } catch (NumberFormatException e) {
+                System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
+            }
         }
     }
 }

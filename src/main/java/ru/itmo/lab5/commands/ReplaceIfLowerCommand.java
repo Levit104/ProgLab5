@@ -43,38 +43,41 @@ public class ReplaceIfLowerCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        try {
-            boolean wasFound = false;
-            Integer key = Integer.parseInt(argument.trim());
+        if (collectionManager.getCollection().isEmpty()) {
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else {
+            try {
+                boolean wasFound = false;
+                Integer key = Integer.parseInt(argument);
 
-            for (Ticket oldTicket : collectionManager.getCollection().values()) {
-                if (key.equals(oldTicket.getKey())) {
-                    wasFound = true;
-                    Ticket newTicket = consoleManager.createTicket(key);
+                for (Ticket oldTicket : collectionManager.getCollection().values()) {
+                    if (key.equals(oldTicket.getKey())) {
+                        wasFound = true;
+                        Ticket newTicket = consoleManager.createTicket(key);
 
-                    if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
-                        if (newTicket.compareTo(oldTicket) < 0) {
-                            collectionManager.getCollection().replace(key, oldTicket, newTicket);
-                            System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
+                        if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
+                            if (newTicket.compareTo(oldTicket) < 0) {
+                                collectionManager.getCollection().replace(key, oldTicket, newTicket);
+                                System.out.printf("Элемент с ключом %d был успешно заменён%n", key);
+                            } else {
+                                System.out.printf("Элемент с ключом %d не был заменён, т.к новое значение цены больше старого%n", key);
+                            }
                         } else {
-                            System.out.printf(
-                                    "Элемент с ключом %d не был заменён, т.к новое значение цены больше старого%n", key);
+                            System.out.printf("Элемент с ключом %d не был заменён%n", key);
+                            consoleManager.setNoScriptErrors(true);
                         }
-                    } else {
-                        System.out.printf("Элемент с ключом %d не был заменён%n", key);
-                        consoleManager.setNoScriptErrors(true);
+
+                        break;
                     }
-
-                    break;
                 }
-            }
 
-            if (!wasFound) {
-                System.out.printf("Элемента с ключом %d не существует%n", key);
-            }
+                if (!wasFound) {
+                    System.out.printf("Элемента с ключом %d не существует%n", key);
+                }
 
-        } catch (NumberFormatException e) {
-            System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
+            } catch (NumberFormatException e) {
+                System.out.printf("Нельзя выполнить команду %s: значение ключа должно быть целым числом%n", getName());
+            }
         }
     }
 }

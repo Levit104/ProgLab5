@@ -106,6 +106,7 @@ public class CommandManager {
             } catch (NoSuchElementException e) {
                 System.out.println();
                 mainScanner = new Scanner(System.in);
+                consoleManager.setScanner(mainScanner);
             }
         }
     }

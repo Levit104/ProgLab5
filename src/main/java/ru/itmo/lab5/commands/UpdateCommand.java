@@ -43,35 +43,45 @@ public class UpdateCommand implements Command {
 
     @Override
     public void execute(String argument) {
-        try {
-            boolean wasFound = false;
-            Integer ID = Integer.parseInt(argument);
+        if (collectionManager.getCollection().isEmpty()) {
+            System.out.printf("Нельзя выполнить команду %s: коллекция пустая%n", getName());
+        } else {
+            try {
+                boolean wasFound = false;
+                Integer ID = Integer.parseInt(argument);
+                StringBuilder idList = new StringBuilder();
 
-            for (Ticket oldTicket : collectionManager.getCollection().values()) {
-                if (ID.equals(oldTicket.getId())) {
-                    wasFound = true;
-                    Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
-                    newTicket.setId(oldTicket.getId());
-                    newTicket.setCreationDate(oldTicket.getCreationDate());
-
-                    if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
-                        collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
-                        System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
-                    } else {
-                        System.out.printf("Элемент с ID %d не был заменён%n", ID);
-                        consoleManager.setNoScriptErrors(true);
-                    }
-
-                    break;
+                for (Ticket ticket : collectionManager.getCollection().values()) {
+                    idList.append(ticket.getId()).append(", ");
                 }
-            }
 
-            if (!wasFound) {
-                System.out.printf("Элемента с ID %d не существует%n", ID);
-            }
+                for (Ticket oldTicket : collectionManager.getCollection().values()) {
+                    if (ID.equals(oldTicket.getId())) {
+                        wasFound = true;
+                        Ticket newTicket = consoleManager.createTicket(oldTicket.getKey());
+                        newTicket.setId(oldTicket.getId());
+                        newTicket.setCreationDate(oldTicket.getCreationDate());
 
-        } catch (NumberFormatException e) {
-            System.out.printf("Нельзя выполнить команду %s: значение ID должно быть целым числом%n", getName());
+                        if (!consoleManager.inScript() || consoleManager.noScriptErrors()) {
+                            collectionManager.getCollection().replace(oldTicket.getKey(), oldTicket, newTicket);
+                            System.out.printf("Элемент с ID %d был успешно заменён%n", ID);
+                        } else {
+                            System.out.printf("Элемент с ID %d не был заменён%n", ID);
+                            consoleManager.setNoScriptErrors(true);
+                        }
+
+                        break;
+                    }
+                }
+
+                if (!wasFound) {
+                    System.out.printf("Элемента с ID %d не существует. Все существующие ID: %s%n",
+                            ID, idList.substring(0, idList.length() - 2));
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.printf("Нельзя выполнить команду %s: значение ID должно быть целым числом%n", getName());
+            }
         }
     }
 }
