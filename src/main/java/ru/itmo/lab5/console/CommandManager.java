@@ -45,11 +45,11 @@ public class CommandManager {
      */
 
     public void consoleMode() {
-        loop: while (true) {
+        while (true) {
             try {
                 if (scriptExit) {
                     System.out.println("Программа успешно завершена через скрипт\n");
-                    break loop;
+                    break;
                 }
 
                 System.out.print("Введите команду (help - справка по всем командам): ");
@@ -67,7 +67,7 @@ public class CommandManager {
                     wasFound = true;
                     if (checkCommand(inputChoice, "exit")) {
                         System.out.println("Программа успешно завершена\n");
-                        break loop;
+                        break;
                     }
                 } else if (inputCommand.equals("help")) {
                     wasFound = true;
@@ -122,7 +122,7 @@ public class CommandManager {
             openedScripts.add(script);
             Scanner scriptScanner = new Scanner(new File(script));
 
-            loop: while (scriptScanner.hasNextLine()) {
+            while (scriptScanner.hasNextLine()) {
                 String scriptLine = scriptScanner.nextLine();
                 String[] scriptChoice = scriptLine.split("\\s+");
                 String scriptCommand = scriptChoice[0];
@@ -133,7 +133,7 @@ public class CommandManager {
                     wasFound = true;
                     if (checkCommand(scriptChoice, "exit")) {
                         scriptExit = true;
-                        break loop;
+                        break;
                     }
                 } else if (scriptCommand.equals("help")) {
                     wasFound = true;
